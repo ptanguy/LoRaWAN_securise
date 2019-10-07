@@ -3,6 +3,7 @@ Fichier regroupant les sites web utilisés au cours du projet
 https://fr.wikipedia.org/wiki/LoRaWAN
 
 https://www.thethingsnetwork.org/
+- https://www.thethingsnetwork.org/docs/lorawan/
 
 https://www.01net.com/actualites/internet-des-objets-orange-choisit-la-techno-lora-915863.html
 
