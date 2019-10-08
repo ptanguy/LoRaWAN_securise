@@ -6,6 +6,19 @@ Explications : https://www.thethingsnetwork.org/docs/lorawan/
 
 Complet avec schémas : https://www.frugalprototype.com/technologie-lora-reseau-lorawan/
 
+Doc spécification : https://www.rs-online.com/designspark/rel-assets/ds-assets/uploads/knowledge-items/application-notes-for-the-internet-of-things/LoRaWAN%20Specification%201R0.pdf
+
+
+## Cours / Formation
+
+Cours USMB : http://scem-eset.univ-smb.fr/wp-content/uploads/2017/02/Cours-LORA-LORAWAN.pdf
+
+TP CNAM : http://cedric.cnam.fr/~bouzefra/cours/Deploiement_Lora_exo.pdf
+
+Cours architecture CNAM : http://cedric.cnam.fr/~bouzefra/cours/cours_Lora.pdf
+
+Réseau LPWAN : https://fr.slideshare.net/Reseauxetservicestpa/rs-10-juin-2015-lora-franck
+
 
 ## Business
 
