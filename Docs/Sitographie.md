@@ -1,22 +1,37 @@
-Fichier regroupant les sites web utilisés au cours du projet
+## Description système LoRa
 
-https://fr.wikipedia.org/wiki/LoRaWAN
+Présentation générale : https://fr.wikipedia.org/wiki/LoRaWAN
 
-https://www.thethingsnetwork.org/
-- https://www.thethingsnetwork.org/docs/lorawan/
-- **Securité** https://www.thethingsnetwork.org/docs/lorawan/security.html
+Explications : https://www.thethingsnetwork.org/docs/lorawan/
+
+
+## Business
+
+Réseau commercial : https://www.thethingsnetwork.org/
+
+Site commercial : https://www.thethingsindustries.com/
+
+
+## Articles presse
 
 https://www.01net.com/actualites/internet-des-objets-orange-choisit-la-techno-lora-915863.html
 
-https://www.kpn.com/zakelijk/internet-of-things/en.htm
+
+## Compréhension 
 
 https://fr.wikipedia.org/wiki/Passerelle_(informatique)
 
 https://fr.wikipedia.org/wiki/Topologie_de_r%C3%A9seau
 
+## Sites officiels
+
 https://lora-alliance.org/
+
+
+## Utiles / Gestion de projet
 
 https://openclassrooms.com/fr/courses/1233741-gerez-vos-codes-source-avec-git
 
 https://www.youtube.com/watch?v=La3SaI2hjzE
 
+http://www.chtiland.fr/lib/exe/fetch.php?media=informatique:divers:git_memo_fr.pdf
