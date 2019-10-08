@@ -30,8 +30,4 @@ https://lora-alliance.org/
 
 ## Utiles / Gestion de projet
 
-https://openclassrooms.com/fr/courses/1233741-gerez-vos-codes-source-avec-git
-
-https://www.youtube.com/watch?v=La3SaI2hjzE
-
-http://www.chtiland.fr/lib/exe/fetch.php?media=informatique:divers:git_memo_fr.pdf
+Utilisation de GitHub : https://openclassrooms.com/fr/courses/1233741-gerez-vos-codes-source-avec-git ; https://www.youtube.com/watch?v=La3SaI2hjzE ; http://www.chtiland.fr/lib/exe/fetch.php?media=informatique:divers:git_memo_fr.pdf
