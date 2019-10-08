@@ -10,6 +10,8 @@ Doc spécification : https://www.rs-online.com/designspark/rel-assets/ds-assets/
 
 LoRa chez STµeletronics : https://www.st.com/en/applications/connectivity/lora.html
 
+Limitation de la techno' : https://www.thethingsnetwork.org/docs/lorawan/limitations.html
+
 Securité dans le protocol LoRa : https://www.thethingsnetwork.org/docs/lorawan/security.html
 
 ## Cours / Formation
