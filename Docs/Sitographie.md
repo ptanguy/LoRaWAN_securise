@@ -4,6 +4,8 @@ Présentation générale : https://fr.wikipedia.org/wiki/LoRaWAN
 
 Explications : https://www.thethingsnetwork.org/docs/lorawan/
 
+Complet avec schémas : https://www.frugalprototype.com/technologie-lora-reseau-lorawan/
+
 
 ## Business
 
@@ -13,6 +15,8 @@ Site commercial : https://www.thethingsindustries.com/
 
 
 ## Articles presse
+
+https://www.objetconnecte.com/tout-savoir-reseau-lora-bouygues/
 
 https://www.01net.com/actualites/internet-des-objets-orange-choisit-la-techno-lora-915863.html
 
