@@ -34,8 +34,14 @@ La passerelle sera donc une Raspberry PI, nous utiliserons donc un OS
 
 +
 
-- Il faut empecher d'autre utilisteur de récuperer les valeurs de la communication.
+- Il faut empécher d'autre utilisteur de récuperer les valeurs de la communication.
 - Empecher d'envoyer de fausses informations au serveur d'application.
 - Empecher de booter sur un autre OS que celui que nous allons créer  
 
 ## Sécurisation des paquets:
+Nous n'avons pas à sécuriser la maniere dont communiquent le noeud et la passerelle. Mais il faut s'assurer que les messages ne soit pas alterer ou intercepté.
+La comminication entre le *noeud* et la *passerelle*  doit pouvoir eviter :
+- Man in the middle
+- Les attaques en texte clair
+- Le jamming
+- Dos
