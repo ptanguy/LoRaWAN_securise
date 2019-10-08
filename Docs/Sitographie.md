@@ -8,6 +8,7 @@ Complet avec schémas : https://www.frugalprototype.com/technologie-lora-reseau-
 
 Doc spécification : https://www.rs-online.com/designspark/rel-assets/ds-assets/uploads/knowledge-items/application-notes-for-the-internet-of-things/LoRaWAN%20Specification%201R0.pdf
 
+LoRa chez St µeletronics : https://www.st.com/en/applications/connectivity/lora.html
 
 ## Cours / Formation
 
