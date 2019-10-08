@@ -1,6 +1,6 @@
 # Cahier des charge projet LoRaWAN
 
-Ce projet à pour but de mettre en oeuvre une communication LoRaWAN sécurisée. Dans ce projet nous nous concentrerons sur la sécurisation d'un *noeud LoRaWAN* et d'une *passerelle*. On peut découper ce projet en 2 grands points : 
+Ce projet à pour but de mettre en oeuvre une communication LoRaWAN sécurisée. Dans ce projet nous nous concentrerons sur la sécurisation d'un *noeud LoRaWAN* et d'une *passerelle*. On peut découper ce projet en deux grands points : 
 
 1. **Création d'un banc de test LoRaWAN complet avec des éléments de sécurité mis en oeuvre**
 
@@ -18,6 +18,7 @@ Pour détailler les 2 points précédents :
 L'ensemble du projet devra être réalisé en 2 mois. 
 
 ## Dates 
+
 - Débuts : *07/10/19*
 - Jalon 1: *11/10/19*
   - Présentation des demandes du client
