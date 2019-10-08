@@ -39,7 +39,7 @@ La passerelle sera donc une Raspberry PI, nous utiliserons donc un OS
 - Empecher de booter sur un autre OS que celui que nous allons créer  
 
 ## Sécurisation des paquets:
-Nous n'avons pas à sécuriser la maniere dont communiquent le noeud et la passerelle. Mais il faut s'assurer que les messages ne soit pas alterer ou intercepté.
+Nous n'avons pas à sécuriser la maniere dont communiquent le noeud et la passerelle. Mais il faut s'assurer que les messages ne soient pas alterés ou interceptés.
 La comminication entre le *noeud* et la *passerelle*  doit pouvoir eviter :
 - Man in the middle
 - Les attaques en texte clair
