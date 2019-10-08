@@ -7,7 +7,7 @@ Le **lora** est un protocol de communication sans fil que nous devons mettre en 
 - La *passerelle* qui serra sur une Raspberry ( la raspberry hébergera aussi le serveur d'application)
 - Transmission des paquets (pas la partie communication entre le noeud et la passerelle)
 
-## Sécurisation du ùC
+## Sécurisation du µC
 ### Attaques possibles :
 
 
