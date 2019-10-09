@@ -16,6 +16,9 @@ Limitation de la techno' : https://www.thethingsnetwork.org/docs/lorawan/limitat
 
 Securité dans le protocol LoRa : https://www.thethingsnetwork.org/docs/lorawan/security.html
 
+Explications claires : http://genelaix.free.fr/IMG/pdf/presentation_lora_lorawan.pdf
+
+
 ## Cours / Formation
 
 Cours USMB : http://scem-eset.univ-smb.fr/wp-content/uploads/2017/02/Cours-LORA-LORAWAN.pdf
