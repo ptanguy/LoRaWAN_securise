@@ -4,7 +4,15 @@ Ce projet à pour but de mettre en oeuvre une communication LoRaWAN sécurisée.
 
 1. **Création d'un banc de test LoRaWAN complet avec des éléments de sécurité mis en oeuvre**
 
-Travail à effectuer...
+On peut distinguer plusieurs étapes de conception :
+
+- Création du réseau de capteurs
+- Gestion du chiffrement des trames 
+- Connection noeud <-> passerelle 
+- Connection passerelle <-> Network server
+- Déchiffrement des données pour le serveur d'application
+
+Nous aurons besoin d'utiliser du matériel approprié pour déployer le réseau. Il y a cependant une certaine flexibilité étant donné la polyvalence des cartes électroniques.
 
 2. **Etudier la surface d'attaque du système par rapports aux différentes versions de LoRaWAN** 
 
