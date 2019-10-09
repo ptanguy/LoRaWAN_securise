@@ -15,13 +15,23 @@ Les clés **NwkSKey** et **AppSKet** sont actualisées à chaque nouvelle connex
 Le LoRaWAN utilise des frame Counter à fin déviter les attaque par répétition.
 2 conteurs sont initialisés lorsqu'un nouvel appareil est connécté.
 Le Noeud incrément le compteur **FCntUP** à chaque fois que qu'il envoit une information sur le *UpLink*. Le Network serveur lui incrémente le compteur **FCntDown** à chaque fois qu'il écrit sur le *DownLink*. Pour chaque trame du réseau la valeure des compteurs est envoyé avec. Le recepteur de la trame va comparer la valeur des compteurs à l'intérieure de la trame avec ses propres compteurs et si la valeurs des compteurs de la trame est inferieur aux copteur du recepteur ce dernier va ignorer le message.
- 
 
 
 ## Le noeud
-Le noeud sera composé d'un microcontroleur, d'un capteur (ou plusieurs) et d'un module permettant la communication en LoRa.
+Le noeud sera composé d'un microcontroleur, d'un capteur (ou plusieurs) et d'un module permettant la communication en LoRa. Pour le noeud nous allons utiliser un kit de développement provenant de STmicroelectronics.
+
+Surface d'attaque : 
+-  Gestion des Clés AES
+-  Modification du code source
+-  Interception des données directement sur le capteur
+-  SPA
+-  DPA
+-  Analyse EM
+-  Memory tempering
 
 ## La passerelle
 La passerelle sera hébergé sur un micro-ordinateur qui aura un module pour la communication LoRa. Le micro-ordinateur hégergera par la même occasion un serveur d'application.
 
 Pour maitriser aux mieux notre passerelle nous allons dévelloper notre propre OS.
+
+## NetworkServer
