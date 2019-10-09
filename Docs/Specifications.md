@@ -1,5 +1,4 @@
  # Specification
-
 Le travail de sécurisation à fournir pour la fin de ce projet vise 2 parties du réseau, la *passerelle* et le *noeud* nous ne nous occuperons pas de la sécurisation de la communiction en **LoRa**.
 Le LoRaWAN est un protocole de communication à longue distance et faible consomation d'energie. Il est composé de 3 services. Les *noeuds*, les *passerelles* et le *serveur d'applications*. 
 ![fonctionnement_lora](Schema_techniques/Schema_LoRaWAN.png)
@@ -51,4 +50,7 @@ Le *Application server* est le service qui va traiter l'information du capteur, 
 
 Surface d'attaque :
 - Gestion clé AES
-- 
+- Création clés AES
+
+Secret à protéger :
+- La valeur de la clés AES
