@@ -25,3 +25,4 @@ Demander à la réunion :
 
 - Combien de clefs y a-t-il réellement (2 ou 3) ?
 - Est-ce que on pourrait pas voir une vraie passerelle et un serveur network et d'application distincts plutôt que tout dans la raspberry ?
+- Quand est la fin du projet ?
