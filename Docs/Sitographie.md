@@ -21,6 +21,7 @@
 ## Sécurisation 
 
 1. Document sur les clefs et ID : https://assets.lairdtech.com/home/brandworld/files/LoRaWAN%20Keys%20and%20IDs%20Overview.pdf 
+2. Securisation avec les clés vidéo : https://youtu.be/S6nJzSc4iy4
 
 
 ## Cours / Formation
