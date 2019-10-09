@@ -18,3 +18,10 @@ LoRa et Sigfox utilisent en Europe la bande des 868MHz
 Dans un premier temps et pour faire nos tests, on va travailler sur un capteur de température simple. On prendra bien le temps de sécuriser notre réseau.
 
 Dans un second temps, si on a le temps, on peut imaginer un réseau de capteurs. Par exemple un capteur classe A (cf site web) qui envoit la luminosité, un traitement par l'application server en fonction d'un seuil, et un autre capteur en classe B ou C qui serait un actionneur sur un volet roulant ou autre. Bien sécuriser toutes les communications.
+
+------------
+
+Demander à la réunion : 
+
+- Combien de clefs y a-t-il réellement (2 ou 3) ?
+- Est-ce que on pourrait pas voir une vraie passerelle et un serveur network et d'application distincts plutôt que tout dans la raspberry ?
