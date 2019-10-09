@@ -2,6 +2,8 @@
 
 Présentation générale : https://fr.wikipedia.org/wiki/LoRaWAN
 
+Présentation en Français : https://www.frugalprototype.com/technologie-lora-reseau-lorawan/
+
 Explications : https://www.thethingsnetwork.org/docs/lorawan/
 
 Complet avec schémas : https://www.frugalprototype.com/technologie-lora-reseau-lorawan/
