@@ -38,7 +38,7 @@ Les secrets à protéger sont :
 La *passerelle* sert de traducteur entre le protocole *LoRa* et un autre protocole de communication. Elle sera hébergé sur un micro-ordinateur.
 
 ## Network Server
-Le *Networkmanager* est le cerveau du réseau LoRaWAN, il génére les clés et authentifie les noeuds. Il déchiffre aussi une partie des trames du réseau.
+Le *Network server* est le cerveau du réseau LoRaWAN, il génére les clés et authentifie les noeuds. Il déchiffre aussi une partie des trames du réseau.
 
 Surface d'attaque :
 - Enregistrement clé AES
