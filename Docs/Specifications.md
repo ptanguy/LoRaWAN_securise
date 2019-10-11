@@ -63,7 +63,15 @@ Secret à protéger :
 Pour la réalisation du banc de test nous allons créer un noeud LoRa WAN avec un kit de développement provenant de ST microelectronics. Ce noeud communiquera les informations prevenant d'un capteur toutes les 10min à Raspberry Pi equipé d'un module LoRaWAN. La Raspberry aura plusieurs service qui communiquerons en interne *gateway*,*networkserver*, *application server*.
 L'application server pourra par exemple enregistrer la valeur du capteur dans un fichier et l'afficher sur un therminal.
 
-## Methodologie gestion de projet
-Pour gérer le projet nous utilisons un outil de versionning appelé github on y met tout le code de projet, les sources ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme de GANTT. Nous le garderons à jour pandant toute la durée du projet. Pour avoir une gestion de projet plus précise (tâches à effectuer chaques semaines), nous utilisons l'onglet *Project* de notre repository github. Dans cet onglet nous indiquons pour chaque semaine les différentes taches à faire. Les taches on 3 états **A faire**, **En cours** et **Fini** nous déplaçons et nous ajoutons des taches au cours de la semaine.
 
-Pour la methode de gestion de projet nous allons utiliser la methode AGILE en commençant par créer un réseau LoRaWAN basic, uis nous ajouterons des couches de sécurité au fur et à mesure.
+## Analyse des risques
+
+Pour le cas d'usage, nous avons défini que les aspects de non-répudiation et de confidentialité ne sont pas les plus critiques car nous voulons transmettre uniquement la température et l'humidité.
+Il faut cepandant éviter qu'une personne vienne altérer l'information envoyée. Nous devons être sûrs que le *noeud* qui envoie l'information est bien le *noeud* que nous avons créé et pas celui d'un éventuel attaquant (par exemple : *man in the middle*).
+
+
+## Methodologie gestion de projet
+
+Pour gérer le projet nous utilisons un outil de *versionning* appelé Github où on y met tout le code du projet, les sources ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme de GANTT. Nous le garderons à jour pandant toute la durée du projet. Pour avoir une gestion de projet plus précise (tâches à effectuer chaques semaines), nous utilisons l'onglet *Project* de notre *repository* Github. Dans cet onglet nous indiquons pour chaque semaine les différentes tâches à faire. Les tâches ont 3 états **A faire**, **En cours** et **Fini** nous déplaçons et nous ajoutons des tâches au cours de la semaine.
+
+Pour la méthode de gestion de projet nous allons utiliser la methode en "spirale". En commençant par créer un réseau LoRaWAN basique, puis nous ajouterons des couches de sécurité au fur et à mesure.
