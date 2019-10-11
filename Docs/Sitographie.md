@@ -68,3 +68,9 @@
 2. Utilisation de GitHub : https://www.youtube.com/watch?v=La3SaI2hjzE
 
 3. Utilisation de GitHub : http://www.chtiland.fr/lib/exe/fetch.php?media=informatique:divers:git_memo_fr.pdf
+
+## Sécurité STM 
+
+Présentation de la sécurité des différentes cartes STM : http://www.emcu.it/SILICA-STDay-2016/X/Presentazioni/2_STM32&SecureElements.pdf
+
+Présentationdes kits LoRa de STM : https://www.youtube.com/watch?v=MgbTraRq0K8
