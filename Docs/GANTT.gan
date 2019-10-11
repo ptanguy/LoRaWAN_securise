@@ -4,16 +4,14 @@
         <field id="tpd3" name="Nom" width="315" order="0"/>
         <field id="tpd4" name="Date de début" width="102" order="1"/>
         <field id="tpd5" name="Date de fin" width="96" order="2"/>
-        <option id="color.recent">
-            <![CDATA[#ff3333 #990099 #ff9900 #66cc00 #000000 #0000ff #999999 #cc00cc]]>
-        </option>
+        <option id="color.recent"><![CDATA[#66cc00 #ff3333 #990099 #ff9900 #000000 #0000ff #999999 #cc00cc]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="210" order="0"/>
         <field id="1" name="Rôle par défaut" width="86" order="1"/>
     </view>
     <!-- -->
-    <calendars>
+    <calendars base-id="Aucun">
         <day-types>
             <day-type id="0"/>
             <day-type id="1"/>
@@ -36,32 +34,33 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="0" name="réception du projet" color="#0000ff" meeting="false" start="2019-10-04" duration="1" complete="100" thirdDate="2019-10-09" thirdDate-constraint="0" expand="true"/>
-        <task id="5" name="recherche documentation" color="#8cb6ce" meeting="false" start="2019-10-05" duration="16" complete="37" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true"/>
-        <task id="21" name="rédaction documentation" color="#8cb6ce" meeting="false" start="2019-10-07" duration="28" complete="14" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
+        <task id="0" name="Réception du projet" color="#0000ff" meeting="false" start="2019-10-04" duration="1" complete="100" thirdDate="2019-10-09" thirdDate-constraint="0" expand="true"/>
+        <task id="5" name="Recherche documentation" color="#8cb6ce" meeting="false" start="2019-10-05" duration="16" complete="37" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true"/>
+        <task id="21" name="Rédaction documentation" color="#8cb6ce" meeting="false" start="2019-10-07" duration="28" complete="14" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
         <task id="76" name="JALON 1" color="#ff9900" meeting="true" start="2019-10-11" duration="0" complete="0" thirdDate="2019-10-01" thirdDate-constraint="0" expand="true"/>
-        <task id="13" name="étude des besoins" color="#990099" meeting="false" start="2019-10-14" duration="7" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
-            <task id="39" name="conception architecture réseau et matériel" color="#990099" meeting="false" start="2019-10-14" duration="2" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
-            <task id="29" name="conception algos" color="#990099" meeting="false" start="2019-10-15" duration="6" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
+        <task id="13" name="Etude des besoins" color="#990099" meeting="false" start="2019-10-14" duration="7" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
+            <task id="39" name="Conception architecture réseau et matériel" color="#990099" meeting="false" start="2019-10-14" duration="2" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
+            <task id="29" name="Conception algos" color="#990099" meeting="false" start="2019-10-15" duration="6" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
                 <depend id="121" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
-        <task id="118" name="programmation" color="#66cc00" meeting="false" start="2019-10-21" duration="56" complete="0" thirdDate="2019-08-26" thirdDate-constraint="0" expand="true">
-            <task id="121" name="programmation première étape" color="#66cc00" meeting="false" start="2019-10-21" duration="14" complete="0" thirdDate="2019-10-06" thirdDate-constraint="0" expand="true">
-                <depend id="123" type="2" difference="0" hardness="Strong"/>
-            </task>
+        <task id="118" name="Programmation" color="#66cc00" meeting="false" start="2019-10-21" duration="42" complete="0" thirdDate="2019-08-26" thirdDate-constraint="0" expand="true">
             <task id="126" name="JALON 2" color="#ff9900" meeting="true" start="2019-10-25" duration="0" complete="0" thirdDate="2019-10-05" thirdDate-constraint="0" expand="true"/>
-            <task id="123" name="poursuite programmation" color="#66cc00" shape="0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0" meeting="false" start="2019-11-04" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
+            <task id="121" name="Développement noeud" color="#66cc00" meeting="false" start="2019-10-21" duration="14" complete="0" thirdDate="2019-10-06" thirdDate-constraint="0" expand="true"/>
+            <task id="123" name="Développement OS" color="#66cc00" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2019-10-21" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
                 <depend id="124" type="2" difference="0" hardness="Strong"/>
+                <depend id="128" type="2" difference="0" hardness="Strong"/>
+                <depend id="140" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="128" name="reprise en main projet" color="#8cb6ce" meeting="false" start="2019-11-30" duration="2" complete="0" thirdDate="2019-11-13" thirdDate-constraint="0" expand="true"/>
-            <task id="124" name="fin programmation" color="#66cc00" meeting="false" start="2019-12-02" duration="14" complete="0" thirdDate="2019-11-25" thirdDate-constraint="0" expand="true"/>
+            <task id="128" name="Dévelopement passerelle" color="#66cc00" meeting="false" start="2019-11-18" duration="7" complete="0" thirdDate="2019-11-13" thirdDate-constraint="0" expand="true"/>
+            <task id="124" name="Développement network server" color="#66cc00" meeting="false" start="2019-11-18" duration="14" complete="0" thirdDate="2019-11-25" thirdDate-constraint="0" expand="true"/>
+            <task id="140" name="Développement application server" color="#66cc00" meeting="false" start="2019-11-18" duration="7" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="74" name="état de l'avancement du projet" color="#8cb6ce" meeting="false" start="2019-12-02" duration="5" complete="0" thirdDate="2019-11-22" thirdDate-constraint="0" expand="true"/>
+        <task id="74" name="Etat de l'avancement du projet" color="#8cb6ce" meeting="false" start="2019-12-02" duration="5" complete="0" thirdDate="2019-11-22" thirdDate-constraint="0" expand="true"/>
         <task id="81" name="JALON 3" color="#ff9900" meeting="true" start="2019-12-06" duration="0" complete="0" thirdDate="2019-11-17" thirdDate-constraint="0" expand="true"/>
-        <task id="135" name="finalisation" color="#ff3333" meeting="false" start="2019-12-07" duration="13" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
-            <task id="138" name="résolution problèmes dernière minute" color="#ff3333" meeting="false" start="2019-12-07" duration="13" complete="0" thirdDate="2019-12-04" thirdDate-constraint="0" expand="true"/>
-            <task id="137" name="mise en page finale" color="#ff3333" meeting="false" start="2019-12-14" duration="6" complete="0" thirdDate="2019-11-19" thirdDate-constraint="0" expand="true"/>
+        <task id="135" name="Finalisation" color="#ff3333" meeting="false" start="2019-12-07" duration="13" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+            <task id="138" name="Tests" color="#ff3333" meeting="false" start="2019-12-07" duration="13" complete="0" thirdDate="2019-12-04" thirdDate-constraint="0" expand="true"/>
+            <task id="137" name="Rédaction des livrables" color="#ff3333" meeting="false" start="2019-12-14" duration="6" complete="0" thirdDate="2019-11-19" thirdDate-constraint="0" expand="true"/>
         </task>
         <task id="84" name="JALON 4 FINAL" color="#ff9900" meeting="true" start="2019-12-20" duration="0" complete="0" thirdDate="2019-12-07" thirdDate-constraint="0" expand="true"/>
     </tasks>
@@ -86,9 +85,14 @@
         <allocation task-id="126" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="128" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="137" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+<<<<<<< HEAD
         <allocation task-id="138" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="135" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="118" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+=======
+        <allocation task-id="140" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="138" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+>>>>>>> 64d8c75f3828da56b6f7342362a7c9560104452d
         <allocation task-id="39" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="21" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="5" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
@@ -105,9 +109,14 @@
         <allocation task-id="126" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="128" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="137" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+<<<<<<< HEAD
         <allocation task-id="138" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="135" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="118" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+=======
+        <allocation task-id="140" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="138" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+>>>>>>> 64d8c75f3828da56b6f7342362a7c9560104452d
     </allocations>
     <vacations/>
     <previous/>
