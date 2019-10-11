@@ -44,17 +44,17 @@
                 <depend id="121" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
-        <task id="118" name="Programmation" color="#66cc00" meeting="false" start="2019-10-21" duration="42" complete="0" thirdDate="2019-08-26" thirdDate-constraint="0" expand="true">
+        <task id="118" name="Programmation" color="#66cc00" meeting="false" start="2019-10-14" duration="42" complete="0" thirdDate="2019-08-26" thirdDate-constraint="0" expand="true">
             <task id="126" name="JALON 2" color="#ff9900" meeting="true" start="2019-10-25" duration="0" complete="0" thirdDate="2019-10-05" thirdDate-constraint="0" expand="true"/>
             <task id="121" name="Développement noeud" color="#66cc00" meeting="false" start="2019-10-21" duration="14" complete="0" thirdDate="2019-10-06" thirdDate-constraint="0" expand="true"/>
-            <task id="123" name="Développement OS" color="#66cc00" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2019-10-21" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
+            <task id="123" name="Développement OS" color="#66cc00" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2019-10-14" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
                 <depend id="124" type="2" difference="0" hardness="Strong"/>
                 <depend id="128" type="2" difference="0" hardness="Strong"/>
                 <depend id="140" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="128" name="Dévelopement passerelle" color="#66cc00" meeting="false" start="2019-11-18" duration="7" complete="0" thirdDate="2019-11-13" thirdDate-constraint="0" expand="true"/>
-            <task id="124" name="Développement network server" color="#66cc00" meeting="false" start="2019-11-18" duration="14" complete="0" thirdDate="2019-11-25" thirdDate-constraint="0" expand="true"/>
-            <task id="140" name="Développement application server" color="#66cc00" meeting="false" start="2019-11-18" duration="7" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true"/>
+            <task id="128" name="Dévelopement passerelle" color="#66cc00" meeting="false" start="2019-11-11" duration="7" complete="0" thirdDate="2019-11-13" thirdDate-constraint="0" expand="true"/>
+            <task id="124" name="Développement network server" color="#66cc00" meeting="false" start="2019-11-11" duration="14" complete="0" thirdDate="2019-11-25" thirdDate-constraint="0" expand="true"/>
+            <task id="140" name="Développement application server" color="#66cc00" meeting="false" start="2019-11-11" duration="7" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true"/>
         </task>
         <task id="74" name="Etat de l'avancement du projet" color="#8cb6ce" meeting="false" start="2019-12-02" duration="5" complete="0" thirdDate="2019-11-22" thirdDate-constraint="0" expand="true"/>
         <task id="81" name="JALON 3" color="#ff9900" meeting="true" start="2019-12-06" duration="0" complete="0" thirdDate="2019-11-17" thirdDate-constraint="0" expand="true"/>
