@@ -64,5 +64,21 @@ La comminication entre le *noeud* et la *passerelle*  doit pouvoir éviter :
 
 ## Analyse des risques
 
-Dump memoire
-capteurs
+Dump memoire (STM32) des clès
+Capteurs (non hackable )
+Antenne ( Non)
+Communication sans fil LoRa entre Noeud et passerelle ( Hackable mais non traité)
+LoRaServer OS : Sécurisé ?? mais a adapter à notre cas d'usage (plusieurs utilisateurs, ouverture ports ...) 
+Gérer les Maj (cf Mender ) / Gerer la Maintenance
+
+
+### Contre mesures
+Dump mémoire  -> Crypté / Caché la clef / Composant sécurisé autre projet M1
+Capteur difficilement hackable mais on peut le mettre dans une boite ( dans notre cas on devra mettre tout le noeud dans la boite)
+Antenne mettre en hauteur / boite 
+Communication
+
+A rechercher pour l'OS 
+
+Sucuriser la com avec le serv de Maj avec un VPN
+
