@@ -77,7 +77,15 @@ Gérer les Maj (cf Mender ) / Gerer la Maintenance
 2 cas de figures 
 
 1. Un os qui ne fais que passerelle, network serv', application serv
-2. Un os qui fais ce qui est dit au dessus  + peut avoir d'autres services donc il faut empécher les autres utilisateurs d'accéder aux information , il faut vérrouiller chque partie du server en faisant attention qui y a accées...
+    - Administration SSH
+    - VPN pour la connection ?
+    - MAJ ... (à reflechir la sécuritée à ce propos)
+    - Faire attention aux services inutiles 
+2. Un os qui fais ce qui est dit au dessus  + peut avoir d'autres services donc il faut empécher les autres utilisateurs d'accéder aux information , il faut vérrouiller chaque partie du server en faisant attention qui y a accées...
+
+
+Dans le premier cas nous devrons considérer la Box LoRa comme un **serv à sécuriser** alors que dans le second cas nous devrons le considérer plus comme **une sessions** sur une machine sur laquelle tourne plusieurs services.
+
 
 
 ### Contre mesures
@@ -90,3 +98,4 @@ A rechercher pour l'OS
 
 Sucuriser la com avec le serv de Maj avec un VPN
 
+Secureboot pour éviter l'execution de code malicieu des les premiers moments du boot [lien secure boot debian](https://wiki.debian.org/SecureBoot)
