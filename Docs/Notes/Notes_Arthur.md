@@ -72,6 +72,14 @@ LoRaServer OS : Sécurisé ?? mais a adapter à notre cas d'usage (plusieurs uti
 Gérer les Maj (cf Mender ) / Gerer la Maintenance
 
 
+### OS 
+
+2 cas de figures 
+
+1. Un os qui ne fais que passerelle, network serv', application serv
+2. Un os qui fais ce qui est dit au dessus  + peut avoir d'autres services donc il faut empécher les autres utilisateurs d'accéder aux information , il faut vérrouiller chque partie du server en faisant attention qui y a accées...
+
+
 ### Contre mesures
 Dump mémoire  -> Crypté / Caché la clef / Composant sécurisé autre projet M1
 Capteur difficilement hackable mais on peut le mettre dans une boite ( dans notre cas on devra mettre tout le noeud dans la boite)
