@@ -65,11 +65,13 @@ La comminication entre le *noeud* et la *passerelle*  doit pouvoir éviter :
 ## Analyse des risques
 
 Dump memoire (STM32) des clès
+++ Canaux cachés 
 Capteurs (non hackable )
 Antenne ( Non)
 Communication sans fil LoRa entre Noeud et passerelle ( Hackable mais non traité)
 LoRaServer OS : Sécurisé ?? mais a adapter à notre cas d'usage (plusieurs utilisateurs, ouverture ports ...) 
 Gérer les Maj (cf Mender ) / Gerer la Maintenance
+++ Usurpation d'identité d'un Noeud (Authenticitée)
 
 
 ### OS 
