@@ -80,7 +80,7 @@ Il faut cepandant éviter qu'une personne vienne altérer l'information envoyée
 | Interception des mises à jour                                                 | ✓                    | VPN                                                              |
 | Execution d'un OS malicieux sur la box LoRA                                   | ✓                    | Secure boot                                                      |
 | Modification du programme du noeud                                            | ✓                    | Condamnation des GPIO de debogage                                |
-| Dos attaque par envois massif de données sur la Bax LoRa                      | ✓                    | Limiter la réception d'un nombre de trame par X temps            |
+| DoS attaque par envoi massif de données sur la Box LoRa                      | ✓                    | Limiter la réception d'un nombre de trames par X temps            |
 
 ## Méthodologie gestion de projet
 
