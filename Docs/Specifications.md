@@ -61,9 +61,9 @@ Secret à protéger :
 ## Mise en place d'un banc de test
 Nous avons définis 3 cas d'usage ayant une compléxité croissante:
 
-1. Mise en pace d'un Noeud LoRaWAN de classe A qui envoit des valeurs de température et d'humidité, à une Box LoRa (passerelle + network server + application server) celle-ci devra afficher les valeurs des capteurs dans un terminal
-2. Mise en place de 2 Noeuds  LoRa 1 de classe A qui envoit les valeurs de température et d'humidité à la box LoRa celle-ci affiche et traite les valeurs. En foncton des valeurs elle va envoyer une commande à un 2éme noeud LoRa qui serra de classe B et qui allumera ou nom une LED en fonction de la commande.
-3. Même cas que précédement mais en ajoutant des services et des utilisateur en plus à la box LoRa afin de simuller un serveur d'entreprise.
+1. Mise en place d'un Noeud LoRaWAN de *classe A* qui envoit des valeurs de température et d'humidité, à une Box LoRa (passerelle + network server + application server) celle-ci devra afficher les valeurs des capteurs dans un terminal
+2. Mise en place de 2 Noeuds  LoRa 1 de *classe A* qui envoit les valeurs de température et d'humidité à la box LoRa celle-ci affiche et traite les valeurs. En foncton des valeurs elle va envoyer une commande à un 2éme noeud LoRa qui serra de *classe B* et qui allumera ou nom une LED en fonction de la commande.
+3. Même cas que précédement mais en ajoutant des services et des utilisateur en plus à la box LoRa afin de simuler un serveur d'entreprise.
 
 
 ## Analyse des risques
@@ -82,9 +82,10 @@ Il faut cepandant éviter qu'une personne vienne altérer l'information envoyée
 | Modification du programme du noeud                                            | ✓                    | Condamnation des GPIO de debogage                                |
 | Dos attaque par envois massif de données sur la Bax LoRa                      | ✓                    | Limiter la réception d'un nombre de trame par X temps            |
 
-## Methodologie gestion de projet
+## Méthodologie gestion de projet
 
 Pour gérer le projet nous utilisons un outil de *versionning* appelé Github où on y met tout le code du projet, les sources ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme de GANTT. Nous le garderons à jour pandant toute la durée du projet. Pour avoir une gestion de projet plus précise (tâches à effectuer chaques semaines), nous utilisons l'onglet *Project* de notre *repository* Github. Dans cet onglet nous indiquons pour chaque semaine les différentes tâches à faire. Les tâches ont 3 états **A faire**, **En cours** et **Fini** nous déplaçons et nous ajoutons des tâches au cours de la semaine.
 
 Pour la méthode de gestion de projet nous allons utiliser la methode en "spirale". En commençant par créer un réseau LoRaWAN basique, puis nous ajouterons des couches de sécurité au fur et à mesure.
 
+Les logiciel que nous allons utiliser pour développer sur STM32 est le logiciel *STM32CubeIDE* il nous permet de facilement générer la configuration du microcontrole grace à l'intégration de CubeMX puis de développer notre programme grace à *Attolic*.
