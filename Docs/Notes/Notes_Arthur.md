@@ -65,14 +65,16 @@ La comminication entre le *noeud* et la *passerelle*  doit pouvoir éviter :
 ## Analyse des risques
 
 Dump memoire (STM32) des clès
-++ Canaux cachés 
+++ Canaux cachés (DPA,SPA ...)
 Capteurs (non hackable )
 Antenne ( Non)
 Communication sans fil LoRa entre Noeud et passerelle ( Hackable mais non traité)
 LoRaServer OS : Sécurisé ?? mais a adapter à notre cas d'usage (plusieurs utilisateurs, ouverture ports ...) 
 Gérer les Maj (cf Mender ) / Gerer la Maintenance
+++ Mise a jour l'ogiciel ne venant pas d'un trusted serveur
 ++ Usurpation d'identité d'un Noeud (Authenticitée)
-
+++ execution d'un code malicieux sur la box LoRa
+++ Dos attaque sur la box LoRA
 
 ### OS 
 
@@ -84,8 +86,6 @@ Gérer les Maj (cf Mender ) / Gerer la Maintenance
     - MAJ ... (à reflechir la sécuritée à ce propos)
     - Faire attention aux services inutiles 
 2. Un os qui fais ce qui est dit au dessus  + peut avoir d'autres services donc il faut empécher les autres utilisateurs d'accéder aux information , il faut vérrouiller chaque partie du server en faisant attention qui y a accées...
-
-
 Dans le premier cas nous devrons considérer la Box LoRa comme un **serv à sécuriser** alors que dans le second cas nous devrons le considérer plus comme **une sessions** sur une machine sur laquelle tourne plusieurs services.
 
 
@@ -98,6 +98,6 @@ Communication
 
 A rechercher pour l'OS 
 
-Sucuriser la com avec le serv de Maj avec un VPN
+Sécuriser la com avec le serv de Maj avec un VPN
 
 Secureboot pour éviter l'execution de code malicieu des les premiers moments du boot [lien secure boot debian](https://wiki.debian.org/SecureBoot)
