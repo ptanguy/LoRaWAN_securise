@@ -71,9 +71,20 @@ Nous avons définis 3 cas d'usage ayant une compléxité croissante:
 Pour le cas d'usage, nous avons défini que les aspects de non-répudiation et de confidentialité ne sont pas les plus critiques car nous voulons transmettre uniquement la température et l'humidité.
 Il faut cepandant éviter qu'une personne vienne altérer l'information envoyée. Nous devons être sûrs que le *noeud* qui envoie l'information est bien le *noeud* que nous avons créé et pas celui d'un éventuel attaquant (par exemple : *man in the middle*).
 
+| Menaces envisageables                                                         | Risques à considérer | Contres mesures                                                  |
+|-------------------------------------------------------------------------------|----------------------|------------------------------------------------------------------|
+| Dump mémoire STM32 et Raspberry                                               | ✓                    | Hasher la clef / Composant de sécurité pour le firmware et clef  |
+| Canaux cachés   (DPA, SPA)                                                    | ⨯                    |                                                                  |
+| Autre Noeud usurpant l'identité de notre Noeud (altération des données)       | ✓                    | Signature et certificat                                          |
+| Mise à jour venant d'une entité autre que le serveur de mise à jour officiel  | ✓                    | Signature des MAJ / certificat                                   |
+| Interception des mises à jour                                                 | ✓                    | VPN                                                              |
+| Execution d'un OS malicieux sur la box LoRA                                   | ✓                    | Secure boot                                                      |
+| Modification du programme du noeud                                            | ✓                    | Condamnation des GPIO de debogage                                |
+| Dos attaque par envois massif de données sur la Bax LoRa                      | ✓                    | Limiter la réception d'un nombre de trame par X temps            |
 
 ## Methodologie gestion de projet
 
 Pour gérer le projet nous utilisons un outil de *versionning* appelé Github où on y met tout le code du projet, les sources ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme de GANTT. Nous le garderons à jour pandant toute la durée du projet. Pour avoir une gestion de projet plus précise (tâches à effectuer chaques semaines), nous utilisons l'onglet *Project* de notre *repository* Github. Dans cet onglet nous indiquons pour chaque semaine les différentes tâches à faire. Les tâches ont 3 états **A faire**, **En cours** et **Fini** nous déplaçons et nous ajoutons des tâches au cours de la semaine.
 
 Pour la méthode de gestion de projet nous allons utiliser la methode en "spirale". En commençant par créer un réseau LoRaWAN basique, puis nous ajouterons des couches de sécurité au fur et à mesure.
+
