@@ -59,9 +59,11 @@ Secret à protéger :
 - La valeur de la clef **AppSKey**
 
 ## Mise en place d'un banc de test
+Nous avons définis 3 cas d'usage ayant une compléxité croissante:
 
-Pour la réalisation du banc de test nous allons créer un noeud LoRa WAN avec un kit de développement provenant de ST microelectronics. Ce noeud communiquera les informations prevenant d'un capteur toutes les 10min à Raspberry Pi equipé d'un module LoRaWAN. La Raspberry aura plusieurs service qui communiquerons en interne *gateway*,*networkserver*, *application server*.
-L'application server pourra par exemple enregistrer la valeur du capteur dans un fichier et l'afficher sur un therminal.
+1. Mise en pace d'un Noeud LoRaWAN de classe A qui envoit des valeurs de température et d'humidité, à une Box LoRa (passerelle + network server + application server) celle-ci devra afficher les valeurs des capteurs dans un terminal
+2. Mise en place de 2 Noeuds  LoRa 1 de classe A qui envoit les valeurs de température et d'humidité à la box LoRa celle-ci affiche et traite les valeurs. En foncton des valeurs elle va envoyer une commande à un 2éme noeud LoRa qui serra de classe B et qui allumera ou nom une LED en fonction de la commande.
+3. Même cas que précédement mais en ajoutant des services et des utilisateur en plus à la box LoRa afin de simuller un serveur d'entreprise.
 
 
 ## Analyse des risques
