@@ -36,4 +36,8 @@ Réponses :
 -------------
 
 
+Utilisation de la raspberry
 
+> sudo raspi-config (puis autoriser le ssh)
+> sudo apt update
+> sudo apt upgrade (faire et installer les maj)
