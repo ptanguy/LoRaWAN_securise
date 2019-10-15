@@ -1,3 +1,5 @@
+---------------
+
 [Cours complet](http://genelaix.free.fr/IMG/pdf/presentation_lora_lorawan.pdf)
 
 Sigfox est prévu pour envoyer 140 messages de 12 octets à 300 bauds par jour et recevoir 4 messages par jour. 
@@ -41,3 +43,8 @@ Utilisation de la raspberry
 > sudo raspi-config (puis autoriser le ssh)
 > sudo apt update
 > sudo apt upgrade (faire et installer les maj)
+
+-------------
+
+15 octobre 2019 -> prise en main IC880A
+
