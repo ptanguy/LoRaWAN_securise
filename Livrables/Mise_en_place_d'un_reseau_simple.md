@@ -24,8 +24,24 @@ Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une
   - Pour ecrire la mise à jour dans la carte *fipy* entrer la commande suivante. `sudo ./pycom-fwtool-cli -p /dev/ttyACM1 flash -t ../../FiPy-1.20.0.rc13.tar.gz` dans notres cas la version du firmware est *1.20.0* et le port */dev/ttyACM1* 
 
 ## Programmation du noeud
+Ouvrez visual studio code ou atom. Si vous avez 
 
 
+## Problème rencontré
+### (Pymakr) There was an error with your serialport module
+Ce problème apparait au démarrage de visual studio code après l'installation de *Pymakr*. Vous pouvez trouver des informatio pour résoudre le problème [ici](https://github.com/pycom/pymakr-vsc/issues/53).
+#### Résolution du problème :
+1. *Dans le cadre de ce projet nous utilisons un fork de **visual studio code** appelé **code** les noms de dossier sont suceptible de changer en fonction du logiciel que vous utiliser.*
+2. *Nous utlisons pour ce projet la distribution Linux **Manjaro** qui est basé sur **Arch Linux** le gestionnaire de paquet serra peut-être différent du votre*
+``` Bash
+$ sudo pacman -Sy npm
+$ npm install -g prebuild-install
+$ cd ~/.vscode-oss/extensions/pycom.pymakr-1.1.3/
+$ cd node_modules/@serialport/bindings
+$ prebuild-install --runtime electron --target 4.2.5 --tag-prefix @serialport/bindings@ --verbose --force
+```
+
+Il faut ensuite relancer visual studio.
 
 ## Source:
 Mise en place Fipy : https://docs.pycom.io/ ; https://docs.pycom.io/gettingstarted/connection/fipy/ ;
