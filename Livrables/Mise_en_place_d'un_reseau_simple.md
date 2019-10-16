@@ -7,14 +7,15 @@ Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une
 - Carte Fipy
   - Carte pysense
 - Raspberry Pi 3b / 3b+
+  - Carte IMST iC880A
 
-## Mise en place carte Fipy
+## Mise en place du Noeud / carte Fipy
 - Dans un premier temps installer dans Visual studio code ou Atom le plugin **Pymakr**
 - Ensuite il va falloir mettre à jour le Firmware de la carte d'extension *pysense*, vous pouvez trouver la procédure  [ici](https://docs.pycom.io/pytrackpysense/installation/firmware/)
 - Après la mise à jour débrancher la carte *pysense* de l'USB
 - Mettre la carte *fypy* sur la carte *pysense*, **il faut que le bouton reset de la carte *fipy* soit du coté du port USB de la carte *pysense***
 - Mise à jour de la carte *fipy*
-  - Avnant de commencer il est recommandé d'installer la mise à jour de la carte fipy vous pouvez trouver les information d'installation pour Windows / Mac OS / Linux [à cette adresse](https://docs.pycom.io/gettingstarted/installation/firmwaretool/), nous nous concentrerons sur Linux
+  - Avant de commencer il est recommandé d'installer la mise à jour de la carte fipy vous pouvez trouver les information d'installation pour Windows / Mac OS / Linux [à cette adresse](https://docs.pycom.io/gettingstarted/installation/firmwaretool/), nous nous concentrerons sur Linux
   - Installez les paquets *dialog* et *python-pyserial*
   - Télecharger le logiciel de mise à jour : https://software.pycom.io/downloads/linux-1.16.1.html
   - Télecharger la dernière version du firmware de la carte *Fipy*  [à cette adresse](https://github.com/pycom/pycom-micropython-sigfox/releases)
@@ -38,9 +39,34 @@ Ouvrez visual studio code ou atom. Créer un dossier pour le projet, nous l'app�
 ```JSON
 "sync_folder": "fipy",
 ```
-- Créer les dossiers et fichiers suivant dans ce dossier 
+- Créer les dossiers et fichiers suivant dans ce dossier
+   - *boot.py* permet d'executer du code uniquement au démarrage de la carte
+   - *main.py* permet d'executer du code pendatn que la carte est allumée
+   - *cert* contient les certificats
+   - *lib* contient des bibliothèque
+
 
 ![image_du_contenu_du_dossier_fipy](images/contenu_dossier_fipy.png)
+
+**********************************
+Ajouter le code du noeud 
+**********************************
+
+## Mise en place de la partie passerelle / network server / application server
+Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec une carte d'extension *IMST iC880A*
+
+- Dans un premier temps téléchargez l'image de *lora-getway-os-full* à l'adresse suivante : https://artifacts.loraserver.io/downloads/lora-gateway-os/raspberrypi/raspberrypi3/3.0.0test2/
+- Une fois télécharger il faut extraire l'archive.
+- Après cela vous devez ecrire l'image extraite sur la carte SD de la Raspberry
+   - Insérer la carte SD dans votre ordinateur
+   - Reperer sont point de montage à l'aide de la commande ```lsblk```
+   - Puis écriver l'amage sur la carte SD avec la commande suivante (en veyant a bien remplacer le chemain de l'image et le point de montage de la carte SD):
+   ```Bash
+   sudo dd bs=4M if=lora-gateway-os-full-raspberrypi3--20190810092349.sdimg of=/dev/mmcblk0 conv=fsync
+   ```
+
+
+
 
 
 ## Problème rencontré
@@ -59,7 +85,9 @@ $ prebuild-install --runtime electron --target 4.2.5 --tag-prefix @serialport/bi
 
 Il faut ensuite relancer visual studio.
 
-## Source:
-Mise en place Fipy : https://docs.pycom.io/ ; https://docs.pycom.io/gettingstarted/connection/fipy/ ;
-Mise en place Pymakr : https://docs.pycom.io/pymakr/installation/vscode/
+## Sources:
+- Mise en place Fipy : https://docs.pycom.io/ ; https://docs.pycom.io/gettingstarted/connection/fipy/ ;
+- Mise en place Pymakr : https://docs.pycom.io/pymakr/installation/vscode/ ; https://docs.pycom.io/pymakr/toolsfeatures/
+- Programmation Noeud : https://docs.pycom.io/tutorials/lora/lorawan-otaa/ ;
+- LoRa Server pour Raspberry : https://www.loraserver.io/lora-gateway-os/install/raspberrypi/
 
