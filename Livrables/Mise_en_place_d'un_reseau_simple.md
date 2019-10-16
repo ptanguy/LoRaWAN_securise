@@ -20,12 +20,18 @@ Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une
   - Télecharger la dernière version du firmware de la carte *Fipy*  [à cette adresse](https://github.com/pycom/pycom-micropython-sigfox/releases)
   - Après avoir extrait le logiciel de mise à jour allez dans *pycom_firmware_update_1.16.1-amd64/pyupgrade* 
   - Brancher à l'ordinateur la carte *pysense* avec la carte *fipy* installée dussus.
-  - Executer la commande pour connaitre le port sur lequel est branché : ```./pycom-fwtool-cli list ```
-  - Pour ecrire la mise à jour dans la carte *fipy* entrer la commande suivante. `sudo ./pycom-fwtool-cli -p /dev/ttyACM1 flash -t ../../FiPy-1.20.0.rc13.tar.gz` dans notres cas la version du firmware est *1.20.0* et le port */dev/ttyACM1* 
+  - Executer la commande pour connaitre le port sur lequel est branché : 
+  ```Bash 
+  ./pycom-fwtool-cli list 
+  ```
+  - Pour ecrire la mise à jour dans la carte *fipy* entrer la commande suivante. 
+  ```Bash
+  sudo ./pycom-fwtool-cli -p /dev/ttyACM1 flash -t ../../FiPy-1.20.0.rc13.tar.gz
+  ```
+   dans notres cas la version du firmware est *1.20.0* et le port */dev/ttyACM1* 
 
 ## Programmation du noeud
-Ouvrez visual studio code ou atom. Si vous avez 
-
+Ouvrez visual studio code ou atom. Si c'est la première fois que vous utiliser *Pymakr* 
 
 ## Problème rencontré
 ### (Pymakr) There was an error with your serialport module
@@ -45,3 +51,5 @@ Il faut ensuite relancer visual studio.
 
 ## Source:
 Mise en place Fipy : https://docs.pycom.io/ ; https://docs.pycom.io/gettingstarted/connection/fipy/ ;
+Mise en place Pymakr : https://docs.pycom.io/pymakr/installation/vscode/
+
