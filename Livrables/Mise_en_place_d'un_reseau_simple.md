@@ -31,7 +31,17 @@ Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une
    dans notres cas la version du firmware est *1.20.0* et le port */dev/ttyACM1* 
 
 ## Programmation du noeud
-Ouvrez visual studio code ou atom. Si c'est la première fois que vous utiliser *Pymakr* 
+Ouvrez visual studio code ou atom. Créer un dossier pour le projet, nous l'appélerons *reseau_simple*.
+- Créer un fichier de configuration pour le Noeud. Cliquez sur *All commands* en bas de l'écran puis dans le mune déroulant qui s'affiche séléctionné *Project Settings*
+- Créer un sous dossier pour y écrire le programme du Noeud, nous l'avons appelé *fipy*
+- Dans le fichier JSON créé précedement ajouter le nom de ce dossier 
+```JSON
+"sync_folder": "fipy",
+```
+- Créer les dossiers et fichiers suivant dans ce dossier 
+
+![image_du_contenu_du_dossier_fipy](images/contenu_dossier_fipy.png)
+
 
 ## Problème rencontré
 ### (Pymakr) There was an error with your serialport module
