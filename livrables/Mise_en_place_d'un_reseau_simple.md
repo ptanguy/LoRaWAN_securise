@@ -48,7 +48,7 @@ Ouvrez visual studio code ou atom. Cr√©er un dossier pour le projet, nous l'app√
 
 ![image_du_contenu_du_dossier_fipy](images/contenu_dossier_fipy.png)
 
-- Dans le dfichier main.py recopier le code suivant pour pour parametrer un code LoRa avec une authentification OTAA (Over The Air Authentification)
+- Dans le fichier main.py recopier le code suivant pour pour parametrer un code LoRa avec une authentification OTAA (Over The Air Authentification) ce code provient des exemples fournit par Pycom : https://docs.pycom.io/tutorials/lora/lorawan-otaa/
 ``` Python
 from network import LoRa
 import socket
