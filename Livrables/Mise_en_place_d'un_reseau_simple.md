@@ -48,9 +48,54 @@ Ouvrez visual studio code ou atom. Cr√©er un dossier pour le projet, nous l'app√
 
 ![image_du_contenu_du_dossier_fipy](images/contenu_dossier_fipy.png)
 
-**********************************
-Ajouter le code du noeud 
-**********************************
+- Dans le dfichier main.py recopier le code suivant pour pour parametrer un code LoRa avec une authentification OTAA (Over The Air Authentification)
+``` Python
+from network import LoRa
+import socket
+import time
+import ubinascii
+
+# Initialise LoRa in LORAWAN mode.
+# Please pick the region that matches where you are using the device:
+# Asia = LoRa.AS923
+# Australia = LoRa.AU915
+# Europe = LoRa.EU868
+# United States = LoRa.US915
+lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
+
+# create an OTAA authentication parameters
+app_eui = ubinascii.unhexlify('ADA4DAE3AC12676B')
+app_key = ubinascii.unhexlify('11B0282A189B75B0B4D2D8C7FA38548B')
+
+# join a network using OTAA (Over the Air Activation)
+lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
+
+# wait until the module has joined the network
+while not lora.has_joined():
+    time.sleep(2.5)
+    print('Not yet joined...')
+
+# create a LoRa socket
+s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+
+# set the LoRaWAN data rate
+s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
+
+# make the socket blocking
+# (waits for the data to be sent and for the 2 receive windows to expire)
+s.setblocking(True)
+
+# send some data
+s.send(bytes([0x01, 0x02, 0x03]))
+
+# make the socket non-blocking
+# (because if there's no data received it will block forever...)
+s.setblocking(False)
+
+# get any data received (if any...)
+data = s.recv(64)
+print(data)
+```
 
 ## Mise en place de la partie passerelle / network server / application server
 Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec une carte d'extension *IMST iC880A*
@@ -64,6 +109,7 @@ Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec u
    ```Bash
    sudo dd bs=4M if=lora-gateway-os-full-raspberrypi3--20190810092349.sdimg of=/dev/mmcblk0 conv=fsync
    ```
+   - Mettez la carte SD dans la Raspberry et tester si celle-ci boot.
 
 
 
