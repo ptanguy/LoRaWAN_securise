@@ -101,3 +101,16 @@ A rechercher pour l'OS
 Sécuriser la com avec le serv de Maj avec un VPN
 
 Secureboot pour éviter l'execution de code malicieu des les premiers moments du boot [lien secure boot debian](https://wiki.debian.org/SecureBoot)
+
+
+
+## Comment cacher la clés dans le STM3é ?
+Il faut eviter de cacher la clé dans le software, car elle serra directement lisible dans la mémoire.
+
+Idée 1 :
+Il faut la stocker en hardware...
+
+Idée 2 :
+Generer une clées aléatoire pour encrypter la RAM stocker à chaque execution du programme ainsi la mémoire est illisible. 
+
+
