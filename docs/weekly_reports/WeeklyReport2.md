@@ -9,20 +9,6 @@ Nous avons eu des problème pour mettre en oeuvre certains points de ce réseau 
 En attandant de résoudre ces problèmes nous nous sommes documenté sur les différentes cartes à notre disposition.
 
 
-*************
-Mise en place d'un noeud simple
-
-Recherches d'information pour la mise en place d'un noeud sur une carte STM
-
-Recherche d'information pour cacher les clés dans la mémoire ou composant de sécuritée
-
-Recherche d'information pour la carte i880A SPI
-
-Lecture de la documentation du LoraServer .io
-******************
-
 ## A faire la semaine prochaine
 
-Repartiton des taches
-
-Finir le réseau de demonstration pour la présentation
+La semaine prochaine nous avons le Jalon 2 de notres, nous devrons donc avoir fini la répartition des tâches et on aimerais pouvoir présenter un démonstrateur du réseau LoRa WAN. Nous allons donc nous concentrer sur ces 2 points pendant la semaine.
