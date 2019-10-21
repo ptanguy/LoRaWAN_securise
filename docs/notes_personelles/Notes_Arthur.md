@@ -114,3 +114,11 @@ Idée 2 :
 Generer une clées aléatoire pour encrypter la RAM stocker à chaque execution du programme ainsi la mémoire est illisible. 
 
 
+## Choisir OS ou en créer un ?
+
+| Créer OS                                                             | Prendre LoRa Server                                                   |
+|----------------------------------------------------------------------|-----------------------------------------------------------------------|
+| ++ Parfaite connaissance des programmes fonctionnant sur le serveur  | ++ Rapidité de mise en place                                          |
+| -- Recherche de recettes à mettre en oeuvre                          | -- Recherche des pogrammmes installé pour vérifier s'ils sont sécuisé |
+
+Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur la mise oeuvre.
