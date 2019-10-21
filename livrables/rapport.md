@@ -40,7 +40,14 @@ Nous avons donc plusieurs noeuds, qui vont communiquer en LoRaWAN avec une passe
 Répartition des tâches 
 ======================
 
-Pour faire ce travail, nous sommes deux personnels travaillant à plein temps. 
-Nous devons donc nous répartir équitablement les tâches.
+Pour faire ce travail, nous sommes deux personnels travaillant à plein temps, Arthur et François.
+Nous devons donc répartir équitablement les tâches.
 
-Dans un premier temps, 
+Dans un premier temps, nous allons tous les deux travailler au déploiement du réseau LoRaWAN. 
+
+François va ensuite se charger de la sécurisation de la passerelle, ainsi que des connections avec le network server et l'application server.
+
+Arthur se chargera de travailler sur la sécurisation du noeud, et le transfert des informations vers la passerelle.
+
+Tous les deux s'occuperont de rédiger constamment une documentation fournie ainsi que tous les documents livrables attendus.
+
