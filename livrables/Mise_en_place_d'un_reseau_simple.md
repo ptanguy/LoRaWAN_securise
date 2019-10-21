@@ -1,6 +1,6 @@
 # Mise en place d'un réseau LoRaWAN simple
 
-Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une raspberry Pi et une carte Fipy.
+Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une raspberry Pi et une carte Fipy. Le Noeud devra envoyer la valeure de température jusqu'au serveur d'application.
 
 ## Matériel :
 
@@ -122,17 +122,37 @@ Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec u
 Sélétionner *Configure WIFI* puis *ok* et *ok*
 
 ``` Bash 
-   enable wifi 
-   scan wifi
-   services #Pour voir les réseaux disponibles
-   agent on
-   #Choisser un des reseaux dans la liste de service 
-   # Exemple :
-   # MyNetwork               wifi_dc85de828967_68756773616d_managed_psk 
-   connect wifi_dc85de828967_68756773616d_managed_psk
-   #Entrer le mot de passe
-   quit
+enable wifi 
+scan wifi
+services #Pour voir les réseaux disponibles
+agent on
+#Choisser un des reseaux dans la liste de service 
+# Exemple :
+# MyNetwork               wifi_dc85de828967_68756773616d_managed_psk 
+connect wifi_dc85de828967_68756773616d_managed_psk
+#Entrer le mot de passe
+quit
 ```
+
+### Configuration de la passerelle
+Faite tout le cablage nécéssaire avant de brancher la Raspberry.
+************
+Insérer schema de cablage
+************
+
+```Bash 
+sudo gateway-config
+# 2 setup LoRa concentrator shield
+# 1 IMST - ic880A
+# Entrer 17 si vous avez suivi notre cablage
+# OK
+# Ok
+# Ok
+# Ok
+# Ok
+```
+
+
 Maintenant à chaque démarrage l'OS va se connecter automatiquement à ce réseau wifi.
 ## Problème rencontré
 ### (Pymakr) There was an error with your serialport module
