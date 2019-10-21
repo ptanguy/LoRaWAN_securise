@@ -122,3 +122,26 @@ Generer une clées aléatoire pour encrypter la RAM stocker à chaque execution 
 | -- Recherche de recettes à mettre en oeuvre                          | -- Recherche des pogrammmes installé pour vérifier s'ils sont sécuisé |
 
 Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur la mise oeuvre.
+
+# Présentation du Projet Format Poupées Russes
+
+- Mise en place d'un réseau LoRaWAN sécurisé
+    - Mise en place d'un réseau LoRaWAN avec sécurité basique
+        - Création d'un premier réseau (facile) entre des µC Fipy et capteur Pysense pour la partie Noeur et une Raspberry pour la partie box LoRa
+        - Création d'un deuxième réseau pareil que le précédant mais en remplaçant le noeud par une carte STM32 equipé d'un Shield LoRaWAN
+    
+    - Mise en place d'un réseau avec des couches de sécurité renforcé
+        - Sécurisation du Noeud en cachant les clefs dans la mémoire
+        - Sécurisation du Noeud en cachant les clefs dans un composant de sécurité
+        - Sécurisation de la Box LoRa 
+            - Points de vu 1 : La box LoRa est la seul composant du serveur
+                - Sécurisation vis à vis d'intrusion externe au systeme
+                    - VPN 
+                - Maintenance 
+                    - Mise à jours
+                    - SSH
+                - Verification des services
+            - Point de vu 2 :  La Box LoRa ne sert pas uniquement à au LoRa WAN
+                - Sécurisation par rapport aux autres service présent et/ou utilisateurs 
+                    - Vérifier les droits d'accées 
+
