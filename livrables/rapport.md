@@ -34,6 +34,13 @@ Rappel des points d’action :
 • Analyse et discussion de la sécurité du système (éventuellement Pentest)
 
 
+Schéma simplifié 
+================
+
+![fonctionnement_simple](../docs/schemas/Schema_LoRaWAN.png)
+
+
+
 Répartition des tâches 
 ======================
 
