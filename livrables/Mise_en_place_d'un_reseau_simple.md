@@ -110,11 +110,30 @@ Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec u
    sudo dd bs=4M if=lora-gateway-os-full-raspberrypi3--20190810092349.sdimg of=/dev/mmcblk0 conv=fsync
    ```
    - Mettez la carte SD dans la Raspberry et tester si celle-ci boot.
+   - Attention le clvier est en QWERTY
+   - Connectez-vous avec les identifiants suivant Login = admin / Password = admin
+
+### Configuartion du WIFI
 
 
+``` Bash
+   sudo gateway-config
+```
+Sélétionner *Configure WIFI* puis *ok* et *ok*
 
-
-
+``` Bash 
+   enable wifi 
+   scan wifi
+   services #Pour voir les réseaux disponibles
+   agent on
+   #Choisser un des reseaux dans la liste de service 
+   # Exemple :
+   # MyNetwork               wifi_dc85de828967_68756773616d_managed_psk 
+   connect wifi_dc85de828967_68756773616d_managed_psk
+   #Entrer le mot de passe
+   quit
+```
+Maintenant à chaque démarrage l'OS va se connecter automatiquement à ce réseau wifi.
 ## Problème rencontré
 ### (Pymakr) There was an error with your serialport module
 Ce problème apparait au démarrage de visual studio code après l'installation de *Pymakr*. Vous pouvez trouver des informatio pour résoudre le problème [ici](https://github.com/pycom/pymakr-vsc/issues/53).
