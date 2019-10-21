@@ -45,7 +45,7 @@ L'ensemble du projet devra être réalisé en 2 mois.
   - Manuel d'utilisation facile a comprendre
   - Fournir le code et les pseudo-code 
 
------
+
 
 # Informations LoRaWAN
 
@@ -55,4 +55,4 @@ Le *noeud* a pour but de fonctionner à distance de la *passerelle*. Le LoRaWAN 
 
 La *passerelle* permet de faire le lien entre une communication LoRaWAN et un serveur d'application ou un autre protocole de communication.
 
------
+
