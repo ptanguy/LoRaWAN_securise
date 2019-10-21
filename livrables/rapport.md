@@ -59,3 +59,8 @@ Nous avons choisi une approche en spirale pour notre organisation. En effet, sur
 Le schéma ci-dessous montre simplement le fonctionnement d'une organisation en spirale.
 
 ![organisation_spirale](../docs/schemas/Schema_spirale.png "Organisation en spirale")
+
+
+Contraintes
+===========
+
