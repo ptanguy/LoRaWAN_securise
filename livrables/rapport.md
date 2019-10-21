@@ -64,3 +64,5 @@ Le schéma ci-dessous montre simplement le fonctionnement d'une organisation en 
 Contraintes
 ===========
 
+- Protocole de communication LoRaWAN entre la passerelle et les noeuds
+- Utilisation du matériel fourni par l'encadrant
