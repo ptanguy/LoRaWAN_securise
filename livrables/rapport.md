@@ -33,7 +33,7 @@ Le schéma ci-dessous est un schéma simplifié, permettant de comprendre le fon
 
 Nous avons donc plusieurs noeuds, qui vont communiquer en LoRaWAN avec une passerelle. Cette passerelle va ensuite communiquer ce qu'elle a reçu des noeuds au serveur d'application, via un autre protocole de communication.
 
-![fonctionnement_simple](../docs/schemas/Schema_LoRaWAN.png)
+![fonctionnement_simple](../docs/schemas/Schema_LoRaWAN.png "Fonctionnement simple")
 
 
 
@@ -58,4 +58,4 @@ Nous avons choisi une approche en spirale pour notre organisation. En effet, sur
 
 Le schéma ci-dessous montre simplement le fonctionnement d'une organisation en spirale.
 
-![organisation_spirale](../docs/schemas/Schema_spirale.png)
+![organisation_spirale](../docs/schemas/Schema_spirale.png "Organisation en spirale")

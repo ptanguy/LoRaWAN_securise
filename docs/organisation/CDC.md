@@ -45,7 +45,7 @@ L'ensemble du projet devra être réalisé en 2 mois.
   - Manuel d'utilisation facile a comprendre
   - Fournir le code et les pseudo-code 
 
------
+
 
 # Informations LoRaWAN
 

@@ -4,7 +4,7 @@ Le LoRaWAN est un protocole de communication à longue distance et faible consom
 
 Le schéma ci-dessous résume simplement la situation.
 
-![fonctionnement_lora](../schemas/Schema_LoRaWAN.png)
+![fonctionnement_lora](../schemas/Schema_LoRaWAN.png "Schéma simplifié")
 
 Le protocole LoRa n'est pas fait pour envoyer de grandes quantités d'information très rapidement. On ne peut envoyer que quelques KiloOctets par intervalle de quelques minutes.
 
@@ -66,7 +66,7 @@ Secret à protéger :
 
 Le schéma ci-dessous récapitule le protocole de communication dans son ensemble.
 
-![fonctionnement_lora_complet](../schemas/Schema_Technique_des_Services.png)
+![fonctionnement_lora_complet](../schemas/Schema_Technique_des_Services.png "Schéma récapitulatif")
 
 ## Mise en place d'un banc de test
 Nous avons défini 3 cas d'usage ayant une complexité croissante:
