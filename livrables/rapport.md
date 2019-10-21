@@ -51,3 +51,11 @@ Arthur se chargera de travailler sur la sécurisation du noeud, et le transfert 
 
 Tous les deux s'occuperont de rédiger constamment une documentation fournie ainsi que tous les documents livrables attendus.
 
+Organisation
+============
+
+Nous avons choisi une approche en spirale pour notre organisation. En effet, sur les conseils de notre encadrant, ce modèle nous permet de tester les différentes couches de sécurisation une à une et de revenir aux étapes précédentes si besoin pour modifier et compléter le dispositif.
+
+Le schéma ci-dessous montre simplement le fonctionnement d'une organisation en spirale.
+
+![organisation_spirale](../docs/schemas/Schema_spirale.png)
