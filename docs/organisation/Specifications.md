@@ -4,7 +4,7 @@ Le LoRaWAN est un protocole de communication à longue distance et faible consom
 
 Le schéma ci-dessous résume simplement la situation.
 
-![fonctionnement_lora](../Schémas/Schema_LoRaWAN.png)
+![fonctionnement_lora](../schemas/Schema_LoRaWAN.png)
 
 Le protocole LoRa n'est pas fait pour envoyer de grandes quantités d'information très rapidement. On ne peut envoyer que quelques KiloOctets par intervalle de quelques minutes.
 
@@ -66,7 +66,7 @@ Secret à protéger :
 
 Le schéma ci-dessous récapitule le protocole de communication dans son ensemble.
 
-![fonctionnement_lora_complet](../Schémas/Schema_Technique_des_Services.png)
+![fonctionnement_lora_complet](../schemas/Schema_Technique_des_Services.png)
 
 ## Mise en place d'un banc de test
 Nous avons défini 3 cas d'usage ayant une complexité croissante:
@@ -90,7 +90,7 @@ Il faut éviter qu'une personne vienne altérer l'information envoyée. Nous dev
 | Interception des mises à jour                                                 | ✓                    | VPN                                                              |
 | Execution d'un OS malicieux sur la box LoRA                                   | ✓                    | Secure boot                                                      |
 | Modification du programme du noeud                                            | ✓                    | Condamnation des GPIO de debogage                                |
-| DoS attaque par envoi massif de données sur la Box LoRa                      | ✓                    | Limiter la réception d'un nombre de trames par X temps            |
+| DoS attaque par envoi massif de données sur la Box LoRa                       | ✓                    | Limiter la réception d'un nombre de trames par X temps            |
 
 ## Méthodologie gestion de projet
 
