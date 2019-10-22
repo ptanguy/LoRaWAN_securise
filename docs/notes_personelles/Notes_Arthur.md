@@ -127,14 +127,26 @@ Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur
 
 - Mise en place d'un réseau LoRaWAN sécurisé
     - Mise en place d'un réseau LoRaWAN avec sécurité basique
-        - Création d'un premier réseau (facile) entre des µC Fipy et capteur Pysense pour la partie Noeur et une Raspberry pour la partie box LoRa
-        - Création d'un deuxième réseau pareil que le précédant mais en remplaçant le noeud par une carte STM32 equipé d'un Shield LoRaWAN
-    
+        - Création d'un premier réseau (facile) entre des µC Fipy et capteur Pysense pour la partie Noeud et une Raspberry pour la partie box LoRa
+        - Création d'un deuxième réseau pareil que le précédant mais en remplaçant le noeud par une carte STM32 équipé d'un Shield LoRaWAN
+        - Construction des services de la Box LoRa
+                - Création d'un OS Perso 
+             - Utilsation d'un OS existant (LoRaServer IO)
+                - OS Full  == Gateway + Network Server + Application Server
+                - OS Base == Gateway
+    - Tests :
+        - Vérification que la valeur du capteur est correcte 
+            - Afficher la valeur de celle-ci dans le terminal ecomparer avec la température ambiante
+        - Vérifier que la valeur est émise
+        - Vérifier que la valeur est arrivée 
+        - Verifier que la valeur est bien transmise dans la box LoRA
     - Mise en place d'un réseau avec des couches de sécurité renforcé
-        - Sécurisation du Noeud en cachant les clefs dans la mémoire
-        - Sécurisation du Noeud en cachant les clefs dans un composant de sécurité
+        - Sécurisation du Noeud
+            - Développer le software du Noeud LoRaWAN
+                - Sécurisation du Noeud en cachant les clefs dans la mémoire
+                - Sécurisation du Noeud en cachant les clefs dans un composant de sécurité
         - Sécurisation de la Box LoRa 
-            - Points de vu 1 : La box LoRa est la seul composant du serveur
+            - Points de vu 1 : La Box LoRa est le seul composant du serveur
                 - Sécurisation vis à vis d'intrusion externe au systeme
                     - VPN 
                 - Maintenance 
@@ -144,4 +156,4 @@ Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur
             - Point de vu 2 :  La Box LoRa ne sert pas uniquement à au LoRa WAN
                 - Sécurisation par rapport aux autres service présent et/ou utilisateurs 
                     - Vérifier les droits d'accées 
-
+        
