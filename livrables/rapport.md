@@ -23,7 +23,32 @@ Un cas d’usage, défini avec notre responsable devra être mis en place et les
 Le deuxième objectif consiste à discuter de la surface d’attaque de notre système. 
 Un aspect analyse est donc demandé en prenant en compte les différentes versions du LoRaWAN, chacun des éléments du système etc.
 
-**Rappel des points d’action :**
+
+Mise au point : vocabulaire
+===========================
+
+LoRaWAN : 
+> Long Range Wide Area Network. Protocole de communication.
+
+Noeud : 
+> Ensemble de composants qui peuvent recevoir et/ou envoyer de l'information via le protocole de communication LoRaWAN. Branche initiale d'un réseau LoRaWAN. Par exemple, un capteur relié à une carte/microcontrôleur et une antenne pour la communication vers l'extérieur.
+
+Passerelle : 
+> Élément de transfert. Permet de traduire et transférer les données venant du noeud vers les serveurs.
+
+*Network server* : 
+> Cerveau du réseau LoRaWAN, il génère les clefs et authentifie les noeuds. Il déchiffre aussi une partie des trames du réseau, reçues via la passerelle.
+
+*Application server* : 
+> Service qui va traiter l'information du capteur, il va déchiffrer la dernière partie du message.
+
+
+Points d’action :
+=================
+
+/!\ A compléter avec [ces notes](../docs/notes_personelles/Notes_Arthur.md "Notes Arthur")
+
+Modèle de fonctionnement en "poupées russes"
 
 - Mise en place et déploiement d’un réseau LoRaWAN sécurisé
   - Prise en main du matériel, lecture de documentation, compréhension
@@ -38,14 +63,7 @@ Un aspect analyse est donc demandé en prenant en compte les différentes versio
 - Analyse et discussion de la sécurité du système (éventuellement *pentest*)
 
 
-Mise au point : vocabulaire
-===========================
 
-LoRaWAN 
-> Long Range Wide Area Network
-
-Noeud
-> Ensemble de composants, branche terminale du réseau LoRaWAN. Par exemple, un capteur relié à un
 
 Schéma simplifié 
 ================
