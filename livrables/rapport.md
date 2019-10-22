@@ -14,8 +14,13 @@ RaWAN (Long Range Wide Area Network).
 
 **Mission :**
 
-Dans ce contexte, il nous est demandé de mettre en place un réseau LoRaWAN.
-Le premier et principal objectif est de créer un banc de test dans lequel un réseau LoRaWAN complet, mais simple doit fonctionner, dont les éléments de sécurité côté noeud et passerelle seront correctement mis en oeuvre. Un cas d’usage (à définir) devra être mis en place et les aspects de sécurité devront être bien maîtrisés. Le deuxième objectif consiste à discuter de la surface d’attaque de notre système. 
+Dans ce contexte, il nous est demandé de mettre en place un réseau LoRaWAN sécurisé.
+Le premier et principal objectif est de créer un réseau LoRaWAN complet, mais simple et fonctionnel, dont les éléments de sécurité côté noeud et passerelle seront correctement mis en oeuvre. 
+Toute une démarche de tests unitaires devra être mise en place, pour tester chacune des parties séparément, puis l'ensemble collectivement. 
+
+Un cas d’usage, défini avec notre responsable devra être mis en place et les aspects de sécurité devront être bien maîtrisés. 
+
+Le deuxième objectif consiste à discuter de la surface d’attaque de notre système. 
 Un aspect analyse est donc demandé en prenant en compte les différentes versions du LoRaWAN, chacun des éléments du système etc.
 
 **Rappel des points d’action :**
