@@ -43,8 +43,21 @@ Passerelle :
 > Service qui va traiter l'information du capteur, il va déchiffrer la dernière partie du message.
 
 
-Points d’action :
-=================
+
+Schéma simplifié 
+================
+
+Le schéma ci-dessous est un schéma simplifié, permettant de comprendre le fonctionnement global de notre système.
+
+Nous avons donc plusieurs noeuds, qui vont communiquer en LoRaWAN avec une passerelle. Cette passerelle va ensuite communiquer ce qu'elle a reçu des noeuds au serveur d'application, via un autre protocole de communication.
+
+![fonctionnement_simple](../docs/schemas/Schema_LoRaWAN.png "Fonctionnement simple")
+
+
+
+
+Points d’action (format poupées russes) :
+=========================================
 
 /!\ A compléter avec [ces notes](../docs/notes_personelles/Notes_Arthur.md "Notes Arthur")
 
@@ -64,15 +77,6 @@ Modèle de fonctionnement en "poupées russes"
 
 
 
-
-Schéma simplifié 
-================
-
-Le schéma ci-dessous est un schéma simplifié, permettant de comprendre le fonctionnement global de notre système.
-
-Nous avons donc plusieurs noeuds, qui vont communiquer en LoRaWAN avec une passerelle. Cette passerelle va ensuite communiquer ce qu'elle a reçu des noeuds au serveur d'application, via un autre protocole de communication.
-
-![fonctionnement_simple](../docs/schemas/Schema_LoRaWAN.png "Fonctionnement simple")
 
 
 
