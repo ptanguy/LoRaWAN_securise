@@ -166,3 +166,11 @@ Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur
                 - Sécurisation par rapport aux autres service présent et/ou utilisateurs 
                     - Vérifier les droits d'accées 
         
+
+
+
+
+-------------------
+
+
+Sécurisation de la passerelle : HTTP => HTTPS et modification MDP par défaut
