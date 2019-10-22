@@ -128,7 +128,9 @@ Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur
 - Mise en place d'un réseau LoRaWAN sécurisé
     - Mise en place d'un réseau LoRaWAN avec sécurité basique
         - Création d'un premier réseau (facile) entre des µC Fipy et capteur Pysense pour la partie Noeud et une Raspberry pour la partie box LoRa
+
         - Création d'un deuxième réseau pareil que le précédant mais en remplaçant le noeud par une carte STM32 équipé d'un Shield LoRaWAN
+
         - Construction des services de la Box LoRa
                 - Création d'un OS Perso 
              - Utilsation d'un OS existant (LoRaServer IO)
@@ -136,15 +138,22 @@ Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur
                 - OS Base == Gateway
     - Tests :
         - Vérification que la valeur du capteur est correcte 
-            - Afficher la valeur de celle-ci dans le terminal ecomparer avec la température ambiante
+            - Afficher la valeur de celle-ci dans le terminal et comparer avec la température ambiante
+
         - Vérifier que la valeur est émise
+            - ??
         - Vérifier que la valeur est arrivée 
-        - Verifier que la valeur est bien transmise dans la box LoRA
+            - ??
+        
+        - Vérifier que la valeur est bien transmise dans la box LoRA
+            - Regarder sur la partie application server que la valeure est la même que celle affichée dans le terminal du micro Controler
     - Mise en place d'un réseau avec des couches de sécurité renforcé
         - Sécurisation du Noeud
             - Développer le software du Noeud LoRaWAN
                 - Sécurisation du Noeud en cachant les clefs dans la mémoire
                 - Sécurisation du Noeud en cachant les clefs dans un composant de sécurité
+                    - ATEC508A
+                    
         - Sécurisation de la Box LoRa 
             - Points de vu 1 : La Box LoRa est le seul composant du serveur
                 - Sécurisation vis à vis d'intrusion externe au systeme
