@@ -38,6 +38,14 @@ Un aspect analyse est donc demandé en prenant en compte les différentes versio
 - Analyse et discussion de la sécurité du système (éventuellement *pentest*)
 
 
+Mise au point : vocabulaire
+===========================
+
+LoRaWAN 
+> Long Range Wide Area Network
+
+Noeud
+> Ensemble de composants, branche terminale du réseau LoRaWAN. Par exemple, un capteur relié à un
 
 Schéma simplifié 
 ================
