@@ -48,3 +48,14 @@ Utilisation de la raspberry
 
 15 octobre 2019 -> prise en main IC880A
 
+-------------------
+
+
+Sécurisation de la passerelle : HTTP => HTTPS et modification MDP par défaut
+
+-------------------
+
+Pour le diapo, faire au début un rappel des termes et acronymes utilisés 
+(ex : noeud = capteur + stm(ou fipy) + antenne, etc)
+
+-------------------
