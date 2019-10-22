@@ -110,7 +110,7 @@ Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec u
    sudo dd bs=4M if=lora-gateway-os-full-raspberrypi3--20190810092349.sdimg of=/dev/mmcblk0 conv=fsync
    ```
    - Mettez la carte SD dans la Raspberry et tester si celle-ci boot.
-   - Attention le clvier est en QWERTY
+   - Attention le clavier est en QWERTY
    - Connectez-vous avec les identifiants suivant Login = admin / Password = admin
 
 ### Configuartion du WIFI
@@ -151,9 +151,63 @@ sudo gateway-config
 # Ok
 # Ok
 ```
-
-
 Maintenant à chaque démarrage l'OS va se connecter automatiquement à ce réseau wifi.
+
+### Parametrage du Serveur de réseau pour notre Appareil
+Connecter vous à l'inteface web. Pour y accéder ouvrez votre navigateur et entrez l'adresse IP de la Raspberry suivi de *:8080* Dans notres cas : **http://192.168.43.134:8080** Les idantifiants de connections sont les mêmes que pour vous identifer en ssh.
+
+#### Création d'un Network Server
+Allez dans l'onglet *Network-servers* et cliquez sur *add*. Vous pouvez mettre comme nom ce que vous voulez, nous l'avons appelé **Fipy_Serv**. Pour *Network-server server* entrez **localhost:8000**.
+Cliquer ensuite sur *ADD NETWORK-SERVER*
+
+
+#### Création d'un Gateway-profiles :
+- Name : **Fipy_GW_profile**
+- Enable channels : **0, 1, 2**
+- Network Server : **Fipy_Serv**
+
+#### Creation d'une Gateway :
+- Gateway Name : **Fipy_GW**
+- Gateway description : **OTAA Fipy Gateway**
+- Gateway ID : **b2 1a d4 c0 7d c6 be f6**
+- Network-server : **Fipy_Serv**
+- Gateway-profile : **Fipy_GW_profile**
+- Gateway discovery enabled : **Autoriser**
+
+#### Création d'un service profile :
+- Service-profile name **M1-CSSE**
+- Network-Server **Fipy_Serv**
+- Add gateway metadata **Autoiser**
+
+#### Création d'un service pour le noeud :
+- Device-profile name : **Fipy_Hello_World**
+- Network-Server : **Fipy_Serv**
+
+#### Device-profiles/Create 
+- Device-profile name : **Fipy_dp**
+- Network-server : **Fipy_Serv**
+- LoRaWAN MAC Version : **1.0.2**
+- LoRaWAN MAC version supported by the device : **B**
+
+#### Device-profiles/ota_dp
+- Device support OTAA : **Autoriser**
+
+#### Application
+- Application name : Hello_World
+- Application description : Hello world App
+- Service-profile : M1 CSSE
+- Payload codec : **None**
+
+#### Application / Hello_world /Creat
+
+- Device name : **Fipy**
+- Device déscription : **Fipy**
+- Device EUI : **ADA4DAE3AC12676B**
+- Device profile : **Fipy_dp**
+
+#### Application / Hello_world / Devices / Fipy
+- Application key : **11 B0 28 2A 18 9B 75 B0 B4 D2 D8 C7 FA 38 54 8B**
+
 ## Problème rencontré
 ### (Pymakr) There was an error with your serialport module
 Ce problème apparait au démarrage de visual studio code après l'installation de *Pymakr*. Vous pouvez trouver des informatio pour résoudre le problème [ici](https://github.com/pycom/pymakr-vsc/issues/53).
@@ -176,3 +230,4 @@ Il faut ensuite relancer visual studio.
 - Programmation Noeud : https://docs.pycom.io/tutorials/lora/lorawan-otaa/ ;
 - LoRa Server pour Raspberry : https://www.loraserver.io/lora-gateway-os/install/raspberrypi/
 
+- Partie Passerelle Box LoRa : https://www.loraserver.io/guides/first-gateway-device/ ; https://docs.pycom.io/tutorials/all/ota-lorawan/
