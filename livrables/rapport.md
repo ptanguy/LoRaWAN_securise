@@ -78,7 +78,7 @@ Modèle de fonctionnement en "poupées russes"
 --------------
 
 - Mise en place d'un réseau LoRaWAN sécurisé
-    - Mise en place d'un réseau LoRaWAN avec sécurité basique (mot de passe, chiffrement simple)
+    - Mise en place d'un réseau LoRaWAN avec sécurité basique (mot de passe)
         - Création d'un premier réseau (facile) entre des µC Fipy et capteur Pysense pour la partie Noeud et une Raspberry pour la partie box LoRa
 
         - Création d'un deuxième réseau pareil que le précédant mais en remplaçant le noeud par une carte STM32 équipé d'un Shield LoRaWAN
