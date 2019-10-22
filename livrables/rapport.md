@@ -33,9 +33,10 @@ Un aspect analyse est donc demandé en prenant en compte les différentes versio
 
 - Sécurisation de la *passerelle*, du *network serveur* et de l’*application serveur*
 
-- Sécurisation des *noeuds* en utilisant les blocs matériels pour le chiffrement ainsi que pour la gestion des clés.
+- Sécurisation du (des) *noeud(s)*
 
-- Analyse et discussion de la sécurité du système (éventuellement Pentest)
+- Analyse et discussion de la sécurité du système (éventuellement *pentest*)
+
 
 
 Schéma simplifié 
