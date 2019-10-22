@@ -25,9 +25,16 @@ Un aspect analyse est donc demandé en prenant en compte les différentes versio
 
 **Rappel des points d’action :**
 
-- Mise en place d’un réseau LoRaWAN sécurisé
-- Sécurisation de la passerelle, du Network serveur et de l’Application serveur
-- Sécurisation des noeuds LoRaWAN en utilisant les blocs matériels pour le chiffrement ainsi que pour la gestion des clés.
+- Mise en place et déploiement d’un réseau LoRaWAN sécurisé
+  - Prise en main du matériel, lecture de documentation, compréhension
+  - Utilisation pour un déploiement simple
+  - Tests unitaires de fonctionnement
+  - Si les tests sont concluants, sécurisation un à un des composants et des logiciels
+
+- Sécurisation de la *passerelle*, du *network serveur* et de l’*application serveur*
+
+- Sécurisation des *noeuds* en utilisant les blocs matériels pour le chiffrement ainsi que pour la gestion des clés.
+
 - Analyse et discussion de la sécurité du système (éventuellement Pentest)
 
 

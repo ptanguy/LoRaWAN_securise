@@ -174,3 +174,8 @@ Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur
 
 
 Sécurisation de la passerelle : HTTP => HTTPS et modification MDP par défaut
+
+-------------------
+
+Pour le diapo, faire au début un rappel des termes et acronymes utilisés 
+(ex : noeud = capteur + stm(ou fipy) + antenne, etc)
