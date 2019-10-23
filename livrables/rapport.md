@@ -65,12 +65,12 @@ Mise en place d'un réseau LoRaWAN sécurisé
 - Mise en place d'un réseau LoRaWAN avec sécurité basique (mot de passe)
   - Création d'un premier réseau (facile) entre le microcontrôleur *Fipy* et le capteur *Pysense* pour la partie noeud et une Raspberry pour la partie box LoRa 
 
-    - Création d'un deuxième réseau identique identique au précédent, mais en remplaçant le noeud par une carte STM32 équipé d'un shield Motion MEMS and environmental (Nucleo expansion board)
+  - Création d'un deuxième réseau identique identique au précédent, mais en remplaçant le noeud par une carte STM32 équipé d'un shield Motion MEMS and environmental (Nucleo expansion board)
 
-    - Construction des services de la Box LoRa
-        - Création d'un OS vs. Utilsation d'un OS existant (LoRaServer IO)
-            Notre choix se portera sur l'utilisation d'un OS déjà existant. Sa rapidité de mise en oeuvre et son adaptabilité nous font pencher en sa faveur. Beaucoup de temps de développement est ainsi gagné en prenant l'OS *LoRaserver.io*
-        - Choix de prendre un OS *Full*, qui contient *gateway* + *network server* + *application server* en interne, et permet une gestion simplifiée.
+  - Construction des services de la Box LoRa
+      - Création d'un OS vs. Utilsation d'un OS existant (LoRaServer IO)
+          Notre choix se portera sur l'utilisation d'un OS déjà existant. Sa rapidité de mise en oeuvre et son adaptabilité nous font pencher en sa faveur. Beaucoup de temps de développement est ainsi gagné en prenant l'OS *LoRaserver.io*
+      - Choix de prendre un OS *Full*, qui contient *gateway* + *network server* + *application server* en interne, et permet une gestion simplifiée.
 
 
 
@@ -107,10 +107,11 @@ Mise en place d'un réseau LoRaWAN sécurisé
 Schéma techique des prototypes : 
 ================================
 
-Ce premier schéma ci-dessous nous montre la chaine technique des composants du premier réseau simple pour la création du prototype
+Ce premier schéma ci-dessous nous montre la chaine technique des composants du premier réseau simple pour la création du prototype.
 
 ![Schéma_prototype_1](../docs/schemas/CommunicationLoRaPysense.png "Prototype 1")
 
+Ce deuxième schéma ci-dessous nous montre la version finale du réseau tel qu'il sera construit.
 
 ![Schéma_prototype_2](../docs/schemas/CommunicationLoRaSTM32.png "Prototype 2")
 
