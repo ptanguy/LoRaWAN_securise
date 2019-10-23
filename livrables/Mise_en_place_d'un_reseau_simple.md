@@ -150,10 +150,7 @@ quit
 
 Faites tout le câblage nécéssaire avant de brancher la *Raspberry*.
 
-************
-/!\ Insérer schéma de câblage
-************
-
+![Schema de cablage](../docs/schemas/Schemat_cablage.png)
 ```Bash 
 sudo gateway-config
 # 2 setup LoRa concentrator shield
