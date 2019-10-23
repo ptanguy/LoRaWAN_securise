@@ -162,6 +162,7 @@ Voici le matériel dont nous disposons :
 
 * Carte pysense : https://pycom.io/product/pysense/ 
 
-* Antenne : 
+* Antenne : https://www.gotronic.fr/art-kit-antenne-pour-lora-et-sigfox-25376.htm 
 
-* Raspberry pi 3b : 
+* Raspberry pi 3b : https://www.raspberrypi.org/products/raspberry-pi-3-model-b/ 
+
