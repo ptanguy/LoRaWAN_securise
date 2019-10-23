@@ -104,6 +104,15 @@ Mise en place d'un réseau LoRaWAN sécurisé
         - Cas 2 :  La box LoRa ne sert pas uniquement à au LoRa WAN
             - Sécurisation par rapport aux autres service présent et/ou utilisateurs : Vérifier les droits d'accès 
     
+Schéma techique des prototypes : 
+================================
+
+Ce premier schéma ci-dessous nous montre la chaine technique des composants du premier réseau simple pour la création du prototype
+
+![Schéma_prototype_1](../docs/schemas/CommunicationLoRaPysense.png "Prototype 1")
+
+
+![Schéma_prototype_2](../docs/schemas/CommunicationLoRaSTM32.png "Prototype 2")
 
 
 Répartition des tâches 
