@@ -76,6 +76,14 @@ Modèle de fonctionnement en "poupées russes"
 - Sécurisation du (des) *noeud(s)*
 
 - Analyse et discussion de la sécurité du système (éventuellement *pentest*)
+  
+
+| Créer OS                                                             | Prendre LoRa Server                                                   |
+|----------------------------------------------------------------------|-----------------------------------------------------------------------|
+| ++ Parfaite connaissance des programmes fonctionnant sur le serveur  | ++ Rapidité de mise en place                                          |
+| -- Recherche de recettes à mettre en oeuvre                          | -- Recherche des pogrammmes installé pour vérifier s'ils sont sécuisé |
+
+
 
 --------------
 
@@ -86,10 +94,9 @@ Modèle de fonctionnement en "poupées russes"
         - Création d'un deuxième réseau identique identique au précédent, mais en remplaçant le noeud par une carte STM32 équipé d'un shield Motion MEMS and environmental (Nucleo expansion board)
 
         - Construction des services de la Box LoRa
-                - Création d'un OS Perso 
-             - Utilsation d'un OS existant (LoRaServer IO)
-                - OS Full  == Gateway + Network Server + Application Server
-                - OS Base == Gateway
+            - Création d'un OS Perso vs Utilsation d'un OS existant (LoRaServer IO)
+                Notre choix se portera sur l'utilisation d'un OS déjà existant. Sa rapidité de mise en oeuvre et son adaptabilité nous font pencher en sa faveur. Beaucoup de temps de développement est ainsi gagné en prenant l'OS *LoRaserver.io*
+            - Choix de prendre un OS *Full*, qui contient *gateway* + *network server* + *application server* en interne, et permet une gestion simplifiée.
     - Tests :
         - Vérification que la valeur du capteur est correcte 
             - Afficher la valeur de celle-ci dans le terminal et comparer avec la température ambiante
