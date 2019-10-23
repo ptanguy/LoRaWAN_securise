@@ -9,7 +9,7 @@ Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une
 - Raspberry Pi 3b / 3b+
   - Carte IMST iC880A
 
-## Mise en place du Noeud / carte Fipy
+## Mise en place du noeud / carte *Fipy*
 - Dans un premier temps, installer dans *Visual Studio Code* ou *Atom* et le plugin *Pymakr*
 - Ensuite il va falloir mettre à jour le Firmware de la carte d'extension *pysense*, vous pouvez trouver la procédure  [ici](https://docs.pycom.io/pytrackpysense/installation/firmware/)
 - Après la mise à jour, débranchez la carte *Pysense* de l'USB
@@ -131,7 +131,7 @@ Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec u
 ``` Bash
    sudo gateway-config
 ```
-Sélétionner *Configure WIFI* puis *ok* et *ok*
+Sélétionnez *Configure WIFI* puis *ok* et *ok*
 
 ``` Bash 
 enable wifi 
@@ -147,9 +147,11 @@ quit
 ```
 
 ### Configuration de la passerelle
-Faite tout le cablage nécéssaire avant de brancher la Raspberry.
+
+Faites tout le câblage nécéssaire avant de brancher la *Raspberry*.
+
 ************
-Insérer schema de cablage
+/!\ Insérer schéma de câblage
 ************
 
 ```Bash 
@@ -163,22 +165,24 @@ sudo gateway-config
 # Ok
 # Ok
 ```
-Maintenant à chaque démarrage l'OS va se connecter automatiquement à ce réseau wifi.
+Maintenant à chaque démarrage, l'OS va se connecter automatiquement à ce réseau wifi.
 
-### Parametrage du Serveur de réseau pour notre Appareil
-Connecter vous à l'inteface web. Pour y accéder ouvrez votre navigateur et entrez l'adresse IP de la Raspberry suivi de *:8080* Dans notres cas : **http://192.168.43.134:8080** Les idantifiants de connections sont les mêmes que pour vous identifer en ssh.
+### Paramétrage du serveur de réseau pour notre appareil
 
-#### Création d'un Network Server
-Allez dans l'onglet *Network-servers* et cliquez sur *add*. Vous pouvez mettre comme nom ce que vous voulez, nous l'avons appelé **Fipy_Serv**. Pour *Network-server server* entrez **localhost:8000**.
+Connectez vous à l'inteface web. Pour y accéder ouvrez votre navigateur et entrez l'adresse IP de la *Raspberry* suivi de : *8080*. Dans notre cas : **http://192.168.43.134:8080** Les identifiants de connection sont les mêmes que pour vous identifer en ssh.
+
+#### Création d'un *network server*
+
+Allez dans l'onglet *network-servers* et cliquez sur *add*. Vous pouvez mettre comme nom ce que vous voulez, nous l'avons appelé **Fipy_Serv**. Pour *Network-server server* entrez : **localhost:8000**.
 Cliquer ensuite sur *ADD NETWORK-SERVER*
 
 
-#### Création d'un Gateway-profiles :
+#### Création d'un *Gateway-profile* :
 - Name : **Fipy_GW_profile**
 - Enable channels : **0, 1, 2**
 - Network Server : **Fipy_Serv**
 
-#### Creation d'une Gateway :
+#### Creation d'une *Gateway* :
 - Gateway Name : **Fipy_GW**
 - Gateway description : **OTAA Fipy Gateway**
 - Gateway ID : **b2 1a d4 c0 7d c6 be f6**
@@ -186,12 +190,12 @@ Cliquer ensuite sur *ADD NETWORK-SERVER*
 - Gateway-profile : **Fipy_GW_profile**
 - Gateway discovery enabled : **Autoriser**
 
-#### Création d'un service profile :
+#### Création d'un *service profile* :
 - Service-profile name **M1-CSSE**
 - Network-Server **Fipy_Serv**
 - Add gateway metadata **Autoiser**
 
-#### Création d'un Device-profiles :
+#### Création d'un *Device-profile* :
 - Device-profile name : **Fipy_Hello_World**
 - Network-Server : **Fipy_Serv**
 
@@ -210,7 +214,7 @@ Cliquer ensuite sur *ADD NETWORK-SERVER*
 - Service-profile : M1 CSSE
 - Payload codec : **None**
 
-#### Application / Hello_world /Create
+#### Application / Hello_world / Create
 
 - Device name : **Fipy**
 - Device déscription : **Fipy**
@@ -221,12 +225,13 @@ Cliquer ensuite sur *ADD NETWORK-SERVER*
 - Application key : **5e6795a5c9abba017d05a2ffef6ba858**
 
 
-## Problème rencontré
-### (Pymakr) There was an error with your serialport module
-Ce problème apparait au démarrage de visual studio code après l'installation de *Pymakr*. Vous pouvez trouver des informatio pour résoudre le problème [ici](https://github.com/pycom/pymakr-vsc/issues/53).
+## Problèmes rencontrés
+### (Pymakr) "There was an error with your serialport module"
+Ce problème apparait au démarrage de visual studio code après l'installation de *Pymakr*. Vous pouvez trouver des informations pour résoudre le problème [ici](https://github.com/pycom/pymakr-vsc/issues/53).
 #### Résolution du problème :
-1. *Dans le cadre de ce projet nous utilisons un fork de **visual studio code** appelé **code** les noms de dossier sont suceptible de changer en fonction du logiciel que vous utiliser.*
-2. *Nous utlisons pour ce projet la distribution Linux **Manjaro** qui est basé sur **Arch Linux** le gestionnaire de paquet serra peut-être différent du votre*
+1. *Dans le cadre de ce projet nous utilisons un fork de **Visual Studio Code** appelé **code** les noms de dossier sont suceptibles de changer en fonction du logiciel que vous utilisez.*
+2. *Nous utilisons pour ce projet la distribution Linux **Manjaro** qui est basé sur **Arch Linux** le gestionnaire de paquet sera peut-être différent du votre*
+
 ``` Bash
 $ sudo pacman -Sy npm
 $ npm install -g prebuild-install
@@ -235,7 +240,7 @@ $ cd node_modules/@serialport/bindings
 $ prebuild-install --runtime electron --target 4.2.5 --tag-prefix @serialport/bindings@ --verbose --force
 ```
 
-Il faut ensuite relancer visual studio.
+Il faut ensuite relancer Visual Studio.
 
 ## Sources:
 - Mise en place Fipy : https://docs.pycom.io/ ; https://docs.pycom.io/gettingstarted/connection/fipy/ ;
