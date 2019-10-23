@@ -9,8 +9,7 @@ Ceci est la documentation de notre projet de sécurisation d'une communication L
 
 L’Internet des objets (IoT, en anglais) est un paradigme dont les premiers déploiements ont quelques années (voire plus, si l’on parle de réseau de capteurs).
 D’un point de vue sécurité, l’IoT a une surface d’attaque très importante, du fait du nombre de technologies, de protocoles, du type de déploiement et du nombre d’acteurs différents.
-Ce projet s’applique aux réseaux d’objets connectés longue porté du type Lo-
-RaWAN (Long Range Wide Area Network).
+Ce projet s’applique aux réseaux d’objets connectés longue porté du type LoRaWAN (Long Range Wide Area Network).
 
 **Mission :**
 
