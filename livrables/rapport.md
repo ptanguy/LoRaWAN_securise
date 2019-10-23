@@ -152,3 +152,16 @@ Matériel :
 
 Voici le matériel dont nous disposons :
 
+* Lorawan discovery kit : https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html
+
+* MEMS environmental shield : https://www.st.com/en/ecosystems/x-nucleo-iks01a1.html
+
+* LoRaWAN concentrator : https://shop.imst.de/wireless-modules/lora-products/8/ic880a-spi-lorawan-concentrator-868-mhz?number=404802 
+
+* Carte Fipy : https://docs.pycom.io/datasheets/development/fipy/ 
+
+* Carte pysense : https://pycom.io/product/pysense/ 
+
+* Antenne : 
+
+* Raspberry pi 3b : 
