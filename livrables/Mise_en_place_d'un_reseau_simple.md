@@ -114,16 +114,16 @@ Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec u
 
 - Dans un premier temps, téléchargez l'image de *lora-getway-os-full* à l'adresse [suivante](https://artifacts.loraserver.io/downloads/lora-gateway-os/raspberrypi/raspberrypi3/3.0.0test2/).
 - Une fois téléchargée, il faut extraire l'archive.
-- Après cela vous devez ecrire l'image extraite sur la carte SD de la Raspberry
-   - Insérer la carte SD dans votre ordinateur
-   - Reperer sont point de montage à l'aide de la commande ```lsblk```
-   - Puis écriver l'amage sur la carte SD avec la commande suivante (en veyant a bien remplacer le chemain de l'image et le point de montage de la carte SD):
+- Après cela vous devez écrire l'image extraite sur la carte SD de la *Raspberry*
+   - Insérez la carte SD dans votre ordinateur
+   - Repérez son point de montage à l'aide de la commande : ```lsblk```
+   - Puis, écrivez l'image sur la carte SD avec la commande suivante (en veillant à bien remplacer le chemin de l'image et le point de montage de la carte SD) :
    ```Bash
    sudo dd bs=4M if=lora-gateway-os-full-raspberrypi3--20190810092349.sdimg of=/dev/mmcblk0 conv=fsync
    ```
-   - Mettez la carte SD dans la Raspberry et tester si celle-ci boot.
-   - Attention le clavier est en QWERTY
-   - Connectez-vous avec les identifiants suivant Login = admin / Password = admin
+   - Mettez la carte SD dans la *Raspberry* et testez si celle-ci *boot*.
+   - Attention ! Le clavier est en QWERTY.
+   - Connectez-vous avec les identifiants suivants : Login = admin / Password = admin
 
 ### Configuartion du WIFI
 
