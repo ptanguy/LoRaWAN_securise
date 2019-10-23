@@ -63,12 +63,27 @@ Points d’action (format poupées russes) :
 
 /!\ A compléter avec [ces notes](../docs/notes_personelles/Notes_Arthur.md "Notes Arthur")
 
+Modèle de fonctionnement en "poupées russes"
+
+- Mise en place et déploiement d’un réseau LoRaWAN sécurisé
+  - Prise en main du matériel, lecture de documentation, compréhension
+  - Utilisation pour un déploiement simple
+  - Tests unitaires de fonctionnement
+  - Si les tests sont concluants, sécurisation un à un des composants et des logiciels
+
+- Sécurisation de la *passerelle*, du *network serveur* et de l’*application serveur*
+
+- Sécurisation du (des) *noeud(s)*
+
+- Analyse et discussion de la sécurité du système (éventuellement *pentest*)
+
+--------------
 
 - Mise en place d'un réseau LoRaWAN sécurisé
     - Mise en place d'un réseau LoRaWAN avec sécurité basique (mot de passe)
-        - Création d'un premier réseau (facile) entre le microcontrôleur *Fipy* et le capteur *Pysense* pour la partie noeud et une Raspberry pour la partie box LoRa
+        - Création d'un premier réseau (facile) entre le microcontrôleur *Fipy* et le capteur *Pysense* pour la partie noeud et une Raspberry pour la partie box LoRa 
 
-        - Création d'un deuxième réseau pareil que le précédant mais en remplaçant le noeud par une carte STM32 équipé d'un Shield LoRaWAN
+        - Création d'un deuxième réseau identique identique au précédent, mais en remplaçant le noeud par une carte STM32 équipé d'un shield Motion MEMS and environmental (Nucleo expansion board)
 
         - Construction des services de la Box LoRa
                 - Création d'un OS Perso 

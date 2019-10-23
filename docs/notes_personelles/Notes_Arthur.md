@@ -104,7 +104,7 @@ Secureboot pour éviter l'execution de code malicieu des les premiers moments du
 
 
 
-## Comment cacher la clés dans le STM3é ?
+## Comment cacher la clés dans le STM32 ?
 Il faut eviter de cacher la clé dans le software, car elle serra directement lisible dans la mémoire.
 
 Idée 1 :
