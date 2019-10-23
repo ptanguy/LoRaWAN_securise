@@ -79,9 +79,9 @@ Mise en place d'un réseau LoRaWAN sécurisé
         - Afficher la valeur de celle-ci dans le terminal et comparer avec la température ambiante réelle.
 
     - Vérifier que la valeur est émise correctement.
-        - Émission des trames LoRa
+        - Émission des trames LoRa. Travail à l'analyseur de spectres de fréquences.
     - Vérifier que la valeur est arrivée 
-        - Réception des trames LoRa
+        - Réception des trames LoRa, via l'interface graphique. 
     
     - Vérifier que la valeur est bien transmise dans la box LoRA
         - Regarder sur la partie *application server* que la valeur est la même que celle affichée dans le terminal du microcontrôleur
