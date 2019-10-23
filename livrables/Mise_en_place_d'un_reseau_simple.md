@@ -1,60 +1,61 @@
 # Mise en place d'un réseau LoRaWAN simple
 
-Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une raspberry Pi et une carte Fipy. Le Noeud devra envoyer la valeure de température jusqu'au serveur d'application.
+Nous allons voir comment mettre en place un réseau LoRaWAN simplement entre une *Raspberry Pi* et une carte *Fipy*. Le noeud devra envoyer la valeur de température jusqu'au serveur d'application.
 
 ## Matériel :
 
-- Carte Fipy
-  - Carte pysense
+- Carte *Fipy*
+  - Carte *Pysense*
 - Raspberry Pi 3b / 3b+
   - Carte IMST iC880A
 
 ## Mise en place du Noeud / carte Fipy
-- Dans un premier temps installer dans Visual studio code ou Atom le plugin **Pymakr**
+- Dans un premier temps, installer dans *Visual Studio Code* ou *Atom* et le plugin *Pymakr*
 - Ensuite il va falloir mettre à jour le Firmware de la carte d'extension *pysense*, vous pouvez trouver la procédure  [ici](https://docs.pycom.io/pytrackpysense/installation/firmware/)
-- Après la mise à jour débrancher la carte *pysense* de l'USB
-- Mettre la carte *fypy* sur la carte *pysense*, **il faut que le bouton reset de la carte *fipy* soit du coté du port USB de la carte *pysense***
-- Mise à jour de la carte *fipy*
-  - Avant de commencer il est recommandé d'installer la mise à jour de la carte fipy vous pouvez trouver les information d'installation pour Windows / Mac OS / Linux [à cette adresse](https://docs.pycom.io/gettingstarted/installation/firmwaretool/), nous nous concentrerons sur Linux
+- Après la mise à jour, débranchez la carte *Pysense* de l'USB
+- Mettre la carte *Fipy* sur la carte *Pysense*, **il faut que le bouton reset de la carte *Fipy* soit du coté du port USB de la carte *Pysense***
+- Mise à jour de la carte *Fipy* :
+  - Avant de commencer, il est recommandé d'installer la mise à jour de la carte *Fipy*. Vous pouvez trouver les informations d'installation pour Windows / Mac OS / Linux à [cette adresse](https://docs.pycom.io/gettingstarted/installation/firmwaretool/). Nous utiliserons une distribution Linux.
   - Installez les paquets *dialog* et *python-pyserial*
-  - Télecharger le logiciel de mise à jour : https://software.pycom.io/downloads/linux-1.16.1.html
-  - Télecharger la dernière version du firmware de la carte *Fipy*  [à cette adresse](https://github.com/pycom/pycom-micropython-sigfox/releases)
-  - Après avoir extrait le logiciel de mise à jour allez dans *pycom_firmware_update_1.16.1-amd64/pyupgrade* 
-  - Brancher à l'ordinateur la carte *pysense* avec la carte *fipy* installée dussus.
-  - Executer la commande pour connaitre le port sur lequel est branché : 
+  - Télechargez le logiciel de mise à jour [ici](https://software.pycom.io/downloads/linux-1.16.1.html)
+  - Télechargez la dernière version du firmware de la carte *Fipy*  [à cette adresse](https://github.com/pycom/pycom-micropython-sigfox/releases)
+  - Après avoir extrait le logiciel de mise à jour, allez dans *pycom_firmware_update_1.16.1-amd64/pyupgrade* 
+  - Branchez à l'ordinateur la carte *Pysense* avec la carte *Fipy* installée dessus.
+  - Executez la commande pour connaitre le port sur lequel est branché la carte : 
   ```Bash 
   ./pycom-fwtool-cli list 
   ```
-  - Pour ecrire la mise à jour dans la carte *fipy* entrer la commande suivante. 
+  - Pour écrire la mise-à-jour dans la carte *Fipy*, entrez la commande suivante : 
   ```Bash
   sudo ./pycom-fwtool-cli -p /dev/ttyACM1 flash -t ../../FiPy-1.20.0.rc13.tar.gz
   ```
-   dans notres cas la version du firmware est *1.20.0* et le port */dev/ttyACM1* 
+   Dans notre cas, la version du firmware est *1.20.0* et le port */dev/ttyACM1* 
 
 ## Programmation du noeud
-Ouvrez visual studio code ou atom. Créer un dossier pour le projet, nous l'appélerons *reseau_simple*.
-- Créer un fichier de configuration pour le Noeud. Cliquez sur *All commands* en bas de l'écran puis dans le mune déroulant qui s'affiche séléctionné *Project Settings*
-- Créer un sous dossier pour y écrire le programme du Noeud, nous l'avons appelé *fipy*
-- Dans le fichier JSON créé précedement ajouter le nom de ce dossier 
+Ouvrez *Visual Studio Code* ou *Atom*. Créez un dossier pour le projet, nous l'appellerons *reseau_simple*.
+- Créez un fichier de configuration pour le noeud. Cliquez sur *All commands* en bas de l'écran, puis dans le menu déroulant qui s'affiche, séléctionnez *Project Settings*
+- Créez un sous-dossier pour y écrire le programme du noeud. Nous l'avons appelé *Fipy*
+- Dans le fichier JSON créé précedement, ajoutez le nom de ce dossier : 
 ```JSON
 "sync_folder": "fipy",
 ```
-- Créer les dossiers et fichiers suivant dans ce dossier
-   - *boot.py* permet d'executer du code uniquement au démarrage de la carte
-   - *main.py* permet d'executer du code pendatn que la carte est allumée
+- Créez les dossiers et fichiers suivants dans ce dossier :
+   - *boot.py* permet d'exécuter du code uniquement au démarrage de la carte
+   - *main.py* permet d'exécuter du code pendant que la carte est allumée
    - *cert* contient les certificats
-   - *lib* contient des bibliothèque
+   - *lib* contient des bibliothèques
 
 
 ![image_du_contenu_du_dossier_fipy](images/contenu_dossier_fipy.png)
 
 ## Programmation du noeud à partir d'exemples
-Dans notres cas nous allons baser notre programme sur un exeple que vous pouvez trouver sur github à cette adresse : https://github.com/pycom/pycom-libraries
-Dans un premier temps téléchargez le repository. Ensuite copier le contenu *pycom-libraries/examples/OTA-lorawan/firmware/1.17.1/flash* dans le dossier **Fipy** créé précedement.
+Dans notre cas nous allons baser notre programme sur un exemple que vous pouvez trouver sur github à [cette adresse](https://github.com/pycom/pycom-libraries).
+
+Dans un premier temps téléchargez le repository. Ensuite copiez le contenu *pycom-libraries/examples/OTA-lorawan/firmware/1.17.1/flash* dans le dossier **Fipy** créé précédement.
 
 ![image_du_contenu_du_dossier_fipy_avec_exemple](images/ContenuDuDossierFipyAvecExemple.png)
 
-Dans le fichier main.py recopier le code Suivant.
+Dans le fichier *main.py*, recopiez le code suivant.
 
 ``` Python
 #!/usr/bin/env python
@@ -111,8 +112,8 @@ main()
 ## Mise en place de la partie passerelle / network server / application server
 Pour toute cette partie nous allons utiliser une carte *Raspberry Pi 3b+* avec une carte d'extension *IMST iC880A*
 
-- Dans un premier temps téléchargez l'image de *lora-getway-os-full* à l'adresse suivante : https://artifacts.loraserver.io/downloads/lora-gateway-os/raspberrypi/raspberrypi3/3.0.0test2/
-- Une fois télécharger il faut extraire l'archive.
+- Dans un premier temps, téléchargez l'image de *lora-getway-os-full* à l'adresse [suivante](https://artifacts.loraserver.io/downloads/lora-gateway-os/raspberrypi/raspberrypi3/3.0.0test2/).
+- Une fois téléchargée, il faut extraire l'archive.
 - Après cela vous devez ecrire l'image extraite sur la carte SD de la Raspberry
    - Insérer la carte SD dans votre ordinateur
    - Reperer sont point de montage à l'aide de la commande ```lsblk```
