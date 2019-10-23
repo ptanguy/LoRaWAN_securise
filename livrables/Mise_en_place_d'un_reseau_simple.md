@@ -48,53 +48,64 @@ Ouvrez visual studio code ou atom. Créer un dossier pour le projet, nous l'app�
 
 ![image_du_contenu_du_dossier_fipy](images/contenu_dossier_fipy.png)
 
-- Dans le fichier main.py recopier le code suivant pour pour parametrer un code LoRa avec une authentification OTAA (Over The Air Authentification) ce code provient des exemples fournit par Pycom : https://docs.pycom.io/tutorials/lora/lorawan-otaa/
+## Programmation du noeud à partir d'exemples
+Dans notres cas nous allons baser notre programme sur un exeple que vous pouvez trouver sur github à cette adresse : https://github.com/pycom/pycom-libraries
+Dans un premier temps téléchargez le repository. Ensuite copier le contenu *pycom-libraries/examples/OTA-lorawan/firmware/1.17.1/flash* dans le dossier **Fipy** créé précedement.
+
+![image_du_contenu_du_dossier_fipy_avec_exemple](images/ContenuDuDossierFipyAvecExemple.png)
+
+Dans le fichier main.py recopier le code Suivant.
+
 ``` Python
+#!/usr/bin/env python
+#
+# Copyright (c) 2019, Pycom Limited.
+#
+# This software is licensed under the GNU GPL version 3 or any
+# later version, with permitted additional terms. For more information
+# see the Pycom Licence v1.0 document supplied with this file, or
+# available at https://www.pycom.io/opensource/licensing
+#
+
+from loranet import LoraNet
+from ota import LoraOTA
 from network import LoRa
-import socket
-import time
-import ubinascii
+import machine
+import utime
 
-# Initialise LoRa in LORAWAN mode.
-# Please pick the region that matches where you are using the device:
-# Asia = LoRa.AS923
-# Australia = LoRa.AU915
-# Europe = LoRa.EU868
-# United States = LoRa.US915
-lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
+def main():
+    print('Booting with firmware version 1.17.1')
 
-# create an OTAA authentication parameters
-app_eui = ubinascii.unhexlify('ADA4DAE3AC12676B')
-app_key = ubinascii.unhexlify('11B0282A189B75B0B4D2D8C7FA38548B')
+    LORA_FREQUENCY = 868100000
+    LORA_NODE_DR = 5
+    LORA_REGION = LoRa.EU868
+    LORA_DEVICE_CLASS = LoRa.CLASS_A
+    LORA_ACTIVATION = LoRa.OTAA
+    LORA_CRED = ('240ac4fffe0bf998', '948c87eff87f04508f64661220f71e3f', '5e6795a5c9abba017d05a2ffef6ba858')
 
-# join a network using OTAA (Over the Air Activation)
-lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
+    lora = LoraNet(LORA_FREQUENCY, LORA_NODE_DR, LORA_REGION, LORA_DEVICE_CLASS, LORA_ACTIVATION, LORA_CRED)
+    lora.connect()
 
-# wait until the module has joined the network
-while not lora.has_joined():
-    time.sleep(2.5)
-    print('Not yet joined...')
+    ota = LoraOTA(lora)
 
-# create a LoRa socket
-s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
+    while True:
+        rx = lora.receive(256)
+        lora.send(bytes("Hello World", "utf-8"))
+        print("In while")
+        if rx:
+            print('Received user message: {}'.format(rx))
 
-# set the LoRaWAN data rate
-s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
+        utime.sleep(60)
 
-# make the socket blocking
-# (waits for the data to be sent and for the 2 receive windows to expire)
-s.setblocking(True)
+main()
 
-# send some data
-s.send(bytes([0x01, 0x02, 0x03]))
+#try:
+#    main()
+#except Exception as e:
+#    print('Firmware exception: Reverting to old firmware')
+#    LoraOTA.revert()
 
-# make the socket non-blocking
-# (because if there's no data received it will block forever...)
-s.setblocking(False)
 
-# get any data received (if any...)
-data = s.recv(64)
-print(data)
 ```
 
 ## Mise en place de la partie passerelle / network server / application server
@@ -179,7 +190,7 @@ Cliquer ensuite sur *ADD NETWORK-SERVER*
 - Network-Server **Fipy_Serv**
 - Add gateway metadata **Autoiser**
 
-#### Création d'un service pour le noeud :
+#### Création d'un Device-profiles :
 - Device-profile name : **Fipy_Hello_World**
 - Network-Server : **Fipy_Serv**
 
@@ -198,15 +209,16 @@ Cliquer ensuite sur *ADD NETWORK-SERVER*
 - Service-profile : M1 CSSE
 - Payload codec : **None**
 
-#### Application / Hello_world /Creat
+#### Application / Hello_world /Create
 
 - Device name : **Fipy**
 - Device déscription : **Fipy**
-- Device EUI : **ADA4DAE3AC12676B**
+- Device EUI : **240ac4fffe0bf998**
 - Device profile : **Fipy_dp**
 
 #### Application / Hello_world / Devices / Fipy
-- Application key : **11 B0 28 2A 18 9B 75 B0 B4 D2 D8 C7 FA 38 54 8B**
+- Application key : **5e6795a5c9abba017d05a2ffef6ba858**
+
 
 ## Problème rencontré
 ### (Pymakr) There was an error with your serialport module
