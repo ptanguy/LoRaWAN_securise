@@ -124,7 +124,7 @@ Nous devons donc répartir équitablement les tâches.
 
 Dans un premier temps, nous allons tous les deux travailler au déploiement du réseau LoRaWAN. 
 
-François va ensuite se charger de la sécurisation de la passerelle, ainsi que des connections avec le network server et l'application server.
+François va ensuite se charger de la sécurisation de la passerelle, ainsi que des connections avec le *network server* et l'*application server*.
 
 Arthur se chargera de travailler sur la sécurisation du noeud, et le transfert des informations vers la passerelle.
 
@@ -141,9 +141,14 @@ Le schéma ci-dessous montre simplement le fonctionnement d'une organisation en 
 ![organisation_spirale](../docs/schemas/Schema_spirale.png "Organisation en spirale")
 
 
-Contraintes
-===========
+Contraintes :
+=============
 
 - Protocole de communication LoRaWAN entre la passerelle et les noeuds
 - Utilisation du matériel fourni par l'encadrant
+
+Matériel :
+==========
+
+Voici le matériel dont nous disposons :
 
