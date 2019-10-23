@@ -64,10 +64,12 @@ Mise en place d'un réseau LoRaWAN sécurisé
 - Mise en place d'un réseau LoRaWAN avec sécurité basique (mot de passe)
   - Création d'un premier réseau (facile) entre le microcontrôleur *Fipy* et le capteur *Pysense* pour la partie noeud et une Raspberry pour la partie box LoRa. Ce premier réseau nous permet de prendre en main le fonctionnement global du LoRa, sans ajouter les complexités d'une carte STM, en travaillant avec un environnement de noeud plus simple.
 
+    - Rédaction d'un tutoriel pour le déploiement de ce réseau. [Documentation complète](./Mise_en_place_d'un_reseau_simple.md "Documentation réseau") pour une prise en main simple. 
+
   - Création d'un deuxième réseau identique identique au précédent, mais en remplaçant le noeud par une carte STM32 équipé d'un shield Motion MEMS and environmental (Nucleo expansion board). La finalité de notre réseau est, en effet, d'utiliser une carte STM32 pour le noeud.
 
   - Construction des services de la Box LoRa
-      - Création d'un OS vs. Utilsation d'un OS existant (LoRaServer IO)
+      - Création d'un OS vs. Utilsation d'un OS existant (LoRaServer io)
           Notre choix se portera sur l'utilisation d'un OS déjà existant. Sa rapidité de mise en oeuvre et son adaptabilité nous font pencher en sa faveur. Beaucoup de temps de développement est ainsi gagné en prenant l'OS *LoRaserver.io*
       - Choix de prendre un OS *Full*, qui contient *gateway* + *network server* + *application server* en interne, et permet une gestion simplifiée.
 
