@@ -117,7 +117,6 @@ Secret à protéger :
 
 
 
-
 Points d’action (format poupées russes) :
 =========================================
 
@@ -218,6 +217,10 @@ Méthodologie
 ============
 
 Pour gérer le projet nous utilisons un outil de *versionning* appelé Github, où on y met tout le code du projet, les sources ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme de GANTT. Nous le garderons à jour pendant toute la durée du projet. Pour avoir une gestion de projet plus précise (tâches à effectuer chaques semaines), nous utilisons l'onglet *Project* de notre *repository* Github. Dans cet onglet nous indiquons pour chaque semaine les différentes tâches à faire. Les tâches ont 3 états **À faire**, **En cours** et **Fini** nous déplaçons et nous ajoutons des tâches au cours de la semaine.
+
+Le diagramme de Gantt ci-dessous récapitule notre organisation tout au long du projet.
+
+![Diagramme_Gantt](images/gantt.png "Diagramme de Gantt")
 
 
 Organisation
