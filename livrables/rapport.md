@@ -55,6 +55,69 @@ Nous avons donc plusieurs noeuds, qui vont communiquer en LoRaWAN avec une passe
 ![fonctionnement_simple](../docs/schemas/Schema_LoRaWAN.png "Fonctionnement simple")
 
 
+
+Spécifications 
+==============
+
+Le protocole LoRa n'est pas fait pour envoyer de grandes quantités d'information très rapidement. On ne peut envoyer que quelques KiloOctets par intervalle de quelques minutes.
+
+Dans sa version 1.0 le LoRaWAN spécifie déjà plusieurs directives à suivre pour le sécuriser.
+Il y a une clef ***AES 128bits*** à fournir pour sécuriser la commuication depuis le *noeud* jusqu'au *serveur d'application*.
+- **AppKey** Clef AES principale. Elle doit être connue *du noeud* et *du network manager*. Elle sert ensuite à déterminer les 2 clefs suivantes.
+- **NwkSKey** Network Session key : chiffre la communication entre le *noeud* et *le network server*. Elle sert à détecter une éventuelle perte d'information dans le message.
+- **AppSKey** Application Session key : chiffre le message entre *le noeud* et *le network server*, sans cette clef il est impossible de lire le message.
+
+Les clefs **NwkSKey** et **AppSKey** sont actualisées à chaque nouvelle connexion d'un appareil, elles sont uniques à chaque *noeud* du réseau.
+
+Le LoRaWAN utilise des *frame counter* à fin d'éviter les attaques par répétition.
+Deux compteurs sont initialisés lorsqu'un nouvel appareil est connecté.
+Le noeud incrémente le compteur **FCntUP** à chaque fois que qu'il envoit une information sur le *UpLink*. Le Network serveur, lui, incrémente le compteur **FCntDown** à chaque fois qu'il écrit sur le *DownLink*. Pour chaque trame du réseau la valeur des compteurs est envoyée avec. Le récepteur de la trame va comparer la valeur des compteurs à l'intérieur de la trame avec ses propres compteurs et si la valeur des compteurs de la trame est inferieure au compteur du récepteur, ce dernier va ignorer le message.
+
+### Le noeud
+Le *noeud* sera composé d'un microcontrôleur, d'un capteur (ou plusieurs) et d'un module permettant la communication en LoRa. Pour le noeud nous allons utiliser un kit de développement provenant de STMicroelectronics.
+
+Nous regroupons ci-dessous les attaques possibles. Ce sera notre base de travail pour sécuriser la communication.
+
+Surface d'attaque : 
+-  Gestion des Clés AES
+-  Modification du code source
+-  Interception des données directement sur le capteur
+-  SPA
+-  DPA
+-  Analyse EM
+-  Memory dumping
+-  Valeur des Frame Counters
+
+Les secrets à protéger sont :
+-  La valeur du capteur
+-  Les clefs **NwkSKey** et **AppSkey** et la clef AES **AppKey**
+
+### La passerelle
+La *passerelle* sert de traducteur entre le protocole *LoRa* et un autre protocole de communication. Elle sera hébergée sur un micro-ordinateur.
+
+### Network Server
+Le *Network server* est le cerveau du réseau LoRaWAN, il génère les clefs et authentifie les noeuds. Il déchiffre aussi une partie des trames du réseau.
+
+Surface d'attaque :
+- Enregistrement clef AES
+- Création des clefs **NwkSKey** et **AppSKey**
+
+Secrets à protéger
+- La valeur des clefs **NwkSKey**, **AppSKey** et **AppKey**
+
+### Application Server
+Le *Application server* est le service qui va traiter l'information du capteur, il va déchiffrer la dernière partie du message.
+
+Surface d'attaque :
+- Réception de la clef **AppSKey**
+- Gestion de la clef **AppSKey**
+
+Secret à protéger :
+- La valeur de la clef **AppSKey**
+
+
+
+
 Points d’action (format poupées russes) :
 =========================================
 
