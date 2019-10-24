@@ -180,6 +180,26 @@ Ce deuxième schéma ci-dessous nous montre la version finale du réseau tel qu'
 ![Schéma_prototype_2](../docs/schemas/CommunicationLoRaSTM32.png "Prototype 2")
 
 
+
+Analyse des risques 
+===================
+
+Pour le cas d'usage, nous avons défini que les aspects de non-répudiation et de confidentialité ne sont pas les plus critiques, car nous voulons transmettre uniquement la température et l'humidité. Nous traiterons donc les paramètres d'intégrité et d'authenticité.
+Il faut éviter qu'une personne vienne altérer l'information envoyée. Nous devons être sûrs que le *noeud* qui envoit l'information est bien le *noeud* que nous avons créé et pas celui d'un éventuel attaquant (par exemple : *man in the middle*).
+
+| Menaces envisageables                                                         | Risques à considérer | Contres mesures                                                  |
+|-------------------------------------------------------------------------------|----------------------|------------------------------------------------------------------|
+| Dump mémoire STM32 et Raspberry                                               | ✓                    | Hasher la clef / Composant de sécurité pour le firmware et clef  |
+| Canaux cachés   (DPA, SPA)                                                    | ⨯                    |                                                                  |
+| Autre Noeud usurpant l'identité de notre Noeud (altération des données)       | ✓                    | Signature et certificat                                          |
+| Mise à jour venant d'une entité autre que le serveur de mise à jour officiel  | ✓                    | Signature des MAJ / certificat                                   |
+| Interception des mises à jour                                                 | ✓                    | VPN                                                              |
+| Execution d'un OS malicieux sur la box LoRA                                   | ✓                    | Secure boot                                                      |
+| Modification du programme du noeud                                            | ✓                    | Condamnation des GPIO de debogage                                |
+| DoS attaque par envoi massif de données sur la Box LoRa                       | ✓                    | Limiter la réception d'un nombre de trames par X temps            |
+
+
+
 Répartition des tâches 
 ======================
 
