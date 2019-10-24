@@ -214,6 +214,12 @@ Arthur se chargera de travailler sur la sécurisation du noeud, et le transfert 
 
 Tous les deux s'occuperont de rédiger constamment une documentation fournie ainsi que tous les documents livrables attendus.
 
+Méthodologie 
+============
+
+Pour gérer le projet nous utilisons un outil de *versionning* appelé Github, où on y met tout le code du projet, les sources ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme de GANTT. Nous le garderons à jour pendant toute la durée du projet. Pour avoir une gestion de projet plus précise (tâches à effectuer chaques semaines), nous utilisons l'onglet *Project* de notre *repository* Github. Dans cet onglet nous indiquons pour chaque semaine les différentes tâches à faire. Les tâches ont 3 états **À faire**, **En cours** et **Fini** nous déplaçons et nous ajoutons des tâches au cours de la semaine.
+
+
 Organisation
 ============
 
