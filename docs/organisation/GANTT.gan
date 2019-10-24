@@ -7,8 +7,8 @@
         <option id="color.recent"><![CDATA[#990099 #66cc00 #ff3333 #ff9900 #000000 #0000ff #999999 #cc00cc]]></option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="210" order="0"/>
-        <field id="1" name="Rôle par défaut" width="86" order="1"/>
+        <field id="0" name="Nom" width="199" order="0"/>
+        <field id="1" name="Rôle par défaut" width="82" order="1"/>
     </view>
     <!-- -->
     <calendars base-id="Aucun">
@@ -85,7 +85,7 @@
                 </task>
                 <task id="199" name="Tests du neud complet" color="#66cc00" meeting="false" start="2019-11-09" duration="4" complete="0" thirdDate="2019-10-21" thirdDate-constraint="0" expand="true"/>
             </task>
-            <task id="123" name="Scrutation pour récupérer la valeure d'un capteur" color="#66cc00" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2019-10-14" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
+            <task id="123" name="Dévelopement Box LoRa" color="#66cc00" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2019-10-14" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
                 <depend id="124" type="2" difference="0" hardness="Strong"/>
                 <depend id="128" type="2" difference="0" hardness="Strong"/>
                 <depend id="140" type="2" difference="0" hardness="Strong"/>
@@ -100,7 +100,6 @@
             <task id="138" name="Tests" color="#ff3333" meeting="false" start="2019-12-07" duration="13" complete="0" thirdDate="2019-12-04" thirdDate-constraint="0" expand="true"/>
             <task id="137" name="Rédaction des livrables" color="#ff3333" meeting="false" start="2019-12-14" duration="6" complete="0" thirdDate="2019-11-19" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="84" name="Dissimulation de clef dans la mémoire" color="#ff9900" meeting="true" start="2019-12-20" duration="0" complete="0" thirdDate="2019-12-07" thirdDate-constraint="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="François" function="Default:1" contacts="" phone=""/>
@@ -116,7 +115,6 @@
         <allocation task-id="76" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="74" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="81" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="84" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="121" resource-id="0" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="123" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="124" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
@@ -134,15 +132,24 @@
         <allocation task-id="76" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="74" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="81" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="84" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="121" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="123" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
-        <allocation task-id="124" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="126" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="128" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="137" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="140" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="138" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="207" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="232" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="220" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="224" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="161" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="159" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="170" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="162" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="176" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="164" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="168" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="166" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="195" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="199" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <previous/>
