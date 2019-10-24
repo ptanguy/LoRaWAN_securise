@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Sécurisation communication LoRaWAN" company="M1 CSSE UBS" webLink="" view-date="2019-09-30" view-index="0" gantt-divider-location="517" resource-divider-location="300" version="2.8.10" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Sécurisation communication LoRaWAN" company="M1 CSSE UBS" webLink="" view-date="2019-09-30" view-index="0" gantt-divider-location="616" resource-divider-location="300" version="2.8.10" locale="fr_FR">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="315" order="0"/>
-        <field id="tpd4" name="Date de début" width="102" order="1"/>
-        <field id="tpd5" name="Date de fin" width="96" order="2"/>
-        <option id="color.recent"><![CDATA[#66cc00 #ff3333 #990099 #ff9900 #000000 #0000ff #999999 #cc00cc]]></option>
+        <field id="tpd3" name="Nom" width="346" order="0"/>
+        <field id="tpd4" name="Date de début" width="137" order="1"/>
+        <field id="tpd5" name="Date de fin" width="129" order="2"/>
+        <option id="color.recent"><![CDATA[#990099 #66cc00 #ff3333 #ff9900 #000000 #0000ff #999999 #cc00cc]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="210" order="0"/>
@@ -36,18 +36,56 @@
         </taskproperties>
         <task id="0" name="Réception du projet" color="#0000ff" meeting="false" start="2019-10-04" duration="1" complete="100" thirdDate="2019-10-09" thirdDate-constraint="0" expand="true"/>
         <task id="5" name="Recherche documentation" color="#8cb6ce" meeting="false" start="2019-10-05" duration="16" complete="80" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true"/>
-        <task id="21" name="Rédaction documentation" color="#8cb6ce" meeting="false" start="2019-10-07" duration="28" complete="80" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
+        <task id="21" name="Rédaction documentation" color="#8cb6ce" meeting="false" start="2019-10-07" duration="28" complete="100" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
         <task id="76" name="JALON 1" color="#ff9900" meeting="true" start="2019-10-11" duration="0" complete="0" thirdDate="2019-10-01" thirdDate-constraint="0" expand="true"/>
-        <task id="13" name="Etude des besoins" color="#990099" meeting="false" start="2019-10-14" duration="7" complete="15" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
-            <task id="39" name="Conception architecture réseau et matériel" color="#990099" meeting="false" start="2019-10-14" duration="2" complete="60" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
-            <task id="29" name="Conception algos" color="#990099" meeting="false" start="2019-10-15" duration="6" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
+        <task id="13" name="Etude des besoins" color="#990099" meeting="false" start="2019-10-14" duration="10" complete="16" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
+            <task id="39" name="Conception architecture réseau et matériel" color="#990099" meeting="false" start="2019-10-14" duration="2" complete="100" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true"/>
+            <task id="29" name="Conception algos" color="#990099" meeting="false" start="2019-10-14" duration="10" complete="0" thirdDate="2019-10-02" thirdDate-constraint="0" expand="true">
                 <depend id="121" type="2" difference="0" hardness="Strong"/>
+                <task id="207" name="Scrutation pour récupérer la valeure d'un capteur" color="#990099" meeting="false" start="2019-10-14" duration="1" complete="0" thirdDate="2019-10-21" thirdDate-constraint="0" expand="true">
+                    <depend id="161" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="232" name="Comment mettre en place un neud LoRa sur la carte stm32" color="#990099" meeting="false" start="2019-10-15" duration="3" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true"/>
+                <task id="220" name="Comment dissimuler la valeur d'une clef dans la mémoire d'une STM" color="#990099" meeting="false" start="2019-10-18" duration="3" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="176" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="224" name="Utilisation d'un composant de sécurité" color="#990099" meeting="false" start="2019-10-21" duration="3" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="168" type="2" difference="0" hardness="Strong"/>
+                </task>
             </task>
         </task>
         <task id="118" name="Programmation" color="#66cc00" meeting="false" start="2019-10-14" duration="42" complete="0" thirdDate="2019-08-26" thirdDate-constraint="0" expand="true">
             <task id="126" name="JALON 2" color="#ff9900" meeting="true" start="2019-10-25" duration="0" complete="0" thirdDate="2019-10-05" thirdDate-constraint="0" expand="true"/>
-            <task id="121" name="Développement noeud" color="#66cc00" meeting="false" start="2019-10-21" duration="14" complete="0" thirdDate="2019-10-06" thirdDate-constraint="0" expand="true"/>
-            <task id="123" name="Développement OS" color="#66cc00" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2019-10-14" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
+            <task id="121" name="Développement noeud" color="#66cc00" meeting="false" start="2019-10-24" duration="20" complete="0" thirdDate="2019-10-06" thirdDate-constraint="0" expand="true">
+                <task id="161" name="Récupération des valeurs d'un capteurs" color="#66cc00" meeting="false" start="2019-10-24" duration="4" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="159" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="159" name="Tests de la récupération des valeurs d'un capteur" color="#66cc00" meeting="false" start="2019-10-28" duration="1" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true"/>
+                <task id="170" name="Mise en place du neud LoRaWAN sur la carte STM32" color="#66cc00" meeting="false" start="2019-10-24" duration="8" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="162" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="162" name="Test du neud LoRaWAN" color="#66cc00" meeting="false" start="2019-11-01" duration="1" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <notes><![CDATA[Connexion à la passerelle et envois de trames simples]]></notes>
+                    <depend id="195" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="176" name="Dissimulation de clef dans la mémoire" color="#66cc00" meeting="false" start="2019-10-24" duration="7" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="164" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="164" name="Test de la dissimulation de clef dans la mémoire" color="#66cc00" meeting="false" start="2019-10-31" duration="2" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="195" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="168" name="Dissimulation de clef dans un composant de sécurité" color="#66cc00" meeting="false" start="2019-10-24" duration="7" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="166" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="166" name="Test de la dissimulation de clef dans un composant de sécurité" color="#66cc00" meeting="false" start="2019-10-31" duration="2" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="195" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="195" name="Mise en place d'un neud sécurisé complet" color="#66cc00" meeting="false" start="2019-11-02" duration="7" complete="0" thirdDate="2019-09-30" thirdDate-constraint="0" expand="true">
+                    <depend id="199" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="199" name="Tests du neud complet" color="#66cc00" meeting="false" start="2019-11-09" duration="4" complete="0" thirdDate="2019-10-21" thirdDate-constraint="0" expand="true"/>
+            </task>
+            <task id="123" name="Scrutation pour récupérer la valeure d'un capteur" color="#66cc00" shape="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0" meeting="false" start="2019-10-14" duration="28" complete="0" thirdDate="2019-09-23" thirdDate-constraint="0" expand="true">
                 <depend id="124" type="2" difference="0" hardness="Strong"/>
                 <depend id="128" type="2" difference="0" hardness="Strong"/>
                 <depend id="140" type="2" difference="0" hardness="Strong"/>
@@ -62,7 +100,7 @@
             <task id="138" name="Tests" color="#ff3333" meeting="false" start="2019-12-07" duration="13" complete="0" thirdDate="2019-12-04" thirdDate-constraint="0" expand="true"/>
             <task id="137" name="Rédaction des livrables" color="#ff3333" meeting="false" start="2019-12-14" duration="6" complete="0" thirdDate="2019-11-19" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="84" name="JALON 4 FINAL" color="#ff9900" meeting="true" start="2019-12-20" duration="0" complete="0" thirdDate="2019-12-07" thirdDate-constraint="0" expand="true"/>
+        <task id="84" name="Dissimulation de clef dans la mémoire" color="#ff9900" meeting="true" start="2019-12-20" duration="0" complete="0" thirdDate="2019-12-07" thirdDate-constraint="0" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="François" function="Default:1" contacts="" phone=""/>
@@ -79,7 +117,7 @@
         <allocation task-id="74" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="81" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="84" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="121" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="121" resource-id="0" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="123" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="124" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="126" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
@@ -98,12 +136,12 @@
         <allocation task-id="81" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="84" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="121" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="123" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="124" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="123" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
+        <allocation task-id="124" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="126" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="128" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="128" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="137" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="140" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="140" resource-id="1" function="Default:1" responsible="false" load="100.0"/>
         <allocation task-id="138" resource-id="1" function="Default:1" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
