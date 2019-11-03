@@ -31,7 +31,7 @@ def main():
 
     while True:
         rx = lora.receive(256)
-        lora.send(bytes("Hello there General Kenobi", "utf-8"))
+        lora.send(bytes("Hello there", "utf-8"))
         print("In while")
         if rx:
             print('Received user message: {}'.format(rx))

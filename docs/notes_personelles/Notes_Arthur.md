@@ -16,7 +16,7 @@ Tant que l'on utilise 1 capteur et une passerelle on peut utiliser de P2P, mais 
 Cette clé sert à calculer et à vérifier intégrité du message (**MIC** : Message Integrity Code) elle est utilisé par *le noeud* et *le Network Server* 
 
 ### AppSKey:
-Cette clé set a chiffrer et à déchiffrer la *payload* d'un message d'une application. Elle est utilisé part *le noeud* et *le Network Server*
+Cette clé sert a chiffrer et à déchiffrer la *payload* d'un message d'une application. Elle est utilisé part *le noeud* et *le Network Server*
 
 ### AppKey:
 Clé AES généré par le serveur d'application. Les 2 clées précédente sont dérivé de celle-ci
@@ -111,7 +111,7 @@ Idée 1 :
 Il faut la stocker en hardware...
 
 Idée 2 :
-Generer une clées aléatoire pour encrypter la RAM stocker à chaque execution du programme ainsi la mémoire est illisible. 
+Générer une clées aléatoire pour encrypter la RAM stocker à chaque execution du programme ainsi la mémoire est illisible. 
 
 
 ## Choisir OS ou en créer un ?
@@ -169,4 +169,38 @@ Le choix ce porte sur LoRa Server car nous penssont gagner beaucoup de temps sur
 
 
 
+ *********************************************************************************************************************
 
+# Diaporama Jalon 2
+
+## Intro / explication du prj / sommaire
+Securisation d'un réseau LoRa WAN
+
+- Explication LoRa WAN (c'est quoi ? pour qui ? pour quoi ? cas d'utilisation)
+- Explication des cas d'attaque possible (authenticité + integrité)
+- Explications des 2 entité Noeud et Box LoRa
+    - Répartions des tâches Arthur Noeud | Franouch BoxLoRA
+    - Montrer organisation du projet *Img du gantt vite fait présenter les grandes lignes Montrer ou en on est rendu + retard et ou on va repprendre à la rentrer)
+
+## Partie Noeud
+
+- 2 types de noeuds (simple et final)
+    - Carte fipy facile à développer permet de mettre en oeuvre rapidement la passerelle et un réseau
+        - Rédaction d'un tutoriel pour pouvoir remttre en oeuvre ce réseau
+        - Fonctionnemnt :
+            - La carte fipy demande à ce connecter à la passerelle avec ses ""identifiants""  c'est à dire clef Appkey et son identifiant DevEUI.
+    - Carte Stm32 finalité du projet
+    (montrer les 2 schemats des 2 réseau + toutes les communication)
+- Sécurisation
+    - Expliquer que l'on doit cacher les clefs dans la mémoire
+    - Expliquer que ensuite on essaira d'inégrer un coposant de sécurité pour cacher les clefs hors de la mémoire et que l'on verra avec le groupe qui se charge de ce sujet
+
+## Partie box LoRa
+
+- Choix entre créer un OS ou utiliser un OS déjà construit
+    - (diapo avec + et - de chaques solutions)
+    - Dire que l'on a choisi lora Server
+        - Présenter ces parties
+            - LoRa Gateway Bridge
+            - LoRa Server (Network Server)
+            - LoRa AppSever
