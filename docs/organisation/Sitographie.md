@@ -74,3 +74,8 @@
 Présentation de la sécurité des différentes cartes STM : http://www.emcu.it/SILICA-STDay-2016/X/Presentazioni/2_STM32&SecureElements.pdf
 
 Présentationdes kits LoRa de STM : https://www.youtube.com/watch?v=MgbTraRq0K8
+
+
+## Mise en place du Noeud
+
+https://stackforce.github.io/LoRaMac-doc/class_a_2_b-_l072_z-_l_r_w_a_n1_2main_8c-example.html
