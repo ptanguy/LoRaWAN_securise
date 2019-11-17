@@ -1,0 +1,95 @@
+Creation d'une layer et d'une recette image
+===========================================
+
+Les layers et les recettes sont "surcouches" que nous pouvons ajouter à des projets *Yocto* elles permettent d'etendre les possibilitées d'un projet. Comme par exemple *metafreescale* qui ajoute le support des cartes *hummingboard* 
+
+Creation de la layer *meta-ubs-homeautomation*
+-----------------------------------------------
+
+.. code-block:: bash
+
+    $ yocto-layer create meta-ubs-homeautomation
+
+
+Vous pouvez laisser la proirité par default et répondre par non aux questions posé par yocto pour la création de la layer.
+Il faut maintenant l'ajouter à la liste des recettes déjà utiliser dans le fichier *bblayers.conf*
+
+.. code-block:: bash
+
+    $ cd build/
+    $ bitbake-layers add-layer ../meta-ubs-homeautomation/
+
+Maintenant nous allons créer la recette *core-image-ubs-homeautomation*
+Nous allons utiliser les configuartion dejà présente dans  *core-image-minimal* en faisant un include.
+
+.. code-block:: bash
+
+    $ cd ../meta-ubs-homeautomation/
+    $ mkdir -p recipes-core/images
+    $ cd recipes-core/images
+    $ touch core-image-ubs-homeautomation.bb
+
+Nous allons maintenant éditer le fichier que nous venons de créer. Pour personaliser notre image.
+Vous devez à present ouvrie le fichier *core-image-ubs-homeautomation.bb* et écrire les lignes suivantes à l'interieur.
+
+.. code-block:: bash 
+
+    include ../../meta/recipes-core/images/core-image-minimal.bb
+
+    SUMMARY = "recette principale de homeautomation"
+
+    LICENSE = "MIT"
+
+    #Ajout de la recette I2cTools pour la gestion de l'I2C
+    IMAGE_INSTALL_append = " i2c-tools"
+
+    #Ajout du SSH par drop bear, pour avoir des fonctionnalité SSH avancé décommenter la ligne openssh
+    IMAGE_FEATURES += "ssh-server-dropbear"
+    #IMAGE_FEATURES += "ssh-server-openssh"
+
+A présent nous pouvons compiler notre nouvelle recette image.
+Pour verifier si nous avons fait des erreurs. Si c'est le cas vérifiez votre configuration.
+
+.. code-block:: bash
+
+    $ bitbake core-image-ubs-homeautomation
+
+Premier test
+------------
+
+Maintenant que nous avons compilé une première version de notre distribution nous allons pouvoir la tester. Pour cela il faut ecrire notre image sur une carte SD.
+Il faut que vous inserier la carte SD dans l'ordinateur.
+
+Ecriture d'une image sur une carte SD :
+Il faut repérer où est monté la carte SD:
+
+.. code-block:: bash 
+
+    $ sudo fdisk -l
+
+La commande va lister les disque monté sur votre machine.
+La suite des commandes dépendra du point de montage.
+Dans mon cas **/dev/sdb**
+
+Ecriture sur carte SD pour la Raspberry
+
+.. code-block:: bash 
+
+    # placer vous dans à la racine de Poky
+    $ sudo dd if=build/tmp/deploy/images/raspberrypi3/core-image-ubs-homeautomation-raspberrypi3.rpi-sdimg of=/dev/sdb bs=4M
+    
+    # Dans un premier temp nous utilisons le fichier .rpi-sdimg créé par bitbake car il va installer le bootloader et le systeme de fichier sur la carte SD.
+    # Cepandant le systéme de fichier est en ext3 et nous devons le passer en ext4
+    
+    $ sudo dd if=build/tmp/deploy/images/raspberrypi3/core-image-ubs-homeautomation-raspberrypi3.ext4 of=/dev/sdb2 bs=4M
+    
+    # Nous venons d'ecrire dans la partition du systeme de fichier, le fsysteme de fichier ext4 créer par bitbake
+
+
+Ecriture sur carte SD pour la Hummingboard
+
+.. code-block:: bash
+
+    $ zcat build/tmp/deploy/images/solidrun-imx6/core-image-ubs-homeautomation-solidrun-imx6.wic.gz | sudo dd of =/dev/sdb0 bs =4 M iflag = fullblock oflag = direct conv = fsync status = progress
+
+Pour 

@@ -1,0 +1,22 @@
+Resolution des erreurs 
+======================
+
+Problème de connection "URL https://www.example.com/ doesn't work"
+---
+
+.. code-block:: bash 
+
+    Fetcher failure for URL: 'https://www.example.com/'. URL https://www.example.com/ doesn't work.                     
+    Please ensure your host's network is configured correctly,                                                          
+    or set BB_NO_NETWORK = "1" to disable network access if
+    all required sources are on local disk.
+
+Il faut modifier l'URL verifier par poky.
+
+.. code-block:: bash
+
+    $ poky/meta-poky/conf/distro
+    $ nano poky.conf
+    CONNECTIVITY_CHECK_URIS ?= "https://www.google.com/"
+
+

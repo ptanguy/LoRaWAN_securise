@@ -1,0 +1,219 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuration Poky &#8212; UBS Home Automation Box v0.1</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Creation d’une layer et d’une recette image" href="personalisation.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo_ubs_ssi.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">Mini projet</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration Poky</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#layers">Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-bblayers-conf">Configuration <em>bblayers.conf</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation">Compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-local-conf">Configuration <em>local.conf</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="personalisation.html">Creation d’une layer et d’une recette image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="resolutionsDeMessageDereur.html">Resolution des erreurs</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="Chapitre précédent">Installation</a></li>
+      <li>Next: <a href="personalisation.html" title="Chapitre suivant">Creation d’une layer et d’une recette image</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration-poky">
+<h1>Configuration Poky<a class="headerlink" href="#configuration-poky" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Poky est un le dossier dans lequel nous allons travailler.</p>
+<p>Dans un prmeier temps nous allons importer des layers permettant d’augmenter les capacités de base du yocto.</p>
+<div class="section" id="layers">
+<h2>Layers<a class="headerlink" href="#layers" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour supporter la carte humming board nous devons ajouter la layer «&nbsp;meta-freescale&nbsp;» et «&nbsp;meta-solidrun-arm-imx6&nbsp;»
+Et pour Supporter la Raspberry nous devons ajouter «&nbsp;meta-raspberry&nbsp;» et «&nbsp;meta-openembedded&nbsp;»</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> .../poky/
+$ git clone https://git.yoctoproject.org/git/meta-freescale
+$ <span class="nb">cd</span> meta-freescale/
+$ git checkout -b rocko origin/rocko
+$ <span class="nb">cd</span> ..
+$ git clone https://github.com/SolidRun/meta-solidrun-arm-imx6.git
+$ <span class="nb">cd</span> meta-solidrun-arm-imx6/
+$ git checkout -b rocko origin/rocko
+$ <span class="nb">cd</span> ..
+$ git clone git://git.yoctoproject.org/meta-raspberrypi
+$ <span class="nb">cd</span> meta-raspberrypi/
+$ git checkout -b rocko origin/rocko
+$ <span class="nb">cd</span> ..
+$ git clone https://github.com/openembedded/meta-openembedded.git
+$ <span class="nb">cd</span> meta-openembedded/
+$ git checkout -b rocko origin/rocko
+$ <span class="nb">cd</span> ..
+</pre></div>
+</div>
+<p>Maintenant il faut activer l’environnement de build et ajouter ces nouvelles layers au fichier de configuration de notre image.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">source</span> oe-init-build-env
+<span class="c1">#Après l&#39;execution de cette cmmande poky vous a placé dans le dossier *build*</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-bblayers-conf">
+<h2>Configuration <em>bblayers.conf</em><a class="headerlink" href="#configuration-bblayers-conf" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#Layers pour la hummingboard</span>
+$ bitbake-layers add-layer ../meta-freescale
+$ bitbake-layers add-layer ../meta-solidrun-arm-imx6
+
+<span class="c1">#Layers pour la raspberry</span>
+$ bitbake-layers add-layer ../meta-openembedded/meta-oe
+$ bitbake-layers add-layer ../meta-openembedded/meta-python
+$ bitbake-layers add-layer ../meta-raspberrypi
+</pre></div>
+</div>
+</div>
+<div class="section" id="compilation">
+<h2>Compilation<a class="headerlink" href="#compilation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Appartir de maintenant nous pouvons déjà compiler l’image <em>core-image-minimal</em> qui est une image sur laquel on va se baser par la suite
+<strong>Cela peut prendre plusieurs heures.</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bitbake core-image-minimal
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration-local-conf">
+<h2>Configuration <em>local.conf</em><a class="headerlink" href="#configuration-local-conf" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Ce fichier contient les informations pour compiler l’image. Il nous permet aussi d’ajouter des élèments comme des utilisateurs par défaut.</p>
+<p>Vous devez ouvrir le fichier local et ajouter les lignes suivantes à l’intérieur.
+Nous ajoutons :</p>
+<ol class="arabic simple">
+<li>Le support pour les 2 cartes</li>
+<li>L’utilsations de paquets ipk</li>
+<li>L’ajout d’un compt utilisateur <em>ubs</em> avec le mot de pass <em>ssi</em></li>
+<li>L’utilisation de systemd</li>
+<li>L’utilisation de ext4 pour la raspberry et hummingboard</li>
+<li>l’UART pour pouvoir afficher les valeurs du temperature et d’humidité du capteur I2C</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#Prise en charge de la carte hummingboard ou de la raspberry</span>
+<span class="nv">MACHINE</span> <span class="o">=</span> <span class="s2">&quot;solidrun-imx6&quot;</span>
+<span class="c1">#MACHINE = &quot;raspberrypi3&quot;</span>
+
+<span class="c1">#Nom de la distribition</span>
+<span class="nv">DISTRO_NAME</span> <span class="o">=</span> <span class="s2">&quot;homeautomation-hummingboard&quot;</span>
+
+<span class="c1">#Gestion des paquets par ipk</span>
+<span class="nv">PACKAGE_CLASSES</span> <span class="o">=</span> <span class="s2">&quot;package_ipk&quot;</span>
+
+<span class="c1">#Ajout d&#39;un utilisateur *ubs*</span>
+<span class="nv">INHERIT</span> <span class="o">+=</span> <span class="s2">&quot;extrausers&quot;</span>
+<span class="nv">EXTRA_USERS_PARAMS</span> <span class="o">=</span> <span class="s2">&quot;useradd -p ssi ubs;&quot;</span>
+
+<span class="c1">#Utilisation de systemd à la place de SysVinit</span>
+<span class="nv">DISTRO_FEATURES_append</span> <span class="o">=</span> <span class="s2">&quot; systemd&quot;</span>
+VIRTUAL-RUNTIME_init_manager <span class="o">=</span> <span class="s2">&quot;systemd&quot;</span>
+
+<span class="c1">#Utilisation d&#39;un root file system ext4</span>
+<span class="c1">#Pour la raspberry</span>
+<span class="c1">#IMAGE_FSTYPES += &quot;ext4 rpi-sdimg&quot;</span>
+
+<span class="c1">#Pour la hummingboard</span>
+<span class="nv">IMAGE_FSTYPES</span> <span class="o">+=</span> <span class="s2">&quot;ext4&quot;</span>
+
+<span class="c1">#Pour utiliser la la liaison serie</span>
+<span class="nv">ENABLE_UART</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2018, ptanguy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/configurationPoky.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
