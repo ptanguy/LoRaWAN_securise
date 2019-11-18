@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spécifications &#8212; Rapport Jalon 2 | Sécurisation d&#39;un réseau LoRaWAN</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Répartition des tâches" href="repartitions.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo_ubs_ssi.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">Rapport-Jalon2</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spécifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#le-noeud">Le noeud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#la-passerelle">La passerelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-server">Network Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-server">Application Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#points-daction-format-poupees-russes">Points d’action (format poupées russes) :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#schema-technique-des-prototypes">Schéma technique des prototypes :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#analyse-des-risques">Analyse des risques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#contraintes">Contraintes :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#materiel">Matériel :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repartitions.html">Répartition des tâches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AnnexeA.html">Mise en place d”un réseau LoRaWAN simple</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="introduction.html" title="Chapitre précédent">Introduction</a></li>
+      <li>Next: <a href="repartitions.html" title="Chapitre suivant">Répartition des tâches</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="specifications">
+<h1>Spécifications<a class="headerlink" href="#specifications" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le protocole LoRa n’est pas fait pour envoyer de grandes quantités d’information très rapidement. On ne peut envoyer que quelques KiloOctets par intervalle de quelques minutes.</p>
+<p>Dans sa version 1.0 le LoRaWAN spécifie déjà plusieurs directives à suivre pour le sécuriser.
+Il y a une clef <strong>*AES 128bits*</strong> à fournir pour sécuriser la commuication depuis le <em>noeud</em> jusqu’au <em>serveur d’application</em>.
+- <strong>AppKey</strong> Clef AES principale. Elle doit être connue <em>du noeud</em> et <em>du network manager</em>. Elle sert ensuite à déterminer les 2 clefs suivantes.
+- <strong>NwkSKey</strong> Network Session key : chiffre la communication entre le <em>noeud</em> et <em>le network server</em>. Elle sert à détecter une éventuelle perte d’information dans le message.
+- <strong>AppSKey</strong> Application Session key : chiffre le message entre <em>le noeud</em> et <em>le network server</em>, sans cette clef il est impossible de lire le message.</p>
+<p>Les clefs <strong>NwkSKey</strong> et <strong>AppSKey</strong> sont actualisées à chaque nouvelle connexion d’un appareil, elles sont uniques à chaque <em>noeud</em> du réseau.</p>
+<p>Le LoRaWAN utilise des <em>frame counter</em> à fin d’éviter les attaques par répétition.
+Deux compteurs sont initialisés lorsqu’un nouvel appareil est connecté.
+Le noeud incrémente le compteur <strong>FCntUP</strong> à chaque fois que qu’il envoit une information sur le <em>UpLink</em>. Le Network serveur, lui, incrémente le compteur <strong>FCntDown</strong> à chaque fois qu’il écrit sur le <em>DownLink</em>. Pour chaque trame du réseau la valeur des compteurs est envoyée avec. Le récepteur de la trame va comparer la valeur des compteurs à l’intérieur de la trame avec ses propres compteurs et si la valeur des compteurs de la trame est inferieure au compteur du récepteur, ce dernier va ignorer le message.</p>
+<div class="section" id="le-noeud">
+<h2>Le noeud<a class="headerlink" href="#le-noeud" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le <em>noeud</em> sera composé d’un microcontrôleur, d’un capteur (ou plusieurs) et d’un module permettant la communication en LoRa. Pour le noeud nous allons utiliser un kit de développement provenant de STMicroelectronics.</p>
+<p>Nous regroupons ci-dessous les attaques possibles. Ce sera notre base de travail pour sécuriser la communication.</p>
+<p>Surface d’attaque :
+-  Gestion des Clés AES
+-  Modification du code source
+-  Interception des données directement sur le capteur
+-  SPA
+-  DPA
+-  Analyse EM
+-  Memory dumping
+-  Valeur des Frame Counters</p>
+<p>Les secrets à protéger sont :
+-  La valeur du capteur
+-  Les clefs <strong>NwkSKey</strong> et <strong>AppSkey</strong> et la clef AES <strong>AppKey</strong></p>
+</div>
+<div class="section" id="la-passerelle">
+<h2>La passerelle<a class="headerlink" href="#la-passerelle" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La <em>passerelle</em> sert de traducteur entre le protocole <em>LoRa</em> et un autre protocole de communication. Elle sera hébergée sur un micro-ordinateur.</p>
+</div>
+<div class="section" id="network-server">
+<h2>Network Server<a class="headerlink" href="#network-server" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le <em>Network server</em> est le cerveau du réseau LoRaWAN, il génère les clefs et authentifie les noeuds. Il déchiffre aussi une partie des trames du réseau.</p>
+<p>Surface d’attaque :
+- Enregistrement clef AES
+- Création des clefs <strong>NwkSKey</strong> et <strong>AppSKey</strong></p>
+<p>Secrets à protéger
+- La valeur des clefs <strong>NwkSKey</strong>, <strong>AppSKey</strong> et <strong>AppKey</strong></p>
+</div>
+<div class="section" id="application-server">
+<h2>Application Server<a class="headerlink" href="#application-server" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le <em>Application server</em> est le service qui va traiter l’information du capteur, il va déchiffrer la dernière partie du message.</p>
+<p>Surface d’attaque :
+- Réception de la clef <strong>AppSKey</strong>
+- Gestion de la clef <strong>AppSKey</strong></p>
+<p>Secret à protéger :
+- La valeur de la clef <strong>AppSKey</strong></p>
+</div>
+</div>
+<div class="section" id="points-daction-format-poupees-russes">
+<h1>Points d’action (format poupées russes) :<a class="headerlink" href="#points-daction-format-poupees-russes" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Mise en place d’un réseau LoRaWAN sécurisé</p>
+<ul>
+<li><p>Mise en place d’un réseau LoRaWAN avec sécurité basique (mot de passe)
+- Création d’un premier réseau (facile) entre le microcontrôleur <em>Fipy</em> et le capteur <em>Pysense</em> pour la partie noeud et une Raspberry pour la partie box LoRa. Ce premier réseau nous permet de prendre en main le fonctionnement global du LoRa, sans ajouter les complexités d’une carte STM, en travaillant avec un environnement de noeud plus simple.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Rédaction d’un tutoriel pour le déploiement de ce réseau. <strong>Chapitre 9</strong> pour une prise en main simple.</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Création d’un deuxième réseau identique identique au précédent, mais en remplaçant le noeud par une carte STM32 équipé d’un shield Motion MEMS and environmental (Nucleo expansion board). La finalité de notre réseau est, en effet, d’utiliser une carte STM32 pour le noeud.</p></li>
+<li><dl class="simple">
+<dt>Construction des services de la Box LoRa</dt><dd><ul>
+<li><dl class="simple">
+<dt>Création d’un OS vs. Utilsation d’un OS existant (LoRaServer io)</dt><dd><p>Notre choix se portera sur l’utilisation d’un OS déjà existant. Sa rapidité de mise en oeuvre et son adaptabilité nous font pencher en sa faveur. Beaucoup de temps de développement est ainsi gagné en prenant l’OS <em>LoRaserver.io</em></p>
+</dd>
+</dl>
+</li>
+<li><p>Choix de prendre un OS <em>Full</em>, qui contient <em>gateway</em> + <em>network server</em> + <em>application server</em> en interne, et permet une gestion simplifiée.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><dl class="simple">
+<dt>Tests unitaires de fonctionnement :</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Vérification<span class="classifier">la valeur du capteur est-elle correcte ?</span></dt><dd><ul>
+<li><p>Afficher la valeur de celle-ci dans le terminal et comparer avec la température ambiante réelle.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Vérifier que la valeur est émise correctement.</dt><dd><ul>
+<li><p>Émission des trames LoRa. Travail à l’analyseur de spectres de fréquences.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Vérifier que la valeur est arrivée</dt><dd><ul>
+<li><p>Réception des trames LoRa, via l’interface graphique.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Vérifier que la valeur est bien transmise dans la box LoRA</dt><dd><ul>
+<li><p>Regarder sur la partie <em>application server</em> que la valeur est la même que celle affichée dans le terminal du microcontrôleur</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Mise en place d’un réseau avec des couches de sécurité renforcées</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Sécurisation du noeud</dt><dd><ul>
+<li><dl class="simple">
+<dt>Développer le software du noeud LoRaWAN</dt><dd><ul>
+<li><p>Sécurisation du noeud en cachant les clefs dans la mémoire (composant de sécurité : ATEC508A ou autre)</p></li>
+<li><p>Sécurisation du noeud en cachant les clefs logiciellement</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Sécurisation de la Box LoRa</dt><dd><ul>
+<li><dl class="simple">
+<dt>Cas 1<span class="classifier">La box LoRa est le seul composant du serveur</span></dt><dd><ul>
+<li><p>Sécurisation vis à vis d’intrusion externe au systeme : VPN</p></li>
+<li><p>Maintenance : Mise à jours, SSH</p></li>
+<li><p>Verification des services</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Cas 2<span class="classifier">La box LoRa ne sert pas uniquement à au LoRa WAN</span></dt><dd><ul>
+<li><p>Sécurisation par rapport aux autres service présent et/ou utilisateurs : Vérifier les droits d’accès</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="schema-technique-des-prototypes">
+<h1>Schéma technique des prototypes :<a class="headerlink" href="#schema-technique-des-prototypes" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ce premier schéma ci-dessous nous montre la chaine technique des composants du premier réseau simple pour la création du prototype.</p>
+<a class="reference internal image-reference" href="_images/CommunicationLoRaPysense.png"><img alt="Schéma_prototype_1" src="_images/CommunicationLoRaPysense.png" style="width: 800px;" /></a>
+<p>Ce deuxième schéma ci-dessous nous montre la version finale du réseau tel qu’il sera construit.</p>
+<a class="reference internal image-reference" href="_images/CommunicationLoRaSTM32.png"><img alt="Schéma_prototype_2" src="_images/CommunicationLoRaSTM32.png" style="width: 800px;" /></a>
+</div>
+<div class="section" id="analyse-des-risques">
+<h1>Analyse des risques<a class="headerlink" href="#analyse-des-risques" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Pour le cas d’usage, nous avons défini que les aspects de non-répudiation et de confidentialité ne sont pas les plus critiques, car nous voulons transmettre uniquement la température et l’humidité. Nous traiterons donc les paramètres d’intégrité et d’authenticité.
+Il faut éviter qu’une personne vienne altérer l’information envoyée. Nous devons être sûrs que le <em>noeud</em> qui envoit l’information est bien le <em>noeud</em> que nous avons créé et pas celui d’un éventuel attaquant (par exemple : <em>man in the middle</em>).</p>
+<table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-text">Analyse des risques</span><a class="headerlink" href="#id1" title="Lien permanent vers ce tableau">¶</a></caption>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 19%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Menaces envisageables</p></th>
+<th class="head"><p>Risques à considérer</p></th>
+<th class="head"><p>Contres mesures</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dump mémoire STM32 et Raspberry</p></td>
+<td><p>✓</p></td>
+<td><p>Hasher la clef / Composant de sécurité pour le firmware et clef</p></td>
+</tr>
+<tr class="row-odd"><td><p>Canaux cachés   (DPA, SPA)</p></td>
+<td><p>x</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Autre Noeud usurpant l’identité de notre Noeud (altération des données)</p></td>
+<td><p>✓</p></td>
+<td><p>Signature et certificat</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mise à jour venant d’une entité autre que le serveur de mise à jour officiel</p></td>
+<td><p>✓</p></td>
+<td><p>Signature des MAJ / certificat</p></td>
+</tr>
+<tr class="row-even"><td><p>Interception des mises à jour</p></td>
+<td><p>✓</p></td>
+<td><p>VPN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Execution d’un OS malicieux sur la box LoRA</p></td>
+<td><p>✓</p></td>
+<td><p>Secure boot</p></td>
+</tr>
+<tr class="row-even"><td><p>Modification du programme du noeud</p></td>
+<td><p>✓</p></td>
+<td><p>Condamnation des GPIO de debogage</p></td>
+</tr>
+<tr class="row-odd"><td><p>DoS attaque par envoi massif de données sur la Box LoRa</p></td>
+<td><p>✓</p></td>
+<td><p>Limiter la réception d’un nombre de trames par X temps</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="contraintes">
+<h1>Contraintes :<a class="headerlink" href="#contraintes" title="Lien permanent vers ce titre">¶</a></h1>
+<ul class="simple">
+<li><p>Protocole de communication LoRaWAN entre la passerelle et les noeuds</p></li>
+<li><p>Utilisation du matériel fourni par l’encadrant</p></li>
+</ul>
+</div>
+<div class="section" id="materiel">
+<h1>Matériel :<a class="headerlink" href="#materiel" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Voici le matériel dont nous disposons :</p>
+<ul class="simple">
+<li><p>Lorawan discovery kit : <a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html">https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html</a></p></li>
+<li><p>MEMS environmental shield : <a class="reference external" href="https://www.st.com/en/ecosystems/x-nucleo-iks01a1.html">https://www.st.com/en/ecosystems/x-nucleo-iks01a1.html</a></p></li>
+<li><p>LoRaWAN concentrator : <a class="reference external" href="https://shop.imst.de/wireless-modules/lora-products/8/ic880a-spi-lorawan-concentrator-868-mhz?number=404802">https://shop.imst.de/wireless-modules/lora-products/8/ic880a-spi-lorawan-concentrator-868-mhz?number=404802</a></p></li>
+<li><p>Carte Fipy : <a class="reference external" href="https://docs.pycom.io/datasheets/development/fipy/">https://docs.pycom.io/datasheets/development/fipy/</a></p></li>
+<li><p>Carte pysense : <a class="reference external" href="https://pycom.io/product/pysense/">https://pycom.io/product/pysense/</a></p></li>
+<li><p>Antenne : <a class="reference external" href="https://www.gotronic.fr/art-kit-antenne-pour-lora-et-sigfox-25376.htm">https://www.gotronic.fr/art-kit-antenne-pour-lora-et-sigfox-25376.htm</a></p></li>
+<li><p>Raspberry pi 3b : <a class="reference external" href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b/">https://www.raspberrypi.org/products/raspberry-pi-3-model-b/</a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2018, ptanguy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/specifications.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

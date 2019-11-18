@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Introduction &#8212; Rapport Jalon 2 | Sécurisation d&#39;un réseau LoRaWAN</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Spécifications" href="specifications.html" />
+    <link rel="prev" title="Sécurisation réseau LoRaWAN" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo_ubs_ssi.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">Rapport-Jalon2</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mise-au-point-vocabulaire">Mise au point : vocabulaire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#schema-simplifie">Schéma simplifié</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="specifications.html">Spécifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specifications.html#points-daction-format-poupees-russes">Points d’action (format poupées russes) :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specifications.html#schema-technique-des-prototypes">Schéma technique des prototypes :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specifications.html#analyse-des-risques">Analyse des risques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specifications.html#contraintes">Contraintes :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="specifications.html#materiel">Matériel :</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repartitions.html">Répartition des tâches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AnnexeA.html">Mise en place d”un réseau LoRaWAN simple</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="Chapitre précédent">Sécurisation réseau LoRaWAN</a></li>
+      <li>Next: <a href="specifications.html" title="Chapitre suivant">Spécifications</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Projet M1 CSSE <em>mise en oeuvre d’un réseau LoRaWAN sécurisé</em> 2019-2020</p>
+<p>Ceci est la documentation de notre projet de sécurisation d’une communication LoRaWAN.</p>
+<p><strong>Contexte :</strong></p>
+<p>L’Internet des objets (IoT, en anglais) est un paradigme dont les premiers déploiements ont quelques années (voire plus, si l’on parle de réseau de capteurs).
+D’un point de vue sécurité, l’IoT a une surface d’attaque très importante, du fait du nombre de technologies, de protocoles, du type de déploiement et du nombre d’acteurs différents.
+Ce projet s’applique aux réseaux d’objets connectés longue porté du type LoRaWAN (Long Range Wide Area Network).</p>
+<p><strong>Mission :</strong></p>
+<p>Dans ce contexte, il nous est demandé de mettre en place un réseau LoRaWAN sécurisé.
+Le premier et principal objectif est de créer un réseau LoRaWAN complet, mais simple et fonctionnel, dont les éléments de sécurité côté noeud et passerelle seront correctement mis en oeuvre.
+Toute une démarche de tests unitaires devra être mise en place, pour tester chacune des parties séparément, puis l’ensemble collectivement.</p>
+<p>Un cas d’usage, défini avec notre responsable devra être mis en place et les aspects de sécurité devront être bien maîtrisés.</p>
+<p>Le deuxième objectif consiste à discuter de la surface d’attaque de notre système.
+Un aspect analyse est donc demandé en prenant en compte les différentes versions du LoRaWAN, chacun des éléments du système etc.</p>
+<div class="section" id="mise-au-point-vocabulaire">
+<h2>Mise au point : vocabulaire<a class="headerlink" href="#mise-au-point-vocabulaire" title="Lien permanent vers ce titre">¶</a></h2>
+<p>LoRaWAN :
+&gt; Long Range Wide Area Network. Protocole de communication.</p>
+<p>Noeud :
+&gt; Ensemble de composants qui peuvent recevoir et/ou envoyer de l’information via le protocole de communication LoRaWAN. Branche initiale d’un réseau LoRaWAN. Par exemple, un capteur relié à une carte/microcontrôleur et une antenne pour la communication vers l’extérieur.</p>
+<p>Passerelle ou <em>Gateway</em> :
+&gt; Élément de transfert. Permet de traduire et transférer les données venant du noeud vers les serveurs.</p>
+<p><em>Network server</em> :
+&gt; Cerveau du réseau LoRaWAN, il génère les clefs et authentifie les noeuds. Il déchiffre aussi une partie des trames du réseau, reçues via la passerelle.</p>
+<p><em>Application server</em> :
+&gt; Service qui va traiter l’information du capteur, il va déchiffrer la dernière partie du message.</p>
+<p>Box LoRa :
+&gt; Pour notre projet, sera un micro-ordinateur <em>Raspberry</em> qui va contenir la passerelle, le <em>network server</em> et l”<em>application server</em></p>
+</div>
+<div class="section" id="schema-simplifie">
+<h2>Schéma simplifié<a class="headerlink" href="#schema-simplifie" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Le schéma ci-dessous est un schéma simplifié, permettant de comprendre le fonctionnement global de notre système.</p>
+<p>Nous avons donc plusieurs noeuds, qui vont communiquer en LoRaWAN avec une passerelle. Cette passerelle va ensuite communiquer ce qu’elle a reçu des noeuds au serveur d’application, via un autre protocole de communication.</p>
+<a class="reference internal image-reference" href="_images/Schema_LoRaWAN.png"><img alt="Fonctionnement simple" src="_images/Schema_LoRaWAN.png" style="width: 800px;" /></a>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2018, ptanguy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/introduction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
