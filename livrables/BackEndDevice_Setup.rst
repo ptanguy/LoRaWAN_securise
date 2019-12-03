@@ -17,7 +17,7 @@ Installation des outils
 Pour gagner du temps dans le dévelopement de noeud nous utilisons comme base un projet github [LoRaMAC-node]_ mettant en oeuvre le LoRaWAN sur notre carte.
 Nous développons le Noeud à partir d'une distribution *Linux* basé sur *Arch Linux*, les dépendance requisent sont : 
 
-..code-block:: bash
+.. code-block:: bash
 
     cmake
     arm-none-eabi-gcc
@@ -81,7 +81,7 @@ Recupérer la valeur d'un capteur
 ********************************
 
 Le shield de cateur que nous utilisons contient différents capteurs, nous utiliserons que le capteur de température (HTS221). En se rapportant à la documentation du shield [#]_ nous voyons que le capteur est relié au bus I2C.
-Pour communiquer sur un bus I2C nous avons besoins d'un mettre et d'un esclave, le maitre sera notre carte *B-L072Z-LRWAN1* et l'esclave le capteur. Pour trouver l'addresse de notre capteur nous avons consulté la documentation de celui-ci [#]_ il est apparue que le capteur avait 2 addresses, une pour la lecture **BF** et une pour l'ecriture **BE**.
+Pour communiquer sur un bus I2C nous avons besoins d'un mettre et d'un esclave, le maitre sera notre carte *B-L072Z-LRWAN1* et l'esclave le capteur. Pour trouver l'addresse de notre capteur nous avons consulté la documentation de celui-ci [#]_ il ait apparu que le capteur avait 2 addresses, une pour la lecture **BF** et une pour l'ecriture **BE**.
 
 
 
