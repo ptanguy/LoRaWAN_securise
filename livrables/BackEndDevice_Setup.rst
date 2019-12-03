@@ -83,7 +83,7 @@ Recupérer la valeur d'un capteur
 Le shield de cateur que nous utilisons contient différents capteurs, nous utiliserons que le capteur de température (HTS221). En se rapportant à la documentation du shield [#]_ nous voyons que le capteur est relié au bus I2C.
 Pour communiquer sur un bus I2C nous avons besoins d'un mettre et d'un esclave, le maitre sera notre carte *B-L072Z-LRWAN1* et l'esclave le capteur. Pour trouver l'addresse de notre capteur nous avons consulté la documentation de celui-ci [#]_ il ait apparu que le capteur avait 2 addresses, une pour la lecture **BF** et une pour l'ecriture **BE**.
 
-
+================================= A FINIR =================================
 
 .. [#] Lien de la documentation du Shield MEMS : https://www.st.com/en/ecosystems/x-nucleo-iks01a2.html
 .. [#] Lien de la documentation du capteur HTS221 : https://www.st.com/en/mems-and-sensors/hts221.html#overview
