@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sécurisation du Noeud LoRaWAN &#8212; Documentation Documentation LoRa WAN Sécurisé </title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="securisation-du-noeud-lorawan">
+<h1>Sécurisation du Noeud LoRaWAN<a class="headerlink" href="#securisation-du-noeud-lorawan" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Dans l’architecture LoRaWAN le rle du noeud est de transmettre une information qui serra traité par l’application server.
+Dans le cadre de notre scénario le campus connécté, nous transmetons une donnée publique qui est la température. Nous devons donc nous concentrer, sur l’authentification du noeud LoRaWAN et l’intégrité de la donnée.</p>
+<p>Pour celà nous devons éviter que notre noeud soit remplacé par un autre noeud qui pourrais envoyer des informations erronnées.</p>
+<p>Le protocole LoRaWAN permet à un noeud de ce connécter de 2 façons différentes, OTAA (Over The Air Activation), ABP (Activation by personalization).</p>
+<div class="section" id="fonctionnement-activation-otaa">
+<h2>Fonctionnement activation OTAA<a class="headerlink" href="#fonctionnement-activation-otaa" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’activation par OTAA met en jeux <em>DevEUI</em>, <em>AppEUI</em>, <em>AppKey</em>  pour ce connecter à la gateway puis utilise <em>AppSKey</em> et <em>NetSKey</em> pour chiffrés la comunication jusqu’à l’application server.
+Le protocole LoRaWAN ne précise pas si les clés doivent être stocké en clair dans la mémoire ou doivent être chiffrés. Il faut <em>AppSKey</em> et <em>NetSKey</em> sont renouvelé à chaque
+Si un attaquant arrive à obtenir les 3 premières clés alors, il pourra usurpé l’identité de notre neud. S’il parvint à obtenir les 2 autres clès, il pourra uniquement déchiffrer l’information.</p>
+</div>
+<div class="section" id="fonctionnement-activation-abp">
+<h2>Fonctionnement activation ABP<a class="headerlink" href="#fonctionnement-activation-abp" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’activation par personnalisatioon met en oeuvre <em>DevAddr</em>, <em>NwkSKey</em> et <em>AppSKey</em> ces 2 dernière sont les clés permettants de chiffrer la communication ainsi, si un attanquant les récupères, il peut tout aussi bien usurper l’identité de notre noeud que lire les informations envoyés.</p>
+</div>
+<div class="section" id="analyse-des-risques">
+<h2>Analyse des risques<a class="headerlink" href="#analyse-des-risques" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Celà veut dire que si un attaquant fais un dump de la mémoire, il va</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Documentation LoRa WAN Sécurisé</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, François Sevaux, Arthur Le Rest | M1 CSSE UBS Lorient.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/securisationNoeud.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
