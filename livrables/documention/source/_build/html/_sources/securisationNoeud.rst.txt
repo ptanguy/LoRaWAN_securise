@@ -25,4 +25,6 @@ L'activation par personnalisatioon met en oeuvre *DevAddr*, *NwkSKey* et *AppSKe
 Analyse des risques
 ###################
 
-Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Celà veut dire que si un attaquant fais un dump de la mémoire, il va 
+Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Celà veut dire que si un attaquant fait un dump de la mémoire, il va pouvoir trouver facilement les clès.
+On remarque ensuite, que l'utilisation de l'activation par OTAA est plus sécurisé car elle utilise plus de clès et en renouvelle 2 à chaques connexions. La connexions par ABP est moins sécurisé car elle utilise uniquement 3 clès, dont 2 qui peuvent aussi permettre l'écoutes de la communication.
+

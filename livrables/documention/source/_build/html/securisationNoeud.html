@@ -49,7 +49,8 @@ Si un attaquant arrive à obtenir les 3 premières clés alors, il pourra usurp�
 </div>
 <div class="section" id="analyse-des-risques">
 <h2>Analyse des risques<a class="headerlink" href="#analyse-des-risques" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Celà veut dire que si un attaquant fais un dump de la mémoire, il va</p>
+<p>Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Celà veut dire que si un attaquant fait un dump de la mémoire, il va pouvoir trouver facilement les clès.
+On remarque ensuite, que l’utilisation de l’activation par OTAA est plus sécurisé car elle utilise plus de clès et en renouvelle 2 à chaques connexions. La connexions par ABP est moins sécurisé car elle utilise uniquement 3 clès, dont 2 qui peuvent aussi permettre l’écoutes de la communication.</p>
 </div>
 </div>
 
