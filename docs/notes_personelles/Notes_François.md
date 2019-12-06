@@ -59,3 +59,13 @@ Pour le diapo, faire au début un rappel des termes et acronymes utilisés
 (ex : noeud = capteur + stm(ou fipy) + antenne, etc)
 
 -------------------
+
+Cas classique : système DAC (propriétaire, groupe) de Linux
+Cas avancé : SELinux, Apparmor, etc
+
+Une fois compris le principe, voir comment l'intéger à ma distro Linux (LoRaserver.io) via Yocto pour la GW.
+
+
+/!\ Deux challenges techniques :
+- savoir mettre en oeuvre le système de permission DAC et MAC.
+- savoir ensuite appliquer la compétence précédente dans le cas de la passerelle LoRa avec Yocto.
