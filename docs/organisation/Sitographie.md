@@ -24,6 +24,9 @@
 
 2. Securisation avec les clés vidéo : https://youtu.be/S6nJzSc4iy4
 
+### Dump memoire
+
+1. https://lujji.github.io/blog/reverse-engineering-stlink-firmware-part2/
 
 ## Cours / Formation
 
