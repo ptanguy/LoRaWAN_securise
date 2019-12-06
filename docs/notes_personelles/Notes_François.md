@@ -69,3 +69,7 @@ Une fois compris le principe, voir comment l'intéger à ma distro Linux (LoRase
 /!\ Deux challenges techniques :
 - savoir mettre en oeuvre le système de permission DAC et MAC.
 - savoir ensuite appliquer la compétence précédente dans le cas de la passerelle LoRa avec Yocto.
+
+Bonus : *travail sur le secure-boot*. Garantir que l'on n'essaye pas
+d'usurper notre identité pour récupérer les trames reçues, ni pouvoir
+envoyer des instructions aux noeuds.
