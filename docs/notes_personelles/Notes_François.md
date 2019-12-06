@@ -6,7 +6,7 @@ Cas avancé : SELinux, Apparmor, etc
 Une fois compris le principe, voir comment l'intéger à ma distro Linux (LoRaserver.io) via Yocto pour la GW.
 
 
-/!\ Deux challenges techniques :
+/!\ Deux challenges techniques : 
 - savoir mettre en oeuvre le système de permission DAC et MAC.
 - savoir ensuite appliquer la compétence précédente dans le cas de la passerelle LoRa avec Yocto.
 
@@ -15,6 +15,28 @@ d'usurper notre identité pour récupérer les trames reçues, ni pouvoir
 envoyer des instructions aux noeuds.
 
 
+Fermer les ports et services inutiles, réduire la surface d'attaque.
+Faire un nmap pour voir ce qui est ouvert
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------
+ANCIEN
 ---------------
 
 [Cours complet](http://genelaix.free.fr/IMG/pdf/presentation_lora_lorawan.pdf)
