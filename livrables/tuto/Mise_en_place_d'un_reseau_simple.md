@@ -46,14 +46,14 @@ Ouvrez *Visual Studio Code* ou *Atom*. Créez un dossier pour le projet, nous l'
    - *lib* contient des bibliothèques
 
 
-![image_du_contenu_du_dossier_fipy](images/contenu_dossier_fipy.png)
+![image_du_contenu_du_dossier_fipy](../images/contenu_dossier_fipy.png)
 
 ## Programmation du noeud à partir d'exemples
 Dans notre cas nous allons baser notre programme sur un exemple que vous pouvez trouver sur github à [cette adresse](https://github.com/pycom/pycom-libraries).
 
 Dans un premier temps téléchargez le repository. Ensuite copiez le contenu *pycom-libraries/examples/OTA-lorawan/firmware/1.17.1/flash* dans le dossier **Fipy** créé précédement.
 
-![image_du_contenu_du_dossier_fipy_avec_exemple](images/ContenuDuDossierFipyAvecExemple.png)
+![image_du_contenu_du_dossier_fipy_avec_exemple](../images/ContenuDuDossierFipyAvecExemple.png)
 
 Dans le fichier *main.py*, recopiez le code suivant.
 
@@ -150,7 +150,7 @@ quit
 
 Faites tout le câblage nécéssaire avant de brancher la *Raspberry*.
 
-![Schema de cablage](../docs/schemas/Schemat_cablage.png)
+![Schema de cablage](../../docs/schemas/Schemat_cablage.png)
 ```Bash 
 sudo gateway-config
 # 2 setup LoRa concentrator shield

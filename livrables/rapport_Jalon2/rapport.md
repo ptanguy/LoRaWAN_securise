@@ -52,7 +52,7 @@ Le schéma ci-dessous est un schéma simplifié, permettant de comprendre le fon
 
 Nous avons donc plusieurs noeuds, qui vont communiquer en LoRaWAN avec une passerelle. Cette passerelle va ensuite communiquer ce qu'elle a reçu des noeuds au serveur d'application, via un autre protocole de communication.
 
-![fonctionnement_simple](../docs/schemas/Schema_LoRaWAN.png "Fonctionnement simple")
+![fonctionnement_simple](../../docs/schemas/Schema_LoRaWAN.png "Fonctionnement simple")
 
 
 
@@ -172,11 +172,11 @@ Schéma technique des prototypes :
 
 Ce premier schéma ci-dessous nous montre la chaine technique des composants du premier réseau simple pour la création du prototype.
 
-![Schéma_prototype_1](../docs/schemas/CommunicationLoRaPysense.png "Prototype 1")
+![Schéma_prototype_1](../../docs/schemas/CommunicationLoRaPysense.png "Prototype 1")
 
 Ce deuxième schéma ci-dessous nous montre la version finale du réseau tel qu'il sera construit.
 
-![Schéma_prototype_2](../docs/schemas/CommunicationLoRaSTM32.png "Prototype 2")
+![Schéma_prototype_2](../../docs/schemas/CommunicationLoRaSTM32.png "Prototype 2")
 
 
 
@@ -220,7 +220,7 @@ Pour gérer le projet nous utilisons un outil de *versionning* appelé Github, o
 
 Le diagramme de Gantt ci-dessous récapitule notre organisation tout au long du projet.
 
-![Diagramme_Gantt](images/gantt.png "Diagramme de Gantt")
+![Diagramme_Gantt](../images/gantt.png "Diagramme de Gantt")
 
 
 Organisation
@@ -231,7 +231,7 @@ Nous avons choisi une approche en spirale pour notre organisation. En effet, sur
 Le schéma ci-dessous montre simplement le fonctionnement d'une organisation en spirale.
 
 
-![organisation_spirale](../docs/schemas/Schema_spirale.png "Organisation en spirale")
+![organisation_spirale](../../docs/schemas/Schema_spirale.png "Organisation en spirale")
 
 
 Contraintes :
