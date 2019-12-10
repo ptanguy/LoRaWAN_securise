@@ -5,13 +5,13 @@ Projet M1 CSSE *mise en oeuvre d'un réseau LoRaWAN sécurisé* 2019-2020
 
 Ceci est la documentation de notre projet de sécurisation d'une communication LoRaWAN.
 
-**Contexte :**
+**Contexte : **
 
 L’Internet des objets (IoT, en anglais) est un paradigme dont les premiers déploiements ont quelques années (voire plus, si l’on parle de réseau de capteurs).
 D’un point de vue sécurité, l’IoT a une surface d’attaque très importante, du fait du nombre de technologies, de protocoles, du type de déploiement et du nombre d’acteurs différents.
 Ce projet s’applique aux réseaux d’objets connectés longue porté du type LoRaWAN (Long Range Wide Area Network).
 
-**Mission :**
+**Mission : **
 
 Dans ce contexte, il nous est demandé de mettre en place un réseau LoRaWAN sécurisé.
 Le premier et principal objectif est de créer un réseau LoRaWAN complet, mais simple et fonctionnel, dont les éléments de sécurité côté noeud et passerelle seront correctement mis en oeuvre. 

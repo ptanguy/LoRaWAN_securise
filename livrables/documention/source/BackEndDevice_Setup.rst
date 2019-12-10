@@ -4,18 +4,18 @@ Mise en place du noeud LoRaWAN avec la carte *B-L072Z-LRWAN1*
 Introduction
 ############
 
-La finalité de la partie Noeud de notre projet est d'utiliser la carte *B-L072Z-LRWAN1* ainsi que le shield *Motion-MEMS*.
-Nous devrons récupérer la valeure d'un des capteurs du shield *Motion-MEMS* et la transmettre à notre *BoxLoRa* (Passerelle + NetworkServer + Application Server).
-Nous avons choisit de récupérer les valeur de la température.
+La finalité de la partie *noeud* de notre projet est d'utiliser la carte *B-L072Z-LRWAN1* ainsi que le shield *Motion-MEMS*.
+Nous devrons récupérer la valeur d'un des capteurs du shield *Motion-MEMS* et la transmettre à notre *BoxLoRa* (Passerelle + NetworkServer + Application Server).
+Nous avons choisi de récupérer les valeurs de la température.
 
-D'un point de vue sécurité, comme nous avons préalablement chosit d'utiliser le mode d'appairage OTAA (Over The Air Activation) du protocal LoRaWAN pour notre noeud.
-Nous devons cacher une clés maitre (AES 128bit) appelé **AppKey** fin déviter l'usurpation de notre Noeud. Nous devons aussi cacher la valeur d'un compteur de trame (Frame Counter) pour eviter les attaques par rejeu.
+D'un point de vue sécurité, comme nous avons préalablement chosi d'utiliser le mode d'appairage OTAA (Over-The-Air Activation) du protocole LoRaWAN pour notre noeud.
+Nous devons cacher une clef maître (AES 128bit) appelée **AppKey** fin d'éviter l'usurpation de notre noeud. Nous devons aussi cacher la valeur d'un compteur de trame (Frame Counter) pour éviter les attaques par rejeu.
 
 Installation des outils
 ***********************
 
-Pour gagner du temps dans le dévelopement de noeud nous utilisons comme base un projet github [LoRaMAC-node]_ mettant en oeuvre le LoRaWAN sur notre carte.
-Nous développons le Noeud à partir d'une distribution *Linux* basé sur *Arch Linux*, les dépendance requisent sont : 
+Pour gagner du temps dans le dévelopement du noeud, nous utilisons comme base un projet github [LoRaMAC-node]_ mettant en oeuvre le LoRaWAN sur notre carte.
+Nous développons le noeud à partir d'une distribution *Linux* basée sur *Arch Linux*, les dépendances requises sont : 
 
 .. code-block:: bash
 
@@ -29,7 +29,7 @@ Pour utiliser le projet LoRaMAC-node dans notre projet nous avons téléchargé 
 Installation de Stlink
 ----------------------
 
-Le St-link est un programme permettant d'avoir accés au debuger des cartes conçuent par St-microelectronics, il permet entre autre de charger des programmes dans les cartes.
+Le St-link est un programme permettant d'avoir accès au debuger des cartes conçues par St-microelectronics, il permet, entre autres, de charger des programmes dans les cartes.
 
 .. code-block:: bash
 
@@ -42,7 +42,7 @@ Le St-link est un programme permettant d'avoir accés au debuger des cartes con�
 Installation de LoRaMAC-node
 ----------------------------
 
-Après avoir extrait le zip téléchargé précédement placez-vous dans le dossier LoRaMac-node-master.
+Après avoir extrait le zip téléchargé précédement, placez-vous dans le dossier LoRaMac-node-master.
 
 .. code-block:: bash
 
@@ -59,11 +59,11 @@ Après avoir extrait le zip téléchargé précédement placez-vous dans le doss
 Envoyer un programme sur la carte
 *********************************
 
-Pour développer un programme pour la carte il faut écrire le programme dans le fichier *src/apps/LoRaMac/classA/B-L072Z-LRWAN1/main.c*.
+Pour développer un programme pour la carte, il faut écrire le programme dans le fichier *src/apps/LoRaMac/classA/B-L072Z-LRWAN1/main.c*.
 
 Dans un premier temps, branchez la carte en USB par le port **CN7**.
-Ensuite placer vous dans le dossier *build*
-compiler le programme en utilisant la commande :
+Ensuite, placez vous dans le dossier *build*
+Compilez le programme en utilisant la commande :
 
 .. code-block:: bash
 
@@ -81,7 +81,7 @@ Recupérer la valeur d'un capteur
 ********************************
 
 Le shield de cateur que nous utilisons contient différents capteurs, nous utiliserons que le capteur de température (HTS221). En se rapportant à la documentation du shield [#]_ nous voyons que le capteur est relié au bus I2C.
-Pour communiquer sur un bus I2C nous avons besoins d'un mettre et d'un esclave, le maitre sera notre carte *B-L072Z-LRWAN1* et l'esclave le capteur. Pour trouver l'addresse de notre capteur nous avons consulté la documentation de celui-ci [#]_ il ait apparu que le capteur avait 2 addresses, une pour la lecture **BF** et une pour l'ecriture **BE**.
+Pour communiquer sur un bus I2C nous avons besoin d'un maître et d'un esclave, le maître sera notre carte *B-L072Z-LRWAN1* et l'esclave le capteur. Pour trouver l'addresse de notre capteur, nous avons consulté la documentation de celui-ci [#]_ il est apparu que le capteur avait 2 addresses, une pour la lecture **BF** et une pour l'ecriture **BE**.
 
 ================================= A FINIR =================================
 
