@@ -24,9 +24,15 @@
 
 2. Securisation avec les clés vidéo : https://youtu.be/S6nJzSc4iy4
 
+3. Protection de la mémoire : https://www.st.com/content/ccc/resource/training/technical/product_training/b9/d2/34/3a/59/45/47/45/STM32L4_System_Memory_Protections.pdf/files/STM32L4_System_Memory_Protections.pdf/jcr:content/translations/en.STM32L4_System_Memory_Protections.pdf
+
+4. Detail + utilisation de certaines fonctions de protection des STM : https://www.st.com/content/ccc/resource/technical/document/application_note/group0/3d/86/0f/38/1c/d4/4b/58/DM00346619/files/DM00346619.pdf/jcr:content/translations/en.DM00346619.pdf
+
+
+
 ### Dump memoire
 
-1. https://lujji.github.io/blog/reverse-engineering-stlink-firmware-part2/
+1. Dump de la mémoire d'une carte ST :https://lujji.github.io/blog/reverse-engineering-stlink-firmware-part2/
 
 ## Cours / Formation
 
