@@ -21,9 +21,8 @@ Faire un nmap pour voir ce qui est ouvert
 
 => a priori secure-boot impossible sur raspberry, se renseigner
 
----------------
-ANCIEN
----------------
+
+===========
 
 [Cours complet](http://genelaix.free.fr/IMG/pdf/presentation_lora_lorawan.pdf)
 
