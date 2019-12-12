@@ -19,7 +19,7 @@ Fermer les ports et services inutiles, réduire la surface d'attaque.
 Faire un nmap pour voir ce qui est ouvert
 
 
-
+=> a priori secure-boot impossible sur raspberry, se renseigner
 
 ---------------
 ANCIEN
