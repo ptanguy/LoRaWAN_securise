@@ -88,3 +88,5 @@ Présentationdes kits LoRa de STM : https://www.youtube.com/watch?v=MgbTraRq0K8
 ## Mise en place du Noeud
 
 https://stackforce.github.io/LoRaMac-doc/class_a_2_b-_l072_z-_l_r_w_a_n1_2main_8c-example.html
+
+code pour activer RDP sur la même carte : https://community.st.com/s/question/0D50X00009XkYMNSA3/halflashoblaunch-holding
