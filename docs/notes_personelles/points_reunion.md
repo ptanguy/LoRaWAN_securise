@@ -3,4 +3,4 @@
 - Problèmes bien cernés
 - Lecture toujours de docs
 - Avancée lente
-- 
+- Pas assez de temps pour finir
