@@ -58,3 +58,21 @@ Aller éditer manuellement le fichier bblayers.conf dans le dossier build, pour 
     apuyer sur echap
     :wq
 
+
+Maintenant, on cherche à compiler notra image, avec la commande
+
+    bitbake core-image-minimal
+
+Cependant, nous ne pouvons pas effectuer cette comande, car les modules dont dépend le projet chirpstack-gateway-os ne peuvent pas téléchargés, et bitbake en fait partie.
+
+résolution : 
+
+on a changé les sources dans le fichiers .gitmodules internet.
+hypothèse 1 : ssh bloqué par le seveur de compilation
+certains utilisent le protocoles github qui lui utilise le protocole ssh
+on a donc remplacé les url git par des url https qui n'utilisent pas le protocole ssh pour les télécharger
+
+on suit le cheminement du makefile : (détailler le contenu du fichier)
+
+    make submodules
+
