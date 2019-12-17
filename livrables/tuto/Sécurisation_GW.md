@@ -4,8 +4,8 @@ Tutoriel pour la sécurisation point à point de la passerelle.
 
 se connecter au serveur de compilation : 
 
-numeroetudiant@m1-isc-os
-motdepasse
+    numeroetudiant@m1-isc-os
+    motdepasse
 
 choisir un shell bash
 
@@ -27,7 +27,9 @@ cloner le répertoire :
 /!\ penser à faire une doc sur comment créer un OS qu'on peut flasher sur carte SD pour le mettre dans la rasp
 cf tp.pdf ex3 dans séquence de démarrage avec uboot
 
+
 on se met dans > ~/projet/os/chirpstack-gateway-os/
+
 
 on active l'environnement de build en faisant > source oe-init-build-env
 
@@ -42,4 +44,17 @@ To add additional metadata layers into your configuration please add entries to 
 "
 
 on se retrouve dans le dossier build
+
+Ajouter la layer meta-selinux, dans le dossier source
+
+    git clone https://git.yoctoproject.org/git/meta-selinux
+
+Aller éditer manuellement le fichier bblayers.conf dans le dossier build, pour l'ajouter
+
+    vim bblayers.conf
+    i (entrer en mode insertion)
+    ajouter à la fin du fichier, dans les guillemets : 
+    /home/numeroetudiant/projet/os/chirpstack-gateway-os/meta-selinux \
+    apuyer sur echap
+    :wq
 
