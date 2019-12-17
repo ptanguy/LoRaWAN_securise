@@ -90,4 +90,10 @@ on relance la compilation
 
 on obtient une erreur : 
 
-    "Layer selinux is not compatible with the core layer which only supports these series: thud (layer is compatible with zeus)
+    "Layer selinux is not compatible with the core layer which only supports these series: thud (layer is compatible with zeus)"
+
+On va donc copier notre répertoire ailleurs pour faire des essais et essayer de changer de version de yocto : nous étions sur rocko et nous passons à zeus : 
+
+    git checkout -b zeus origin/zeus
+
+Cependant erreur, nous travaillons sur le git du projet chirpstack-gateway-os donc incompatible pour les commandes.
