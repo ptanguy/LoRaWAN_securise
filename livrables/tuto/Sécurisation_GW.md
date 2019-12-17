@@ -76,3 +76,18 @@ on suit le cheminement du makefile : (détailler le contenu du fichier)
 
     make submodules
 
+Cependant, nous avons oublié de modifier également le fichier 
+
+
+git submodule init
+
+git submodule => nous montre toutes les layers .git/modules/layers
+
+ok on finit par réussir ç tout télécharger à la main
+on relance la compilation
+
+    bitbake core-image-minimal
+
+on obtient une erreur : 
+
+    "Layer selinux is not compatible with the core layer which only supports these series: thud (layer is compatible with zeus)
