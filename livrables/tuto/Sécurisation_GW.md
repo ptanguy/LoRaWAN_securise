@@ -28,20 +28,22 @@ cloner le répertoire :
 cf tp.pdf ex3 dans séquence de démarrage avec uboot
 
 
-on se met dans > ~/projet/os/chirpstack-gateway-os/
+on se met dans notre répertoire > ~/projet/os/chirpstack-gateway-os/
 
 
-on active l'environnement de build en faisant > source oe-init-build-env
+on active l'environnement de build en faisant 
+    
+    source oe-init-build-env
+
 
 renvoit : 
 
-"
-you had no conf/local.conf file. This configuration file has therefore been created for you with some default values.
-You may wish to edit it, for example, select a different machine (target hardware). See conf/local.conf for more information as common configuration options are commented.
+    "You had no conf/local.conf file. This configuration file has therefore been created for you with some default values.
+    You may wish to edit it, for example, select a different machine (target hardware). See conf/local.conf for more information as common configuration options are commented.
 
-You had no conf/bblayers.conf file. This configuration file has therefore been created for you with some default values. 
-To add additional metadata layers into your configuration please add entries to conf/bblayers.conf.
-"
+    You had no conf/bblayers.conf file. This configuration file has therefore been created for you with some default values. 
+    To add additional metadata layers into your configuration please add entries to conf/bblayers.conf."
+
 
 on se retrouve dans le dossier build
 
@@ -53,9 +55,11 @@ Aller éditer manuellement le fichier bblayers.conf dans le dossier build, pour 
 
     vim bblayers.conf
     i (entrer en mode insertion)
-    ajouter à la fin du fichier, dans les guillemets : 
+
+ajouter à la fin du fichier, dans les guillemets : 
+
     /home/numeroetudiant/projet/os/chirpstack-gateway-os/meta-selinux \
-    apuyer sur echap
+    echap
     :wq
 
 
@@ -65,12 +69,12 @@ Maintenant, on cherche à compiler notra image, avec la commande
 
 Cependant, nous ne pouvons pas effectuer cette comande, car les modules dont dépend le projet chirpstack-gateway-os ne peuvent pas téléchargés, et bitbake en fait partie.
 
-résolution : 
+Résolution : 
 
-on a changé les sources dans le fichiers .gitmodules internet.
+on a changé les sources dans le fichiers .gitmodules internet. (cf fichier commandes)
 hypothèse 1 : ssh bloqué par le seveur de compilation
 certains utilisent le protocoles github qui lui utilise le protocole ssh
-on a donc remplacé les url git par des url https qui n'utilisent pas le protocole ssh pour les télécharger
+on a donc remplacé les url git par des url https qui n'utilisent pas le protocole ssh pour les télécharger (cf. mail résolution)
 
 on suit le cheminement du makefile : (détailler le contenu du fichier)
 
@@ -78,10 +82,9 @@ on suit le cheminement du makefile : (détailler le contenu du fichier)
 
 Cependant, nous avons oublié de modifier également le fichier 
 
+    git submodule init
 
-git submodule init
-
-git submodule => nous montre toutes les layers .git/modules/layers
+    git submodule => nous montre toutes les layers .git/modules/layers
 
 ok on finit par réussir ç tout télécharger à la main
 on relance la compilation
@@ -96,4 +99,11 @@ On va donc copier notre répertoire ailleurs pour faire des essais et essayer de
 
     git checkout -b zeus origin/zeus
 
-Cependant erreur, nous travaillons sur le git du projet chirpstack-gateway-os donc incompatible pour les commandes.
+Cependant erreur, nous travaillons sur le git du projet chirpstack-gateway-os donc incompatible pour les commandes avec la version zeus.
+
++++++++++
+
+
+on passe tout le monde sur warrior (version avant derniere de yocto
+
+changer thud dans le fichier .gitmodules
