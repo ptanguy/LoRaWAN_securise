@@ -1,0 +1,117 @@
+\documentclass[a4paper, titlepage,12pt]{report}
+
+\usepackage[T1]{fontenc}      % caracteres francais
+\usepackage[latin1]{inputenc} % accents
+\usepackage[french]{babel}  % langue
+
+\usepackage{geometry}         % marges
+\usepackage{graphicx}         % images
+\usepackage{verbatim}         % texte préformaté
+
+\usepackage{pdfpages}
+\usepackage{amsmath}
+%\usepackage{underscore}
+\usepackage{hyperref}
+
+
+\title{Mise en place d'un réseau LoRaWAN sécurisé}      % renseigne le titre
+\author{François Sevaux, Arthur Le Rest}           %   "   "   l'auteur
+\date{20 décembre 2019}           %   "   "   la future date de parution
+
+\pagestyle{headings}          % affiche un rappel discret (en haut à gauche)
+                              % de la partie dans laquel on se situe
+
+\begin{document}
+%\includepdf{PageGarde/PageGarde.pdf}
+
+\paragraph{Remerciements}
+
+\tableofcontents
+\pagebreak
+
+
+\chapter{Introduction}
+\paragraph{}
+L'Internet des objets (IoT, en anglais) est un paradigme dont les premiers déploiements ont quelques années (voire plus, si l'on parle de réseau de capteurs). D'un point de vue sécurité, l'IoT a une surface d'attaque très importante, du fait du nombre de technologies, de protocoles, du type de déploiement et du nombre d'acteurs différents. Ce projet s'applique aux réseaux d'objets connectés longue porté du type LoRaWAN (Long Range Wide Area Network).
+
+\section{Contexte du projet}
+\paragraph{}
+Dans le cadre de notre première année de Master 1 (Cyber-sécurité des Systèmes Embarqués) nous avons eu l'occasion de réaliser un projet d'une durée de 2 mois en parallèle de nos cours. Nous avons choisit le projet "Création d'un réseau LoRaWAN sécurisé" car il correspond à des technologies mis en \oe{}uvre pour l'IoT, qui nous intéresses. 
+
+\section{LoRaWAN et la problématique de sécurité}
+\paragraph{}
+
+
+\chapter{Organisation}
+\section{Méthode de travail}
+\paragraph{}
+Pour gérer le projet nous utilisons un outil de versionning appelé \textit{Github}, où on y met tout le code du projet, les sources
+ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme
+de \textit{GANTT}. Nous le garderons à jour pendant toute la durée du projet. Pour avoir une gestion de projet plus précise
+(tâches à effectuer chaques semaines), nous utilisons l?onglet Project de notre repository \textit{Github}, qui utilise la méthode \textit{Kanban}. Dans cet onglet nous
+indiquons pour chaque semaine les différentes tâches à faire. Les tâches ont 3 états À faire, En cours et Fini nous
+déplaçons et nous ajoutons des tâches au cours de la semaine.
+
+Nous avons choisi une approche en spirale (méthode \textit{Agile}) pour notre organisation. En effet, sur les conseils de notre encadrant, ce modèle nous permet de d'appliquer les différentes couches de sécurisation une à une et de revenir aux étapes précédentes si besoin pour modifier et compléter le dispositif, ou de passé à une autre après avoir effectué et validé les tests.
+
+\section{Logiciels utilisé}
+\paragraph{}
+Pour gérer le versionning de notre projet nous avons utilisé \textit{Git} car c'est un des outils que l'on nous a présenté lors de nos cours et dont nous avions déjà connaissance. Pour le développement du programme du noeud, nous avons utilisé \textit{Visual Studio Code} qui est un éditeur de texte puissant et possédant plusieurs extensions facilitant la programmation dont \textit{Pycom} qui nous a permis de développer un premier noeud. Nous avons aussi utilisé \textit{STM32CubeIDE 1.0.2} pour le développement car il nous a permis d'écrire un programme simple pour tester des fonctions de sécurité. 
+
+
+
+\chapter{Réalisation}
+\paragraph{}  
+
+\section{Noeud}
+\paragraph{}
+
+\subsection{Tests Unitaire}
+\paragraph{}
+
+\subsection{Tests Intégration}
+\paragraph{}
+
+\subsection{Problèmes rencontré}
+\paragraph{}
+
+\subsection{Conclusion}
+\paragraph{}
+
+\section{Passerelle}
+\paragraph{}
+
+\subsection{Tests Unitaire}
+\paragraph{}
+
+\subsection{Tests Intégration}
+\paragraph{}
+
+\subsection{Problèmes rencontré}
+\paragraph{}
+
+\subsection{Conclusion}
+\paragraph{}
+
+\chapter{Conclusion}
+
+
+%============================ Fin doc =======================================
+
+\listoffigures
+%\listoftables	%Table des tableau
+\pagebreak
+
+%============================ Annexes =======================================
+\pagebreak
+\appendix	%Signifi que les paragraphes suivant serons des annexes
+\chapter{Protocole caractérisation
+flexiForce}
+%==================================== Fin ANNEXES =============================
+
+\pagebreak
+\pagebreak
+\bibliography{biblio} 
+\bibliographystyle{plain}
+
+\end{document}
