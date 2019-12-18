@@ -45,25 +45,35 @@ Dans le cadre de notre première année de Master 1 (Cyber-sécurité des Systèmes E
 \chapter{Organisation}
 \section{Méthode de travail}
 \paragraph{}
-Pour gérer le projet nous utilisons un outil de versionning appelé \textit{Github}, où on y met tout le code du projet, les sources
-ainsi que la documentation. Pour nous organiser tout au long de la période du projet nous avons créé un diagramme
-de \textit{GANTT}. Nous le garderons à jour pendant toute la durée du projet. Pour avoir une gestion de projet plus précise
-(tâches à effectuer chaques semaines), nous utilisons l?onglet Project de notre repository \textit{Github}, qui utilise la méthode \textit{Kanban}. Dans cet onglet nous
-indiquons pour chaque semaine les différentes tâches à faire. Les tâches ont 3 états À faire, En cours et Fini nous
-déplaçons et nous ajoutons des tâches au cours de la semaine.
+Pour gérer les modifications du projet nous avons utilisé un outil de versionning appelé \textit{Github}, celui-ci nous permet de stocker les programmes ainsi que les différents documents nécessaire au projet.
+Pour nous organiser tout au long de la période du projet nous avons établi un diagramme de \textit{GANTT}. Nous avons gardé à jour pendant toute la durée du projet. Pour avoir une gestion de projet plus précise (tâches à effectuer chaque semaines), nous avons utilisé l'onglet \textit{Project} de notre \textit{repository} \textit{Github}, qui utilise un tableau de \textit{Kanban}. Dans cet onglet nous indiquions pour chaque semaine, les différentes tâches à faire. Les tâches ont 3 états \textit{À faire}, \textit{En cours} et \textit{Fini} nous déplacions les taches d'une colonne à l'autre en fonction de leurs statu, nous ajoutions aussi de nouvelles tâches au cour de la semaine si besoin.
 
-Nous avons choisi une approche en spirale (méthode \textit{Agile}) pour notre organisation. En effet, sur les conseils de notre encadrant, ce modèle nous permet de d'appliquer les différentes couches de sécurisation une à une et de revenir aux étapes précédentes si besoin pour modifier et compléter le dispositif, ou de passé à une autre après avoir effectué et validé les tests.
+Nous avons choisi une approche en spirale (méthode \textit{Agile}) pour notre organisation vis à vis du développement. En effet, sur les conseils de notre encadrant, ce modèle nous permet de d'appliquer les différentes couches de sécurisation une à une et de revenir aux étapes précédentes si besoin pour modifier et compléter le dispositif, ou de passé à une autre après avoir effectué et validé des tests.
 
-\section{Logiciels utilisé}
+\section{Logiciels utilisés}
 \paragraph{}
-Pour gérer le versionning de notre projet nous avons utilisé \textit{Git} car c'est un des outils que l'on nous a présenté lors de nos cours et dont nous avions déjà connaissance. Pour le développement du programme du noeud, nous avons utilisé \textit{Visual Studio Code} qui est un éditeur de texte puissant et possédant plusieurs extensions facilitant la programmation dont \textit{Pycom} qui nous a permis de développer un premier noeud. Nous avons aussi utilisé \textit{STM32CubeIDE 1.0.2} pour le développement car il nous a permis d'écrire un programme simple pour tester des fonctions de sécurité. 
+Pour gérer le versionning de notre projet nous avons utilisé \textit{Git} car c'est un des outils que l'on nous a présenté lors de nos cours et dont nous avions déjà connaissance. Pour le développement du programme du n\oe{}ud, nous avons utilisé \textit{Visual Studio Code} qui est un éditeur de texte puissant et possédant plusieurs extensions facilitant la programmation dont \textit{Pycom} qui nous a permis de développer un premier n\oe{}ud. Nous avons aussi utilisé \textit{STM32CubeIDE 1.0.2} pour le développement sur carte car il nous a permis d'écrire un programme simple pour implémenter des fonctions de sécurité. Pour le debugage et le tests des fonctions de sécurité nous avons utilisé \textit{St-Link} et \textit{St-Link Utility} qui permettent de lire et de voir les \textit{bytes} d'option d'un microcontrôleur STM32, de plus \textit{ST-Link Utility} est disponibles uniquement sur Windows que nous avons du utilisé \oe{}uvre via une machine virtuelle supervisé par le logiciel \textit{VirtualBox}. Pour effectuer le reverse engineering des binaires extrait de la mémoire par le biais de \textit{St-Link} nous avons utilisé le logiciel \textit{Ghidra} car c'est un logiciel que les Master 2 ont utilisé et c'est le seul logiciel de reverse engineering que nous connaissions.
+
+Pour mettre en place la \textit{Box LoRa} (passerelle, network server et application server) nous utilisons l'OS \textit{ChirpStack} car il permet d'utiliser et de de configurer facilement ces 3 services du LoRaWAN de plus il peut être utilisé sur la Raspberry Pi qui nous sert de support pour cette partie du projet. 
+
+Pour finir avons utilisé comme OS Linux et plus précisement les distributions \textit{Manjaro} qui est basé sur \textit{Arch Linux} et \textit{Xubuntu} qui est basé sur \textit{Ubuntu} qui est lui même basé sur \textit{Debian}
+
+\section{Répartition des tâches}
+\paragraph{}
+Pour ce projet nous sommes deux étudiants, dans la première partie du projet (premier mois) nous avons tout deux étudié le LoRaWAN car nous n'avions pas de connaissances sur ce sujet auparavant. Pour valider nos connaissances acquises durant cette étape de recherche nous avons mis en place un démonstrateur à présenter à notre deuxième jalon .
+
+A la reprise du projet en décembre, nous avons chacun travaillé sur une partie différente du projet. François  à travaillé sur la sécurisation de la \textit{Box LoRa} et Arthur sur la sécurisation du n\oe{}ud.
+
+La Box LoRa est appareil permettant d'utiliser plusieurs services, un service LoRaWAN mais peut aussi contenir des services de mail par exemple. L'objectif de cette partie est d'empêcher un utilisateur d'avoir accès aux ressources d'un autre. Par exemple, le service mail ne doit pas interférer avec le service LoRaWAN. Pour cela il a fallu apporté des modifications à l'OS \textit{ChirpStack}.
+
+Le n\oe{}ud LoRaWAN à besoins de clés pour ce connecter au réseau, qu'il doit dans notre cas stocker dans sa mémoire. Si un attaquant parvint à récupérer ces clés, il pourra  espionner le trafic LoRaWAN ou connecter sont propre n\oe{}ud à la place du nôtre. Pour sécurisé ces clés il a fallu utiliser des solutions de sécurité déjà présentes dans le micro contrôleur ou utiliser un composant de sécurité pour stocker les clés.
 
 
 
 \chapter{Réalisation}
 \paragraph{}  
 
-\section{Noeud}
+\section{N\oe{}ud}
 \paragraph{}
 
 \subsection{Tests Unitaire}
