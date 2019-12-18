@@ -66,15 +66,81 @@ A la reprise du projet en décembre, nous avons chacun travaillé sur une partie d
 
 La Box LoRa est appareil permettant d'utiliser plusieurs services, un service LoRaWAN mais peut aussi contenir des services de mail par exemple. L'objectif de cette partie est d'empêcher un utilisateur d'avoir accès aux ressources d'un autre. Par exemple, le service mail ne doit pas interférer avec le service LoRaWAN. Pour cela il a fallu apporté des modifications à l'OS \textit{ChirpStack}.
 
-Le n\oe{}ud LoRaWAN à besoins de clés pour ce connecter au réseau, qu'il doit dans notre cas stocker dans sa mémoire. Si un attaquant parvint à récupérer ces clés, il pourra  espionner le trafic LoRaWAN ou connecter sont propre n\oe{}ud à la place du nôtre. Pour sécurisé ces clés il a fallu utiliser des solutions de sécurité déjà présentes dans le micro contrôleur ou utiliser un composant de sécurité pour stocker les clés.
+Le n\oe{}ud LoRaWAN à besoins de clés pour ce connecter au réseau, qu'il doit dans notre cas stocker dans sa mémoire. Si un attaquant parvint à récupérer ces clés, il pourra  espionner le trafic LoRaWAN ou connecter sont propre n\oe{}ud à la place du nôtre. Pour sécurisé ces clés il a fallu utiliser des solutions de sécurité déjà présentes dans le microcontrôleur ou utiliser un composant de sécurité pour stocker les clés.
 
 
 
-\chapter{Réalisation}
+\chapter{Réalisation et Tests}
 \paragraph{}  
+
+Au cours de ce projet nous devions effectué 3 réalisations, un démonstrateur, un n\oe{}ud sécurisé et une \textit{Box LoRa} sécurisé.
+
+
+
+\section{Démonstrateur}
+\paragraph{}
+Comme nous l'avons dis dans le chapitre précédant nous avons dans un premier temps réalisé un démonstrateur non sécurisé d'un réseau LoRaWAN. Le but était d'utiliser nos connaissances du LoRaWAN et de les démontrer lors d'une présentation. Pour créer ce démonstrateur nous avons utiliser l'OS \textit{ChirpStack}\cite{chirpstarksite} sur la \textit{Raspberry Pi} équipé de son \textit{shield} antenne \textit{iC880A} pour le n\oe{}ud nous avons utilisé la carte \textit{Fipy}\cite{fipysite} avec sont \textit{shield} \textit{PySence}.
+
+L'OS ChirpStack permet de mettre très facilement un réseau LoRaWAN en fonctionnement car il intègre déjà les différents services de passerelle, serveur réseau et serveur d'application. Ces différents service sont aussi facilement configurable grâce à une interface web.
+
+La carte \textit{Fipy}, est une carte de développement orienté pour l'utilisation de réseau sans fils comme WiFi, Bluetooth ou LoRaWAN. Cette carte ce programme en \textit{Python} avec l'extension \textit{Pymakr} pour les éditeur de text \textit{Atom} et \textit{Visual Studio Code}.
+Elle nous a permis de créer le noeud LoRaWAN facilement car la documentation donne des exemples pour ce type de programme.
+
+Lors du développement de ce démonstrateur, nous n'avons pas eu de problèmes particulier autre que des problèmes de configuration de l'extension \textit{Pymakr}.
+
+En fonctionnement le n\oe{}ud envoyait une chaine de caractère à la passerelle puis on lisait cette chaine caractère grâce au serveur d'application. 
 
 \section{N\oe{}ud}
 \paragraph{}
+Pour le rendu final du projet le n\oe{}ud doit fonctionner sur une carte B-L072Z-LRWAN1\cite{cartelora} qui est une carte de découverte produite par STmicroelectronics orienté pour le développement de solutions basées sur des réseaux \textit{LoRaWAN} ou \textit{SigFox}. Cette carte est équipé d'une MCU \textit{STM32L072CZ} qui est basé sur un Arm Cortex M0+.
+
+Pour rappelle, dans l'architecture LoRaWAN, le rôle du n\oe{}ud est de transmettre une information qui serra traité par l'application server.
+Dans le cadre de notre scénario le campus connecté, nous transmettons une donnée publique qui est la température. Nous nous sommes donc concentré, sur l'authentification du n\oe{}ud LoRaWAN et l'intégrité de la donnée.
+
+Pour cela nous devions éviter que notre n\oe{}ud soit remplacé par un autre n\oe{}ud lequel pourrait envoyer des informations erronées.
+
+\subsection{Surface d'attaque du n\oe{}ud}
+\paragraph{}
+Sur la figure \ref{Schéma vecteur attaque B-L072Z-LRWAN1} vous pouvez voir les différents composant autour de notre programme.
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.75]{img/eps/ModeledemenaceNoued.eps}
+\caption{Schéma présentant les différents éléments autour de la carte B-L072Z-LRWAN1}
+\label{Schéma vecteur attaque B-L072Z-LRWAN1}
+\end{figure}
+
+Il y a plusieurs vecteur d'attaque possible dans nôtre cas, chaque points de la figure \ref{Schéma vecteur attaque B-L072Z-LRWAN1} est un cible potentielle :
+
+\begin{enumerate}
+\item Changer le mode de démarrage pour utiliser un autre programme que celui contenu dans la mémoire Flash et avoir accès à tout les contenu du micro contrôleur.
+\item Accès à des parties du programme sensibles pour les copier ou les voler
+\item Utilisation de faille dans la SRAM comme un buffer overflow pour voler des information de dans ou provoquer un dénie de service sur la carte.
+\item L'observation des communications et/ou usurpation des appareils du réseau
+\item Un attaquant pourrait remplacer le \textit{shield} contenant les capteurs pour envoyer des fausses valeurs et mettre dans un état non déterminé.
+\item Utilisation des ports de debugages pour avoir un accès complet au micro contrôleur.
+\item Utilisation des Interfaces de communication pour avoirs accès au micro contrôleur
+\end{enumerate}
+
+Pour chacune des attaques ci-dessus on peut trouver une ou plusieurs contremesures:
+\begin{enumerate}
+\item Autoriser qu'un seul mode de démarrage. Désactiver le démarrage depuis le port de débugage
+\item Mettre la mémoire en mode execution only. Utilisé une MPU(Memory protection unit). Créer des zones mémoires sécurisé
+\item Utilisé une MPU(Memory protection unit). Créer des zones mémoires sécurisé
+\item Chiffrer et signer les communications.
+\item Utilisation d'un système pouvant détecter une intrusion au niveau de la carte.
+\item Désactiver les fonctionnalités de débugage
+\item Rendre les interfaces de communications difficiles d'accès. Desactivé les interfaces si on ne les utilises pas.
+\end{enumerate}
+
+Pour ce projet nous nous sommes concentré sur deux types d'attaques, la première \textbf{Une lecture de la mémoire (Dump mémoire)} et la deuxième \textbf{Accès à la mémoire par une partie du programme non autorisé}
+
+Nous avons commencer par faire des recherche sur quel méthode de connexion était la plus intéressante à sécuriser par rapport à nôtres scénario. 
+
+Le protocole LoRaWAN permet à un n\oe{}ud de ce connecter de 2 façons différentes, OTAA (Over The Air Activation), ABP (Activation by personalization). 
+
+\subsection{N\oe{}ud LoRaWAN avec une carte B-L072Z-LRWAN1}
+\paragraph{}
+Dans un premier temps nous avons trouvé un projet sur github qui permet d'utiliser cette facilement pour le LoRaWAN.
 
 \subsection{Tests Unitaire}
 \paragraph{}

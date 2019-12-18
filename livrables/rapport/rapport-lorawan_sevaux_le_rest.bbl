@@ -1,3 +1,19 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{chirpstarksite}
+Orne Brocaar.
+\newblock Chirpstack.
+\newblock \url{https://www.chirpstack.io/}.
+
+\bibitem{fipysite}
+Pycom.
+\newblock Fipy.
+\newblock \url{https://pycom.io/product/fipy/}.
+
+\bibitem{cartelora}
+STMicroelectronics.
+\newblock B-l072z-lrwan1.
+\newblock
+  \url{https://www.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-mpu-eval-tools/stm32-mcu-mpu-eval-tools/stm32-discovery-kits/b-l072z-lrwan1.html}.
 
 \end{thebibliography}
