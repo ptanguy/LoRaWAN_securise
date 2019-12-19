@@ -233,7 +233,7 @@ Pour cela nous effectuons un dump de la mémoire à l'aide du logiciel \textit{St-
 \label{Clé1figure4}
 \end{figure}
 
-Pour être sur que nous trouvions bien la clés et pas des variables aléatoire formant la même suite nous avons essayé avec trois clés différente et nous cherchions à chaque fois les 3 clés, pour être sur que celle trouvé ne soit pas une coïncidence.
+Pour être sur que nous trouvions bien la clés et pas des variables aléatoire formant la même suite nous avons essayé avec trois clés différente et nous cherchions à chaque fois les 3 clés, pour être sur que celle trouvé ne soit pas une coïncidence. Vous pouvez trouver en Annexe \ref{notedumpmemoire} les conclusions et note sur les \textit{dump} de la mémoire.
 \pagebreak
 
 \subsection{Problèmes rencontré}
@@ -295,7 +295,7 @@ Pour la suite du projet il nous restera à trouver comment stocker une fonction à
 
 Il nous restera aussi à utiliser le \textit{Firewall} si besoins car il faudra faire une étude de besoins pour vérifier si \textit{PCROP} n'est pas suffisant dans nôtres cas.
 
-
+La partie n\oe{}ud nous a permis de découvrir les différentes solutions de sécurité intégrés aux micro contrôleurs STM32.
 \section{Passerelle}
 \paragraph{}
 
@@ -323,7 +323,42 @@ Il nous restera aussi à utiliser le \textit{Firewall} si besoins car il faudra f
 %============================ Annexes =======================================
 \pagebreak
 \appendix	%Signifi que les paragraphes suivant serons des annexes
-\chapter{Première Annexe}
+\chapter{Notes sur les différents dump de la mémoire}
+\label{notedumpmemoire}
+
+\section{Test Dump mémoire STM32}
+\paragraph{}
+Pour ces tests nous utilisons 3 clés différentes pour chaque tests. Afin de vérifier que nous trouvons bien la clés et pas des valeurs similaire trouvé dans la mémoire.
+
+\begin{itemize}
+\item \textbf{Clef 1} : 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C
+\item \textbf{Clef 2} : 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x5F, 0x3C
+\item \textbf{Clef 3} : 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x3F, 0x3C
+\end{itemize}
+
+\begin{table}[]
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+Nom du test  & Programme     & Clés   & Nb clés 1 & Nb 2 & Nb 3 \\ \hline
+Validation 1 & LoRaMAC       & Clés 1 & 5         & 0    & 0    \\ \hline
+Validation 2 & LoRaMAC       & Clés 2 & 3         & 2    & 0    \\ \hline
+Validation 3 & LoRaMAC       & Clés 3 & 3         & 0    & 2    \\ \hline
+Validation 4 & ProgrammeTest & Clés 1 & 1         & 0    & 0    \\ \hline
+Validation 5 & ProgrammeTest & Clés 2 & 0         & 1    & 0    \\ \hline
+Validation 6 & ProgrammeTest & Clé 3  & 0         & 0    & 1    \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Conclusions sur les validations}
+\paragraph{}
+On remarque que à chaque fois nous avons pu retrouver la/les clef(s) dans la mémoire en utilisant le debugger.
+Si l'on trouve plusieurs clés pour le programme LoRaMAC c'est car nous avons modifier à chaque fois uniquement les 2 clefs de sessions nécessaires. Le programme LoRaMAC mais en ?uvre 5 clefs au total.
+
+Lorsque l'on met en place la sécurité : \textit{RDP} de niveau 1, il n'est alors plus possible d'utiliser les ports de debugage pour venir lire la mémoire.
+
+On remarque qu'il est facile de lire la mémoire d'un micro contrôleur pour un attaquant et qu'il est donc important de verrouiller les ports de debug.
+
+Il faut aussi noter que pour passer d'un niveau RDP 1 à RDP 0, le procédé est tout aussi facile avec l'utilitaire st-link utility, bien qu'il efface intégralement la mémoire et efface donc le programme qu'elle contient.
 %==================================== Fin ANNEXES =============================
 
 \pagebreak

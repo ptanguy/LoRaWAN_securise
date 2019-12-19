@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.12.11)  19 DEC 2019 17:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.12.11)  19 DEC 2019 18:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -514,7 +514,7 @@ to.pdf>
 d-eps-converted-to.pdf img/eps/ModeledemenaceNoued.eps>
 (epstopdf)             \includegraphics on input line 106.
 Package epstopdf Info: Output file is already uptodate.
-<img/eps/ModeledemenaceNoued-eps-converted-to.pdf, id=172, 533.995pt x 252.945p
+<img/eps/ModeledemenaceNoued-eps-converted-to.pdf, id=182, 533.995pt x 252.945p
 t>
 File: img/eps/ModeledemenaceNoued-eps-converted-to.pdf Graphic file (type pdf)
 <use img/eps/ModeledemenaceNoued-eps-converted-to.pdf>
@@ -536,7 +536,7 @@ es_CodeNonSecure-eps-converted-to.pdf img/eps/FLUO+RechercheDeCles_CodeNonSecur
 e.eps>
 (epstopdf)             \includegraphics on input line 231.
 Package epstopdf Info: Output file is already uptodate.
-<img/eps/FLUO+RechercheDeCles_CodeNonSecure-eps-converted-to.pdf, id=242, 964.6
+<img/eps/FLUO+RechercheDeCles_CodeNonSecure-eps-converted-to.pdf, id=252, 964.6
 0374pt x 443.6575pt>
 File: img/eps/FLUO+RechercheDeCles_CodeNonSecure-eps-converted-to.pdf Graphic f
 ile (type pdf)
@@ -564,7 +564,7 @@ Package epstopdf Info: Source file: <img/eps/OptionByteWindows.eps>
 eps-converted-to.pdf img/eps/OptionByteWindows.eps>
 (epstopdf)             \includegraphics on input line 263.
 Package epstopdf Info: Output file is already uptodate.
-<img/eps/OptionByteWindows-eps-converted-to.pdf, id=264, 405.515pt x 260.975pt>
+<img/eps/OptionByteWindows-eps-converted-to.pdf, id=275, 405.515pt x 260.975pt>
 
 File: img/eps/OptionByteWindows-eps-converted-to.pdf Graphic file (type pdf)
 <use img/eps/OptionByteWindows-eps-converted-to.pdf>
@@ -581,7 +581,7 @@ Package epstopdf Info: Source file: <img/eps/PCROPVerif.eps>
 verted-to.pdf img/eps/PCROPVerif.eps>
 (epstopdf)             \includegraphics on input line 273.
 Package epstopdf Info: Output file is already uptodate.
-<img/eps/PCROPVerif-eps-converted-to.pdf, id=266, 400.49625pt x 325.215pt>
+<img/eps/PCROPVerif-eps-converted-to.pdf, id=277, 400.49625pt x 325.215pt>
 File: img/eps/PCROPVerif-eps-converted-to.pdf Graphic file (type pdf)
 <use img/eps/PCROPVerif-eps-converted-to.pdf>
 Package pdftex.def Info: img/eps/PCROPVerif-eps-converted-to.pdf  used on input
@@ -603,7 +603,7 @@ rted-to.pdf>
 rOPRDP-eps-converted-to.pdf img/eps/TestDintegrationPCrOPRDP.eps>
 (epstopdf)             \includegraphics on input line 285.
 Package epstopdf Info: Output file is already uptodate.
-<img/eps/TestDintegrationPCrOPRDP-eps-converted-to.pdf, id=280, 381.425pt x 658
+<img/eps/TestDintegrationPCrOPRDP-eps-converted-to.pdf, id=291, 381.425pt x 658
 .46pt>
 File: img/eps/TestDintegrationPCrOPRDP-eps-converted-to.pdf Graphic file (type 
 pdf)
@@ -628,9 +628,13 @@ Chapitre 4.
 
 ]
 Annexe A.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 339.
+
 [20
 
-] (./rapport-lorawan_sevaux_le_rest.bbl
+] [21] (./rapport-lorawan_sevaux_le_rest.bbl
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
 .
 
@@ -654,24 +658,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 19--23
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 334.
- [21
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 369.
+ [22
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 334.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 369.
  (./rapport-lorawan_sevaux_le_rest.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 334.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 334.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 369.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 369.
 Package rerunfilecheck Info: File `rapport-lorawan_sevaux_le_rest.out' has not 
 changed.
-(rerunfilecheck)             Checksum: F74F758BDABD54C22A29B11F72EF8ACA;1624.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 334.
+(rerunfilecheck)             Checksum: D6110AB51374C04A5C149A047401C5FF;1814.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 369.
  ) 
 Here is how much of TeX's memory you used:
- 9106 strings out of 492167
- 131192 string characters out of 6131557
- 251706 words of memory out of 5000000
- 13211 multiletter control sequences out of 15000+600000
+ 9116 strings out of 492167
+ 131319 string characters out of 6131557
+ 251774 words of memory out of 5000000
+ 13216 multiletter control sequences out of 15000+600000
  17244 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  40i,8n,45p,1347b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -685,10 +689,10 @@ onts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/publ
 ic/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfs
 l1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr
 /share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on rapport-lorawan_sevaux_le_rest.pdf (21 pages, 383071 bytes).
+Output written on rapport-lorawan_sevaux_le_rest.pdf (22 pages, 388788 bytes).
 PDF statistics:
- 411 PDF objects out of 1000 (max. 8388607)
- 363 compressed objects within 4 object streams
- 116 named destinations out of 1000 (max. 500000)
- 218 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 429 PDF objects out of 1000 (max. 8388607)
+ 380 compressed objects within 4 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 234 words of extra memory for PDF output out of 10000 (max. 10000000)
 

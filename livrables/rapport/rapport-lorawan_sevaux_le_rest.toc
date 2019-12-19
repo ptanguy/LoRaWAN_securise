@@ -63,4 +63,8 @@
 \contentsline {subsection}{\numberline {3.3.4}Conclusion}{17}{subsection.3.3.4}% 
 \contentsline {paragraph}{}{17}{section*.42}% 
 \contentsline {chapter}{\numberline {4}Conclusion}{18}{chapter.4}% 
-\contentsline {chapter}{\numberline {A}Premi\`ere Annexe}{20}{appendix.A}% 
+\contentsline {chapter}{\numberline {A}Notes sur les diff\'erents dump de la m\'emoire}{20}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}Test Dump m\'emoire STM32}{20}{section.A.1}% 
+\contentsline {paragraph}{}{20}{section*.44}% 
+\contentsline {subsection}{\numberline {A.1.1}Conclusions sur les validations}{20}{subsection.A.1.1}% 
+\contentsline {paragraph}{}{20}{section*.45}% 
