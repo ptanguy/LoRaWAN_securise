@@ -25,6 +25,7 @@
 %\includepdf{PageGarde/PageGarde.pdf}
 
 \paragraph{Remerciements}
+
 \tableofcontents
 \pagebreak
 
@@ -219,6 +220,7 @@ La \textbf{PCROP} permet de sécuriser la mémoires par secteur\footnote{La taille
 \paragraph{Firewall}
 Comme le \textbf{PCROP}, le \textbf{Firewall} protège des secteur de la mémoire définit à l'initialisation du programme. Le \textbf{Firewall} est un composant physique qui va contrôler les et filtrer les accès entre 3 parties : La zone du Code dans la mémoire Flash, une zone de mémoire volatile dans SRAM et une zone de mémoire non volatile dans la Flash. L'accès à un code sécurisé par un \textbf{Firewall} ce fais par une seule fonction, si une autre fonction essaie d'accéder à ce code, le \textbf{Firewall} générera un \textit{reset} de la carte
 
+<<<<<<< HEAD
 \paragraph{Mass Erase}
 Avant d'implanter ces contres mesures dans un programme nous avons chercher comment es désactiver pour éviter d'être bloqué avec une carte non utilisable et ainsi pouvoir effectuer plusieurs tests. Pour pour pouvoir passer du niveau \textbf{RDP} 1 à 0 et pour désactiver \textbf{PCROP}, il faut effectuer un \textit{mass erase} sur la carte ce qui à pour conséquence de mettre toute les mémoire Flash et SRAM à 0. Pour effectuer une mass erase il y a deux possibilité, la première et d'écrire une fonction faisant un \textit{mass erase} dans la RAM et la deuxième est d'utiliser l'utilitaire \textit{ST-link utility} qui permet de faire en autre ce genre d'opération sans avoir à les programmer.
 
@@ -275,6 +277,10 @@ Pour vérifier si \textit{PCROP} a bien été implémenté il faut brancher la carte 
 \label{SecuSecteur}
 \end{figure}
 \pagebreak
+=======
+\subsection{Tests Unitaire}
+\paragraph{}
+>>>>>>> ef97e00a76469d9e865d03e526227841a59b48d3
 
 \subsection{Tests Intégration}
 \paragraph{}
@@ -288,6 +294,8 @@ Le tests d'intégrations effectué jusqu'à présent est la mise en fonctionnement d
 \end{figure}
 \pagebreak
 
+\subsection{Problèmes rencontré}
+\paragraph{}
 
 \subsection{Conclusion}
 \paragraph{}
