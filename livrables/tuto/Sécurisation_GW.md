@@ -107,3 +107,11 @@ Cependant erreur, nous travaillons sur le git du projet chirpstack-gateway-os do
 on passe tout le monde sur warrior (version avant derniere de yocto
 
 changer thud dans le fichier .gitmodules
+
+exemple : 
+
+    [submodule "layers/bsp/meta-raspberrypi"]
+	path = layers/bsp/meta-raspberrypi
+	url = git://git.yoctoproject.org/meta-raspberrypi
+	branch = thud
+
