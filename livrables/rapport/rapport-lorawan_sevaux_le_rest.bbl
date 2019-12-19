@@ -5,6 +5,11 @@ Orne Brocaar.
 \newblock Chirpstack.
 \newblock \url{https://www.chirpstack.io/}.
 
+\bibitem{loramacnode}
+Lora net /~Semtech.
+\newblock Loramac-node.
+\newblock \url{https://github.com/Lora-net/LoRaMac-node}.
+
 \bibitem{fipysite}
 Pycom.
 \newblock Fipy.

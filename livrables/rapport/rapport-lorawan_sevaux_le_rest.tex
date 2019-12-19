@@ -92,7 +92,7 @@ En fonctionnement le n\oe{}ud envoyait une chaine de caractère à la passerelle p
 
 \section{N\oe{}ud}
 \paragraph{}
-Pour le rendu final du projet le n\oe{}ud doit fonctionner sur une carte B-L072Z-LRWAN1\cite{cartelora} qui est une carte de découverte produite par STmicroelectronics orienté pour le développement de solutions basées sur des réseaux \textit{LoRaWAN} ou \textit{SigFox}. Cette carte est équipé d'une MCU \textit{STM32L072CZ} qui est basé sur un Arm Cortex M0+.
+Pour le rendu final du projet le n\oe{}ud doit fonctionner sur une carte B-L072Z-LRWAN1\cite{cartelora} qui est une carte de découverte produite par STmicroelectronics orienté pour le développement de solutions basées sur des réseaux \textit{LoRaWAN} ou \textit{SigFox}. Cette carte est équipé d'une MCU \textit{STM32L072CZ} qui est basé sur une architecture Arm Cortex M0+.
 
 Pour rappelle, dans l'architecture LoRaWAN, le rôle du n\oe{}ud est de transmettre une information qui serra traité par l'application server.
 Dans le cadre de notre scénario le campus connecté, nous transmettons une donnée publique qui est la température. Nous nous sommes donc concentré, sur l'authentification du n\oe{}ud LoRaWAN et l'intégrité de la donnée.
@@ -134,13 +134,97 @@ Pour chacune des attaques ci-dessus on peut trouver une ou plusieurs contremesur
 
 Pour ce projet nous nous sommes concentré sur deux types d'attaques, la première \textbf{Une lecture de la mémoire (Dump mémoire)} et la deuxième \textbf{Accès à la mémoire par une partie du programme non autorisé}
 
-Nous avons commencer par faire des recherche sur quel méthode de connexion était la plus intéressante à sécuriser par rapport à nôtres scénario. 
+Nous avons commencé par faire des recherches sur quel méthode de connexion était la plus intéressante à sécuriser par rapport à nôtres scénario. 
 
-Le protocole LoRaWAN permet à un n\oe{}ud de ce connecter de 2 façons différentes, OTAA (Over The Air Activation), ABP (Activation by personalization). 
+Le protocole LoRaWAN permet à un n\oe{}ud de ce connecter de deux façons différentes, \textbf{OTAA} (Over The Air Activation), \textbf{ABP} (Activation by personalization). 
+
+\subsubsection{Fonctionnement activation OTAA}
+\paragraph{}
+L'activation par \textbf{OTAA} met en jeux \textit{DevEUI}, \textit{AppEUI}, \textit{AppKey}  pour ce connecter à la \textit{gateway} puis utilise \textit{AppSKey} et \textit{NetSKey} pour chiffrés la communication jusqu'à l'\textit{application server}.
+Le protocole LoRaWAN ne précise pas si les clés doivent être stocké en clair dans la mémoire ou doivent être chiffrés. Il faut \textit{AppSKey} et \textit{NetSKey} sont renouvelé à chaque 
+Si un attaquant arrive à obtenir les trois premières clés alors, il pourra usurpé l'identité de notre n\oe{}ud. S'il parvint à obtenir les deux autres clés, il pourra uniquement déchiffrer l'information.
+
+\subsubsection{Fonctionnement activation ABP}
+\paragraph{}
+L'activation par personnalisation met en \oe{}uvre \textit{DevAddr}, \textit{NwkSKey} et \textit{AppSKey} ces deux dernière sont les clés permettant de chiffrer la communication ainsi, si un attaquant les récupères, il peut tout aussi bien usurper l'identité de notre n\oe{}ud que lire les informations envoyés.
+
+\subsubsection{Analyse des risques, pour la connexion d'un n\oe{}ud à un réseau LoRaWAN}
+\paragraph{}
+
+Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Cela veut dire que si un attaquant fait un \textit{dump} de la mémoire, il va pouvoir trouver facilement les clés.
+On remarque ensuite, que l'utilisation de l'activation par \textbf{OTAA} est plus sécurisé car elle utilise plus de clés et en renouvelle 2 à chaque connexions. La connexions par \textbf{ABP} est moins sécurisé car elle utilise uniquement trois clés, dont deux qui peuvent aussi permettre l'écoutes de la communication.
+
+Dans le scénario que nous utilisons nous n'avons pas besoins de dissimuler l'information transmise, donc obtenir \textit{NetSKey} et \textit{AppSKey} lors d'une activation \textbf{OTAA} nous importe peut.
+
+D'un point de vue technique le nombre de clés à récupérer par attaquant pour usurper l'identité de notre n\oe{}ud est le même d'un mode d'activation à l'autre.
+Nous avons choisit d'utiliser et de protéger le mode d'activation \textbf{ABP}, car si un attaquant arrive à obtenir les clés il pourra lire les informations transmises et/ou usurpé l'identité de nôtres n\oe{}ud, de plus nous trouvons intéressant de pouvoir observer les trames LoRaWAN ce propager dans l'air à l'aide d'un analyseur de spectre et de pouvoir les décodé avec un logiciel comme \textit{GNURadio}.
 
 \subsection{N\oe{}ud LoRaWAN avec une carte B-L072Z-LRWAN1}
 \paragraph{}
-Dans un premier temps nous avons trouvé un projet sur github qui permet d'utiliser cette facilement pour le LoRaWAN.
+Le premier objectif que nous nous sommes fixé était de créer un n\oe{}ud LoRaWAN non sécurisé comme l'on avait fait avec le démonstrateur.
+
+Pour cela nous avons trouvé le projet \textit{LoRaMac-node}\cite{loramacnode}  sur \textit{Github}, qui est un projet permettant de configurer facilement un n\oe{}ud LoRaWAN avec des cartes de développement dont la carte B-L072Z-LRWAN1 que nous utilisons. 
+
+...................................................................
+
+...................................................................
+
+...................................................................
+
+
+Dire qu'il utilise c'est propres fonctions et pas les fonction HAL
+
+
+\subsection{Sécurisation carte STM32}
+\paragraph{}
+Comme nous l'avons dit précédemment, le n\oe{}ud doit pouvoir stocker de manière sécuriser des clés. Pour cela nous avons deux solutions, stocker les clés dans un élément sécurisé ou les stocker dans la mémoire du micro contrôleur de manière sécurisé.
+
+Nous avons choisit dans un premier temps de stocker les clés dans la mémoire, afin d'éviter d'utiliser un élément de sécurisé qui pourrait augmenter le coûts de notre projet, et sa consommation d'énergie. Cependant si les mesures de sécurité offertes par cette première solution ne sont pas suffisantes nous pouvions dans un second temps utiliser un élément de sécurité.
+
+\subsubsection{Fonctions de sécurité dans les MCU STM32L0}
+\paragraph{}
+Dans un premier temps de recherche nous avons trouvé que les MCU STM32L0 contenait déjà des contres mesures pour différents types d'attaques, prêtes a l'emploi à l'aide de fonctions \textit{HAL}\footnote{Hardware Abstraction Layer}
+
+Vous pouvez trouver la liste des protection présentes dans notre MCU ci-dessous :
+
+\begin{itemize}
+\item \textbf{RDP} (Read Out Protection) : Protection de la mémoire Flash qui empêche la copie du code. Cette fonction prévient donc du reverse engineering fait à l'aide des outils de debugage. Empêche aussi de charger une nouveau programme sur la carte.
+
+\item \textbf{WRP} (Write Protection) : Sert à protéger une partie de la mémoire Flash d'un effacement ou d'une mise à jour.
+
+\item \textbf{PCROP} (Proprietary code read-out protection) : Permet de configurer certaines partie de la mémoire flash pour qu'elles soient uniquement accéssible par le bus d'instruction du CPU (Execution Only).
+
+\item \textbf{Firewall} : Le par feu est un composant physique qui contrôle les accès à trois parties de la mémoire, la zone du code (mémoire flash), les donnés volatile (SRAM) et les donnés non volatile (Flash).
+
+\item \textbf{MPU} (Memory Protection Unit) : Mécanisme de protection qui permet de définir des droits d'accès à certaines zone de la mémoire.
+
+\item \textbf{Anti temper} : Détection d'une intrusion au niveau physique, permet de prendre les mesure adéquates comme effacer la mémoire par example.
+
+\item \textbf{IWDG} (Independant watchdog) : Watchdog Independant permettant de lever des \textit{flags} si une tache prend plus de temps que celui qui lui est attribué.
+\end{itemize}
+\paragraph{}
+Pour rappel les deux attaques contre les quelles nous allons protéger la carte sont : \textbf{Une lecture de la mémoire (Dump mémoire)} et \textbf{Accès à la mémoire par une partie du programme non autorisé}. Pour protéger le n\oe{}ud de la première nous avons choisit de mettre d'utiliser les sécurité \textbf{RDP} et \textbf{PCROP}, pour la deuxième \textbf{PCROP} et \textbf{Firewall}.
+
+\paragraph{Protection RDP}
+La RDP offre différents niveaux de protection 0, 1, 2.
+
+\begin{itemize}
+\item \textbf{Le niveau 0}, équivaut à aucune protection la mémoire flash et complètement lisible, peut importe le mode de démarrage du contrôleur (par la RAM, par la flash, par le debuger ...). Ce mode doit être utilisé uniquement pour la phase de développement.
+
+\item \textbf{Le niveau 1}, empêche l'accès à la mémoire flash et à la mémoire SRAM2 par le debuger. Cependant lorsque le programme démarra à partir de la mémoire flash celui-ci à accès à la mémoire flash et la SRAM2.
+
+\item \textbf{Le niveau 2}, ce niveau empêche tout les accès aux mémoire depuis l'extérieur. \textbf{Attention après l'avoir activé on ne peut plus revenir en arrière}.
+
+\end{itemize}
+
+Il faut faire très attention lors de l'utilisation de la \textbf{RDP} car dés que l'on utilise une protection de niveau supérieure à 1, on ne peut plus mettre de programme dans la carte via le bootloader.
+Pour mettre à jour le programme il faut utiliser une \textit{SFU}\footnote{Secure Firmware Update}.
+
+\paragraph{Protection PCROP}
+La \textbf{PCROP} permet de sécuriser la mémoires par secteur\footnote{La taille des secteur dépend du micro contrôleur, dans nôtres cas, 1 secteur = 32 pages = 4Ko}. Il sert principalement à protéger les propriétés intellectuelles d'un programme, mais il peut aussi, permettre de dissimuler des code sensible dans une mémoire comme un code permettant de générer des clés cryptographiques. Lorsque un secteur est sécurisé, son accès est uniquement possible via le bus de d'instruction. Si un secteur protégé est lu il retournera une erreur sur le bus de lecture.
+
+\paragraph{Firewall}
+Comme le \textbf{PCROP}, le \textbf{Firewall} protège des secteur de la mémoire définit à l'initialisation du programme. Le \textbf{Firewall} est un composant physique qui va contrôler les et filtrer les accès entre 3 parties : La zone du Code dans la mémoire Flash, une zone de mémoire volatile dans SRAM et une zone de mémoire non volatile dans la Flash. L'accès à un code sécurisé par un \textbf{Firewall} ce fais par une seule fonction, si une autre fonction essaie d'accéder à ce code, le \textbf{Firewall} générera un \textit{reset} de la carte
 
 \subsection{Tests Unitaire}
 \paragraph{}
@@ -181,8 +265,7 @@ Dans un premier temps nous avons trouvé un projet sur github qui permet d'utilis
 %============================ Annexes =======================================
 \pagebreak
 \appendix	%Signifi que les paragraphes suivant serons des annexes
-\chapter{Protocole caractérisation
-flexiForce}
+\chapter{Première Annexe}
 %==================================== Fin ANNEXES =============================
 
 \pagebreak
