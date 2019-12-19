@@ -163,17 +163,11 @@ Nous avons choisit d'utiliser et de protéger le mode d'activation \textbf{ABP}, 
 \paragraph{}
 Le premier objectif que nous nous sommes fixé était de créer un n\oe{}ud LoRaWAN non sécurisé comme l'on avait fait avec le démonstrateur.
 
-Pour cela nous avons trouvé le projet \textit{LoRaMac-node}\cite{loramacnode}  sur \textit{Github}, qui est un projet permettant de configurer facilement un n\oe{}ud LoRaWAN avec des cartes de développement dont la carte B-L072Z-LRWAN1 que nous utilisons. 
+Pour cela nous avons trouvé le projet \textit{LoRaMac-node}\cite{loramacnode}  sur \textit{Github}, qui est un projet permettant de configurer facilement un n\oe{}ud LoRaWAN avec des cartes de développement dont la carte B-L072Z-LRWAN1 que nous utilisons. De plus dans sa documentation il est indiqué comment utiliser un composant de sécurité.
 
-...................................................................
+Le projet \textit{LoRaMac-node} permet d'utiliser les trois différentes class de n\oe{}ud LoRaWAN et avec plusieurs versions du protocole 1.0 à 1.0.3.
 
-...................................................................
-
-...................................................................
-
-
-Dire qu'il utilise c'est propres fonctions et pas les fonction HAL
-
+Pour fonctionner sur différentes plateformes le projet utilise des fonctions utilisant d'autres fonctions propre aux cartes sur lesquels il peut être déployer. Pour compiler un programme sur les bonnes cartes il utilise, \textbf{Cmake} pour générer des \textit{makefile} lesquels permettent ensuite d'inclure les \textit{lirairie} correspondant à la cible.
 
 \subsection{Sécurisation carte STM32}
 \paragraph{}
