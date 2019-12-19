@@ -266,18 +266,27 @@ Pour tester le fonctionnement de la contre mesure \textbf{RDP} nous l'avons impl
 \end{figure}
 
 \subsubsection{Tests PCROP}
-Pour vérifier si \textit{PCROP} a bien été implémenté il faut brancher la carte au programme \textit{St-link Utility} et afficher les octets d'option pour voir les secteur sécuriser, comme on peut le voir sur la figure \ref{SecuSecteur}  
+Pour vérifier si \textit{PCROP} a bien été implémenté il faut brancher la carte au programme \textit{St-link Utility} et afficher les octets d'option pour voir les secteurs sécurisé, comme on peut le voir sur la figure \ref{SecuSecteur}  
  
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.6]{img/eps/PCROPVerif.eps}
-\caption{Capture d'écran du logiciel \textit{St-Link Utility} sur laquelle on peut voir Des secteur sécurisé et non sécurisé }
+\caption{Capture d'écran du logiciel \textit{St-Link Utility} sur laquelle on peut voir des secteurs sécurisés et non sécurisés }
 \label{SecuSecteur}
 \end{figure}
 \pagebreak
 
 \subsection{Tests Intégration}
 \paragraph{}
+Le tests d'intégrations effectué jusqu'à présent est la mise en fonctionnement d'un programme simple, de \textit{RDP} et de \textit{PCROP}. Pour cela on utilise de nouveaux la visualisation des octets d'options dans \textit{St-link Utility}. Pour vérifier de la carte utilise bien le bon niveau RDP et qu'elle sécurise les bon secteurs mémoire. Pour vérifier que notre programme fonctionne toujours on regarde si les LEDs qu'il doit vérifier fonctionnes toujours.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.4]{img/eps/TestDintegrationPCrOPRDP.eps}
+\caption{Capture d'écran du logiciel \textit{St-Link Utility} sur laquelle on peut voir les secteurs sécurisés et non sécurisés ainsi que le niveau de protection RDP}
+\label{TestDintégrationPCrOPRDP}
+\end{figure}
+\pagebreak
 
 
 \subsection{Conclusion}
@@ -285,6 +294,7 @@ Pour vérifier si \textit{PCROP} a bien été implémenté il faut brancher la carte 
 Pour la suite du projet il nous restera à trouver comment stocker une fonction à un endroit précis de la mémoire pour pouvoir utiliser \textit{PCROP} car actuellement nous savons sécuriser les secteurs souhaités mais sans savoir où se trouve dans la mémoire la fonction à sécuriser.
 
 Il nous restera aussi à utiliser le \textit{Firewall} si besoins car il faudra faire une étude de besoins pour vérifier si \textit{PCROP} n'est pas suffisant dans nôtres cas.
+
 
 \section{Passerelle}
 \paragraph{}
