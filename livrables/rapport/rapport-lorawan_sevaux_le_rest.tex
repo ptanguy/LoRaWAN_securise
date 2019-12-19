@@ -222,6 +222,20 @@ Comme le \textbf{PCROP}, le \textbf{Firewall} protège des secteur de la mémoire 
 \paragraph{Mass Erase}
 Avant d'implanter ces contres mesures dans un programme nous avons chercher comment es désactiver pour éviter d'être bloqué avec une carte non utilisable et ainsi pouvoir effectuer plusieurs tests. Pour pour pouvoir passer du niveau \textbf{RDP} 1 à 0 et pour désactiver \textbf{PCROP}, il faut effectuer un \textit{mass erase} sur la carte ce qui à pour conséquence de mettre toute les mémoire Flash et SRAM à 0. Pour effectuer une mass erase il y a deux possibilité, la première et d'écrire une fonction faisant un \textit{mass erase} dans la RAM et la deuxième est d'utiliser l'utilitaire \textit{ST-link utility} qui permet de faire en autre ce genre d'opération sans avoir à les programmer.
 
+\paragraph{}
+Avant d'implémenter les protections, nous avons réaliser des dumps de la mémoire lorsque un programme fonctionnait sur la carte pour vérifier que nous trouvions bien les clés écrites dans le code.
+
+Pour cela nous effectuons un dump de la mémoire à l'aide du logiciel \textit{St-Link} et nous ouvrions le fichier récupéré avec \textit{Ghidra} qui nous permettait de revenir presque au code C de base. Vous pouvez voir en figure \ref{Clé1figure4} une des clés présente dans la mémoire.
+
+\begin{figure}[!h]
+\includegraphics[scale=0.45]{img/eps/FLUO+RechercheDeCles_CodeNonSecure.eps}
+\caption{Capture d'écran de \textit{ghidra} sur laquelle on voit une des clés dans la mémoire}
+\label{Clé1figure4}
+\end{figure}
+
+Pour être sur que nous trouvions bien la clés et pas des variables aléatoire formant la même suite nous avons essayé avec trois clés différente et nous cherchions à chaque fois les 3 clés, pour être sur que celle trouvé ne soit pas une coïncidence.
+\pagebreak
+
 \subsection{Problèmes rencontré}
 \paragraph{}
 A ce jour, nous n'avons pas réussi à implémenter les contres mesures de sécurité présenté ci-dessus dans le programme LoRaMAC-node car, pour implémenter ces contres mesures il faut utiliser des fonctions \textit{HAL} propres au STM32 qui sont définit dans des librairies différentes d'un micro contrôleur à l'autre.
@@ -237,12 +251,30 @@ Pour vérifier si les fonctions sont bien définit, nous avons essayé de lister to
 Au pour finir nous n'avons pas réussi à trouver avec certitude quelle librairies étaient utilisés.
 
 \paragraph{}
-Pour palier à ce problème nous avons décidés de programmer les différentes contres mesures dans un programme simple dans lequel nous avons dissimulés une variable contenant des clés.
+Pour palier à ce problème nous avons décidés de programmer les différentes contres mesures dans un programme simple dans lequel nous avons dissimulés une variable contenant des clés. Pour d'abords être sur que les contremesure fonctionne et que le code que nous implémenterons dans le programme \textit{LoRaMAC-node} soit validé.
 
 \subsection{Tests Unitaire}
 \paragraph{}
-Pour tester le fonctionnement de la contre mesure \textbf{RDP} nous l'avons implanté dans notre programme de test. 
+\subsubsection{Tests RDP}
+Pour tester le fonctionnement de la contre mesure \textbf{RDP} nous l'avons implanté dans notre programme simple. Puis nous avons essayés de lire la mémoire avec \textit{St-Link Utility} s'il nous affichait un message d'erreur disant de désactiver \textit{Read Out Protection} nous allions verifier les Octet d'option du programme et regardions le niveau de la \textit{RDP}. Comme vous pouvez le voir sur la figure \ref{OptionByteWindows}
 
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.6]{img/eps/OptionByteWindows.eps}
+\caption{Capture d'écran de \textit{St-link utility} sur laquelle on voit le niveau RDP de la carte}
+\label{OptionByteWindows}
+\end{figure}
+
+\subsubsection{Tests PCROP}
+Pour vérifier si \textit{PCROP} a bien été implémenté il faut brancher la carte au programme \textit{St-link Utility} et afficher les octets d'option pour voir les secteur sécuriser, comme on peut le voir sur la figure \ref{SecuSecteur}  
+ 
+\begin{figure}[!h]
+\centering
+\includegraphics[scale=0.6]{img/eps/PCROPVerif.eps}
+\caption{Capture d'écran du logiciel \textit{St-Link Utility} sur laquelle on peut voir Des secteur sécurisé et non sécurisé }
+\label{SecuSecteur}
+\end{figure}
+\pagebreak
 
 \subsection{Tests Intégration}
 \paragraph{}
@@ -250,6 +282,9 @@ Pour tester le fonctionnement de la contre mesure \textbf{RDP} nous l'avons impl
 
 \subsection{Conclusion}
 \paragraph{}
+Pour la suite du projet il nous restera à trouver comment stocker une fonction à un endroit précis de la mémoire pour pouvoir utiliser \textit{PCROP} car actuellement nous savons sécuriser les secteurs souhaités mais sans savoir où se trouve dans la mémoire la fonction à sécuriser.
+
+Il nous restera aussi à utiliser le \textit{Firewall} si besoins car il faudra faire une étude de besoins pour vérifier si \textit{PCROP} n'est pas suffisant dans nôtres cas.
 
 \section{Passerelle}
 \paragraph{}
