@@ -14,10 +14,3 @@ Documentation pour reproduire le projet LoRaWAN Sécurisé
    creationPrgpourFctdeSEc.rst
    securisationGW.rst
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
