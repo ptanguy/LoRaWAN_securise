@@ -261,6 +261,9 @@ Au pour finir nous n'avons pas réussi à trouver avec certitude quelle librairies
 \paragraph{}
 Pour palier à ce problème nous avons décidés de programmer les différentes contres mesures dans un programme simple dans lequel nous avons dissimulés une variable contenant des clés. Pour d'abords être sur que les contremesure fonctionne et que le code que nous implémenterons dans le programme \textit{LoRaMAC-node} soit validé.
 
+Une autre solution été possible, en effet avec le programme \textit{St-Link Utility} il est possible de modifier les octets d'options d'un programme (non sécurisé), et ce même lorsque le programme est sur la carte. 
+\textit{St-Link utility} vas récupérer le contenu de la mémoire et l'écrire à nouveau avec les modification apporté. Cela nous permet entre autres de modifier facilement le Niveau \textbf{RDP}, et \textbf{PCROP} de n'importe quel programme non sécurisé sur la carte.
+
 \subsection{Tests Unitaire}
 \paragraph{}
 \subsubsection{Tests RDP}
