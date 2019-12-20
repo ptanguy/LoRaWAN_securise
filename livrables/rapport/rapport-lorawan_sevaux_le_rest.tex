@@ -39,6 +39,38 @@ Dans le cadre de notre première année de Master 1 CSSE (Cyber-sécurité des Systè
 
 \section{LoRaWAN et la problématique de sécurité}
 \paragraph{}
+Dans ce contexte, il nous est demandé de mettre en place un réseau LoRaWAN sécurisé.
+Le premier et principal objectif est de créer un réseau LoRaWAN complet, mais simple et fonctionnel, dont les éléments de sécurité côté n\oe{}ud et passerelle seront correctement mis en \oe{}uvre. 
+Toute une démarche de tests unitaires devra être mise en place, pour tester chacune des parties séparément, puis l'ensemble collectivement. 
+
+Cependant, nous allons voir qu'un communication simplement déployée pose de nombreux problèmes de sécurité et de confidentialité. Le système initial ne suffit pas à protéger nos données face à un attaquant connaissant un peu le système.
+
+Le deuxième objectif consistera donc à discuter de la surface d?attaque de notre système. 
+Un aspect analyse est donc demandé en prenant en compte les différentes versions du LoRaWAN, chacun des éléments du système etc.
+
+Ainsi, les communications LoRaWAN ont de nombreux vecteurs d'attaque, dont nous devons prendre connaissance pour pouvoir y remédier.
+
+\section{Vocabulaire}
+\paragraph{}
+Nous souhaitons faire ici un rappel des termes techniques que nous emploierons pour éviter tout malentendu.
+
+\paragraph{LoRaWAN}
+ Long Range Wide Area Network. Protocole de communication.
+
+\paragraph{Noeud}
+Ensemble de composants qui peuvent recevoir et/ou envoyer de l'information via le protocole de communication LoRaWAN. Branche initiale d'un réseau LoRaWAN. Par exemple, un capteur relié à une carte/microcontrôleur et une antenne pour la communication vers l'extérieur.
+
+\paragraph{Passerelle ou \textit{Gateway}}
+Élément de transfert. Permet de traduire et transférer les données venant du noeud vers les serveurs.
+
+\paragraph{\textit{Network server}} 
+Cerveau du réseau LoRaWAN, il génère les clefs et authentifie les noeuds. Il déchiffre aussi une partie des trames du réseau, reçues via la passerelle.
+
+\paragraph{\textit{Application server}} 
+Service qui va traiter l'information du capteur, il va déchiffrer la dernière partie du message.
+
+\paragraph{Box LoRa}
+Pour notre projet, sera un micro-ordinateur \textit{Raspberry} qui va contenir la passerelle, le \textit{network server} et l'\textit{application server}
 
 
 \chapter{Organisation}
