@@ -19,8 +19,8 @@ choisir un shell bash
     bash
 
 
-Problèmes rentrés
-#################
+Problèmes rencontrés
+####################
 
 Problème de téléchargement qui ne marche pas:
 
@@ -132,6 +132,8 @@ on passe tout le monde sur warrior (avant dernière version disponible et foncti
 On doit changer thud dans le fichier .gitmodules
 
 exemple : 
+
+.. code-block:: Bash
 
     [submodule "layers/bsp/meta-raspberrypi"]
 	path = layers/bsp/meta-raspberrypi

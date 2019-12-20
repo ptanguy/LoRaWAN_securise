@@ -14,7 +14,7 @@
 \contentsline {subsection}{\numberline {2.4.2}PCROP et RDP}{12}{subsection.2.4.2}% 
 \contentsline {chapter}{\numberline {3}Tutoriel pour ajouter une layer SELinux à notre OS chirpstack\sphinxhyphen {}gateway\sphinxhyphen {}os via Yocto :}{13}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Connexion au serveur de compilation}{13}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}Problèmes rentrés}{13}{section.3.2}% 
+\contentsline {section}{\numberline {3.2}Problèmes rencontrés}{13}{section.3.2}% 
 \contentsline {section}{\numberline {3.3}Générer l’OS}{14}{section.3.3}% 
 \contentsline {chapter}{\numberline {4}Indices and tables}{17}{chapter.4}% 
 \contentsline {chapter}{Bibliographie}{19}{chapter*.3}% 

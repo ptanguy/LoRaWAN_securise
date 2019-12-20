@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.12.11)  20 DEC 2019 15:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.12.11)  20 DEC 2019 17:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -962,36 +962,31 @@ moire se trouve dans le fi-chier : \T1/ptm/m/it/10 Dri-
 Chapitre 3.
 [13
 
-] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 574--578
-[]\T1/ptm/m/n/10 path = layers/bsp/meta-raspberrypi url =
- []
-
-[15] [16
+] [14] [15] [16
 
 ]
 Chapitre 4.
 [17] [18
 
 ] (./documentationlorawanscuris.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 625.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 623.
  [19
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 625.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 623.
 
 (./documentationlorawanscuris.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 625.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 625.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 623.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 623.
 Package rerunfilecheck Info: File `documentationlorawanscuris.out' has not chan
 ged.
-(rerunfilecheck)             Checksum: EBE7264FAF5CD1E9F8AADD1BBE6FCEB8;3341.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 625.
+(rerunfilecheck)             Checksum: 2B5A93CFEF195096F02EE8908DCFDE45;3356.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 623.
  ) 
 Here is how much of TeX's memory you used:
  14627 strings out of 492167
- 203638 string characters out of 6131557
- 370286 words of memory out of 5000000
+ 203641 string characters out of 6131557
+ 370289 words of memory out of 5000000
  18632 multiletter control sequences out of 15000+600000
  52020 words of font info for 72 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
@@ -1009,7 +1004,7 @@ lvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></
 usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fo
 nts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utm
 ri8a.pfb>
-Output written on documentationlorawanscuris.pdf (23 pages, 621578 bytes).
+Output written on documentationlorawanscuris.pdf (23 pages, 621037 bytes).
 PDF statistics:
  275 PDF objects out of 1000 (max. 8388607)
  214 compressed objects within 3 object streams

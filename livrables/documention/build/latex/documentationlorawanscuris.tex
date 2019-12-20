@@ -455,8 +455,8 @@ bash
 \end{sphinxVerbatim}
 
 
-\section{Problèmes rentrés}
-\label{\detokenize{securisationGW:problemes-rentres}}
+\section{Problèmes rencontrés}
+\label{\detokenize{securisationGW:problemes-rencontres}}
 Problème de téléchargement qui ne marche pas:
 \begin{quote}
 
@@ -569,15 +569,13 @@ on passe tout le monde sur warrior (avant dernière version disponible et foncti
 On doit changer thud dans le fichier .gitmodules
 
 exemple :
-\begin{quote}
-\begin{description}
-\item[{{[}submodule « layers/bsp/meta\sphinxhyphen{}raspberrypi »{]}}] \leavevmode
-path = layers/bsp/meta\sphinxhyphen{}raspberrypi
-url = git://git.yoctoproject.org/meta\sphinxhyphen{}raspberrypi
-branch = thud
 
-\end{description}
-\end{quote}
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{[}submodule \PYG{l+s+s2}{\PYGZdq{}layers/bsp/meta\PYGZhy{}raspberrypi\PYGZdq{}}\PYG{o}{]}
+    \PYG{n+nv}{path} \PYG{o}{=} layers/bsp/meta\PYGZhy{}raspberrypi
+    \PYG{n+nv}{url} \PYG{o}{=} git://git.yoctoproject.org/meta\PYGZhy{}raspberrypi
+    \PYG{n+nv}{branch} \PYG{o}{=} thud
+\end{sphinxVerbatim}
 
 On passe sur la branche warrior
 
