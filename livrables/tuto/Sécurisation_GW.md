@@ -1,4 +1,4 @@
-Tutoriel pour la sécurisation point à point de la passerelle.
+__Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto :__
 
 
 
@@ -19,13 +19,12 @@ Problème Git et proxy
 
     git config --global http.proxy http://ocytohe.univ-ubs.fr:3128
 
-cloner le répertoire : 
+Cloner le répertoire : 
 
     git clone https://github.com/brocaar/chirpstack-gateway-os
 
 
-/!\ penser à faire une doc sur comment créer un OS qu'on peut flasher sur carte SD pour le mettre dans la rasp
-cf tp.pdf ex3 dans séquence de démarrage avec uboot
+
 
 
 on se met dans notre répertoire > ~/projet/os/chirpstack-gateway-os/
@@ -45,7 +44,7 @@ renvoit :
     To add additional metadata layers into your configuration please add entries to conf/bblayers.conf."
 
 
-on se retrouve dans le dossier build
+On se retrouve dans le dossier build
 
 Ajouter la layer meta-selinux, dans le dossier source
 
@@ -56,7 +55,7 @@ Aller éditer manuellement le fichier bblayers.conf dans le dossier build, pour 
     vim bblayers.conf
     i (entrer en mode insertion)
 
-ajouter à la fin du fichier, dans les guillemets : 
+Ajouter à la fin du fichier, dans les guillemets : 
 
     /home/numeroetudiant/projet/os/chirpstack-gateway-os/meta-selinux \
     echap
@@ -69,14 +68,10 @@ Maintenant, on cherche à compiler notra image, avec la commande
 
 Cependant, nous ne pouvons pas effectuer cette comande, car les modules dont dépend le projet chirpstack-gateway-os ne peuvent pas téléchargés, et bitbake en fait partie.
 
-Résolution : 
+Le protocole ssh est bloqué par le seveur de compilation. Certains utilisent le protocole git qui lui aussi utilise le protocole ssh.
+on a donc remplacé les url git par des url https qui n'utilisent pas le protocole ssh pour les télécharger.
 
-on a changé les sources dans le fichiers .gitmodules internet. (cf fichier commandes)
-hypothèse 1 : ssh bloqué par le seveur de compilation
-certains utilisent le protocoles github qui lui utilise le protocole ssh
-on a donc remplacé les url git par des url https qui n'utilisent pas le protocole ssh pour les télécharger (cf. mail résolution)
-
-on suit le cheminement du makefile : (détailler le contenu du fichier)
+On suit le cheminement du makefile : 
 
     make submodules
 
@@ -86,12 +81,12 @@ Cependant, nous avons oublié de modifier également le fichier
 
     git submodule => nous montre toutes les layers .git/modules/layers
 
-ok on finit par réussir ç tout télécharger à la main
-on relance la compilation
+On finit par tout télécharger à la main
+On peut relancer la compilation
 
     bitbake core-image-minimal
 
-on obtient une erreur : 
+On obtient une erreur : 
 
     "Layer selinux is not compatible with the core layer which only supports these series: thud (layer is compatible with zeus)"
 
@@ -101,12 +96,10 @@ On va donc copier notre répertoire ailleurs pour faire des essais et essayer de
 
 Cependant erreur, nous travaillons sur le git du projet chirpstack-gateway-os donc incompatible pour les commandes avec la version zeus.
 
-+++++++++
 
+on passe tout le monde sur warrior (avant dernière version disponible et fonctionnelle)
 
-on passe tout le monde sur warrior (version avant derniere de yocto
-
-changer thud dans le fichier .gitmodules
+On doit changer thud dans le fichier .gitmodules
 
 exemple : 
 
@@ -114,4 +107,8 @@ exemple :
 	path = layers/bsp/meta-raspberrypi
 	url = git://git.yoctoproject.org/meta-raspberrypi
 	branch = thud
+
+On passe sur la branche warrior
+
+    branch = warrior
 
