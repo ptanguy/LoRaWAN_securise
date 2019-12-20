@@ -56,5 +56,5 @@ Nous ne détaillerons pas les autres modèles d'habilitations.
 Par rapport aux problématiques de sécurité définies plus haut, nous pensons que le modèle MAC est le plus adapté pour notre \textit{Box LoRa}. Nous choisissons donc ce modèle comme angle d'attaque.
 
 Ainsi, nous pouvons proposer l'utilisation de deux modules intéressants qui semblent être adaptés : SELinux et AppArmor.
-Ces deux logiciels sont un moyen de mettre en oeuvre un système MAC. Nous allons faire un rapide comparatif afin de prendre une décision sur l'emploi d'un tel ou d'un autre.
+Ces deux Linux Security Module (LSM) sont un moyen de mettre en oeuvre un système MAC. Nous allons faire un rapide comparatif afin de prendre une décision sur l'emploi d'un tel ou d'un autre.
 
