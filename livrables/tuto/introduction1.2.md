@@ -4,13 +4,17 @@ Dans ce contexte, il nous est demandé de mettre en place un réseau LoRaWAN sé
 Le premier et principal objectif est de créer un réseau LoRaWAN complet, mais simple et fonctionnel, dont les éléments de sécurité côté noeud et passerelle seront correctement mis en oeuvre. 
 Toute une démarche de tests unitaires devra être mise en place, pour tester chacune des parties séparément, puis l'ensemble collectivement. 
 
-Le deuxième objectif consiste à discuter de la surface d’attaque de notre système. 
+Cependant, nous allons voir qu'un communication simplement déployée pose de nombreux problèmes de sécurité et de confidentialité. Le système initial ne suffit pas à protéger nos données face à un attaquant connaissant un peu le système.
+
+Le deuxième objectif consistera donc à discuter de la surface d’attaque de notre système. 
 Un aspect analyse est donc demandé en prenant en compte les différentes versions du LoRaWAN, chacun des éléments du système etc.
 
 Ainsi, les communications LoRaWAN ont de nombreux vecteurs d'attaque, dont nous devons prendre connaissance pour pouvoir y remédier.
 
 
 1.3 Mise au point : vocabulaire
+
+Nous souhaitons faire ici un rappel des termes techniques que nous emploierons pour éviter tout malentendu.
 
 LoRaWAN : 
 > Long Range Wide Area Network. Protocole de communication.
