@@ -49,14 +49,14 @@ Les niveaux proposés pour l'exemple sont les suivants :
 
 Le principal point positif est que cette méthode offre un niveau hautement sécurisé d’administration aux sources d’information. En effet, une autorité centrale applique les décisions de contrôle d’accès, et non par le propriétaire individuel d’un objet (ressource). Et le propriétaire ne peut pas modifier les droits d’accès. 
 
-Les points négatifs sont : Modèle très rigide. Il impose des restrictions sur l’accès des utilisateurs qui, conformément aux politiques de sécurité, ne permettent pas les modifications dynamiques. ; Inadapté aux systèmes repartis. ; Assez coûteux en étude, car il nécessite une planification prédéterminée pour être mis en œuvre efficacement. ; Assez coûteux en exploitation. Après la mise en oeuvre, un mode de gestion complexe est nécessaire à cause de la mise à jour constante des étiquettes d’objet et de compte, pour collecter de nouvelles données.
+Les points négatifs sont : Modèle très rigide. Il impose des restrictions sur l’accès des utilisateurs qui, conformément aux politiques de sécurité, ne permettent pas les modifications dynamiques. ; Inadapté aux systèmes repartis. ; Assez coûteux en étude, car il nécessite une planification prédéterminée pour être mis en oeuvre efficacement. ; Assez coûteux en exploitation. Après la mise en oeuvre, un mode de gestion complexe est nécessaire à cause de la mise à jour constante des étiquettes d’objet et de compte, pour collecter de nouvelles données.
 
 Nous ne détaillerons pas les autres modèles d'habilitations.
 
 Par rapport aux problématiques de sécurité définies plus haut, nous pensons que le modèle MAC est le plus adapté pour notre \textit{Box LoRa}. Nous choisissons donc ce modèle comme angle d'attaque.
 
 Ainsi, nous pouvons proposer l'utilisation de deux modules intéressants qui semblent être adaptés : SELinux et AppArmor.
-Ces deux Linux Security Module (LSM) sont un moyen de mettre en oeuvre un système MAC. 
+Ces deux logiciels - Linux Security Module (LSM), sont un moyen de mettre en oeuvre un système MAC. 
 
 Concernant l'emploi de l'un ou l'autre, nous avons retenu les critères suivants : 
 
