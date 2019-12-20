@@ -15,6 +15,8 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Creation d’un programme de test pour y mettre des fonctions de sécurités" href="creationPrgpourFctdeSEc.html" />
+    <link rel="prev" title="Documentation pour reproduire le projet LoRaWAN Sécurisé" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,34 +35,51 @@
             
   <div class="section" id="utilisation-de-loramac-node">
 <h1>Utilisation de LoRaMac-node<a class="headerlink" href="#utilisation-de-loramac-node" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Dans un premier temps nous allons utiliser le projet LoRaMAc-node créer par semtech pour utiliser notre carte B-L072Z-LRWAN1 comme noeud LoRaWAN.</p>
+<p>Dans un premier temps, nous allons utiliser le projet LoRaMAc-node créé par Semtech pour utiliser notre carte B-L072Z-LRWAN1 comme nœud LoRaWAN.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Pour commencer, vous devez installer les dépendances nécessaires. Le nom des pacquet est sucéptible de varié en onctions de votre OS, dans nôtres cas nous utilisons ArchLinux</p>
-<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>sudo pacman -Sy arm-none-eabi-gcc gdb-common cmake
-<span class="c1"># Installation de St-Link version Open Sources</span>
-git clone https://github.com/texane/stlink.git
-make release
-<span class="nb">cd</span> build/Release
-sudo make install
-sudo ldconfig
+<p>Pour gagner du temps dans le développement du nœud, nous utilisons comme base un projet github <a class="reference internal" href="#loramac-node" id="id1"><span>[LoRaMAC-node]</span></a> mettant en œuvre le LoRaWAN sur notre carte.
+Nous développons le nœud à partir d’une distribution <em>Linux</em> basée sur <em>Arch Linux</em>, les dépendances requises sont :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake
+arm-none-eabi-gcc
+arm-none-eabi-newlibS221 : https://www.st.com/en/mems-and-sS221 : https://www.st.com/en/mems-and-sensors/hts221.html#overviewensors/hts221.html#overview
+openocd
 </pre></div>
 </div>
-<p>Ensuite il faut récupérer la branche master du projet sur github.</p>
-<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Lora-net/LoRaMac-node.git
-<span class="nb">cd</span> LoRaMac-node-master
-mkdir build
-<span class="nb">cd</span> build
-<span class="nv">BOARD</span><span class="o">=</span>B-L072Z-LRWAN1
-cmake -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span><span class="s2">&quot;cmake/toolchain-arm-none-eabi.cmake&quot;</span> -DBOARD<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$BOARD</span><span class="s2">&quot;</span> -DAPPLICATION<span class="o">=</span><span class="s2">&quot;LoRaMac&quot;</span> -DCLASS<span class="o">=</span><span class="s2">&quot;classA&quot;</span> -DACTIVEREGION<span class="o">=</span><span class="s2">&quot;LORAMAC_REGION_EU868&quot;</span> ..
-make
-</pre></div>
+<p>Pour utiliser le projet LoRaMAC-node dans notre projet, nous avons téléchargé le .zip du projet de la branche master en <strong>version 4.4.2</strong>.
+Installation de Stlink
+———————-</p>
+<p>Le St-link est un programme permettant d’avoir accès au débuger des cartes conçues par STMicroelectronics, il permet, entre autres, de charger des programmes dans les cartes.
+.. code-block:: bash</p>
+<blockquote>
+<div><p>git clone <a class="reference external" href="https://github.com/texane/stlink.git">https://github.com/texane/stlink.git</a>
+make release
+cd build/Release
+sudo make install
+sudo ldconfig</p>
+</div></blockquote>
+<div class="section" id="installation-de-loramac-node">
+<h3>Installation de LoRaMAC-node<a class="headerlink" href="#installation-de-loramac-node" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Après avoir extrait le zip téléchargé précédemment, placez-vous dans le dossier LoRaMac-node-master.
+.. code-block:: bash</p>
+<blockquote>
+<div><p>mkdir build
+cd buid
+BOARD=B-L072Z-LRWAN1
+cmake -DCMAKE_TOOLCHAIN_FILE= »cmake/toolchain-arm-none-eabi.cmake » -DBOARD= »$BOARD » -DAPPLICATION= »LoRaMac » -DCLASS= »classA » -DACTIVEREGION= »LORAMAC_REGION_EU868 » ..
+make</p>
+</div></blockquote>
+<dl class="citation">
+<dt class="label" id="loramac-node"><span class="brackets"><a class="fn-backref" href="#id1">LoRaMAC-node</a></span></dt>
+<dd><p>Projet permettant la mise en œuvre d’un Nœud LoRaWAN sur une carte <em>B-L072Z-LRWAN1</em> (<a class="reference external" href="https://github.com/Lora-net/LoRaMac-node/tree/master/Doc">https://github.com/Lora-net/LoRaMac-node/tree/master/Doc</a>)</p>
+</dd>
+</dl>
 </div>
 </div>
 <div class="section" id="charger-un-programme-dans-la-carte">
 <h2>Charger un programme dans la carte<a class="headerlink" href="#charger-un-programme-dans-la-carte" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Pour charger le programme dans la carte nous utilisons St-Link, dans un premier temps brancher la carte à l’aide d’un cable USB à l’ordinateur.
-Sur la carte vous devez utiliser le port USB le plus éloigné de l’antenne.</p>
+<p>Pour charger le programme dans la carte nous utilisons St-Link, dans un premier temps brancher la carte à l’aide d’un câble USB à l’ordinateur.
+Sur la carte, vous devez utiliser le port USB le plus éloigné de l’antenne.</p>
 <div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>st-info --probe <span class="c1">#Permet de verifier que la carte est recunnu par l&#39;ordinateur</span>
 <span class="c1">#Placez-vous dans le dossier build créé précédement.</span>
 st-flash write build/src/apps/LoRaMac/LoRaMac-classA.bin 0x8000000
@@ -86,17 +105,17 @@ make
 <div class="section" id="configurer-loramac-node">
 <h2>Configurer LoRaMAC-node<a class="headerlink" href="#configurer-loramac-node" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Nous vous recommandons d’utiliser dans un premier temps le programme <em>exemple</em> de LoRaMAC-node.
-Pour cela, vous devrez utiliser les programmes ce trouvant dans le dossier « LoRaWAN_securise/noeud/LoRaMac-node-master/src/apps/LoRaMac/classA/B-L072Z-LRWAN1/ »</p>
-<p>Le programme <em>main.c</em> est le programme principale c’est dans celui-ci que vous aller créer votre programme personnel. Le fichier <em>Commissioning.h</em> contient les différentes variables nécéssaire à une liaison LoRaWAN (DevEUI, AppKey …).</p>
-<p>Lorsque l’on commence un projet vous devez configurer dans un premier temps le fichier <em>Commissioning.h</em>.</p>
-<p>Dans notres cas nous utilisons une méthode de connexion APB donc nous devons configurer dans ce fichier, le mode de connexion, devAddr, AppSKey et NwkSKey.</p>
+Pour cela, vous devrez utiliser les programmes se trouvant dans le dossier « LoRaWAN_securise/noeud/LoRaMac-node-master/src/apps/LoRaMac/classA/B-L072Z-LRWAN1/ »</p>
+<p>Le programme <em>main.c</em> est le programme principal, c’est dans celui-ci que vous aller créer votre programme personnel. Le fichier <em>Commissioning.h</em> contient les différentes variables nécessaire à une liaison LoRaWAN (DevEUI, AppKey …).</p>
+<p>Lorsque l’on commence un projet, vous devez configurer dans un premier temps le fichier <em>Commissioning.h</em>.</p>
+<p>Dans nôtres cas nous utilisons une méthode de connexion APB donc nous devons configurer dans ce fichier, le mode de connexion, devAddr, AppSKey et NwkSKey.</p>
 <p>Voici les valeurs que nous utilisons pour ces différentes clés :</p>
 <ul class="simple">
 <li><p>devAddr  =  0x00000000</p></li>
 <li><p>AppSkey  =  0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C</p></li>
 <li><p>NwkSkey  =   0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C</p></li>
 </ul>
-<p>Pour conigurer nôtre programme, cherchez les lignes suivante et métez les valeurs indiqué à la place des valeurs par défaut</p>
+<p>Pour configurer notre programme, cherchez les lignes suivantes et mettez les valeurs indiquées à la place des valeurs par défaut.</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#define OVER_THE_AIR_ACTIVATION                            0</span>
 <span class="c1">// Définit le mode de connexion APB</span>
 <span class="cp">#define LORAWAN_DEVICE_ADDRESS                             ( uint32_t )0x00000000</span>
@@ -107,7 +126,7 @@ Pour cela, vous devrez utiliser les programmes ce trouvant dans le dossier « L
 <span class="c1">//AppSKey</span>
 </pre></div>
 </div>
-<p>Enregistrez les modifications et lancer le programme à l’aide du script créé précédement.</p>
+<p>Enregistrez les modifications et lancer le programme à l’aide du script créé précédemment.</p>
 </div>
 </div>
 
@@ -128,11 +147,25 @@ Pour cela, vous devrez utiliser les programmes ce trouvant dans le dossier « L
 
 
 <h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utilisation de LoRaMac-node</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#charger-un-programme-dans-la-carte">Charger un programme dans la carte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#faciliter-la-compilation-et-eviter-les-erreurs">Faciliter la compilation et éviter les erreurs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configurer-loramac-node">Configurer LoRaMAC-node</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="creationPrgpourFctdeSEc.html">Creation d’un programme de test pour y mettre des fonctions de sécurités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="securisationGW.html">Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto :</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="Chapitre précédent">Documentation pour reproduire le projet LoRaWAN Sécurisé</a></li>
+      <li>Next: <a href="creationPrgpourFctdeSEc.html" title="Chapitre suivant">Creation d’un programme de test pour y mettre des fonctions de sécurités</a></li>
   </ul></li>
 </ul>
 </div>
