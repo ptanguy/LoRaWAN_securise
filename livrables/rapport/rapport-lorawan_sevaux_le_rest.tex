@@ -339,23 +339,79 @@ Pour la suite du projet il nous restera à trouver comment stocker une fonction à
 Il nous restera aussi à utiliser le \textit{Firewall} si besoins car il faudra faire une étude de besoins pour vérifier si \textit{PCROP} n'est pas suffisant dans nôtres cas.
 
 La partie n\oe{}ud nous a permis de découvrir les différentes solutions de sécurité intégrés aux micro contrôleurs STM32.
+
 \section{Passerelle}
 \paragraph{}
 
-\subsection{Tests Unitaire}
+\subsection{Surface d'attaque de la \textit{Box LoRa}}
 \paragraph{}
+Concernant la \textit{Box LoRa}, nous avons affaire aux problématiques suivantes : comment faire pour garantir une compartimentation parfaite et complète de tous les services proposés ? 
 
-\subsection{Tests Intégration}
-\paragraph{}
+Notre \textit{Box LoRa} peut fournir plusieurs services. Le service initial minimum est la réception de données provenant du noeud, sa traduction et son utilisation (afficher une donnée sur un moniteur, faire actionner un moteur, etc). Mais on peut penser qu'un fournisseur voudrait proposer plusieurs services avec une telle box. Par exemple, pour une société qui voudrait utiliser les communications en LoRa pour relever des données de ses capteurs, mais également avec un service de messagerie (mails) en interne, ou bien une zone de dépot et partage de documents sur la \textit{Box LoRa}, alors apparaissent certaines contraintes, notamment de sécurité.
 
-\subsection{Problèmes rencontré}
-\paragraph{}
+En effet, il faut garantir les contraintes CIAN (Confidentialité, Intégrité, Authenticité, Non-répudiation) pour les données envoyées et reçues.
 
-\subsection{Conclusion}
+On peut donc voir que si chaque service n'est pas bien isolé des autres, ces contraintes pourraient ne pas être respectées respectées. Par exemple, si le compte utilisé pour la messagerie est un \textit{super-utilisateur}, il peut avoir les droit pour aller modifier des fichiers de configuration importants, faire arrêter le système, modifier les données, etc.
+
+Ainsi, nous devons apporter des solutions pour protéger notre \textit{Box LoRa}
+
+\subsection{Solutions envisagées et solution retenue}
 \paragraph{}
+Pour répondre à ces problématiques, nous avons étudié plusieurs solutions. 
+
+Premièrement, nous avons considéré les modèles d'habilitation. Ces modèles d'habilitation permettent de garantir, au sein d'une entreprise par exemple, un contrôle d'accès performant sur les ressources et les services. Ils permettent également de rationaliser le processus de demande d'accès des utilisateurs.
+
+Les principaux sont : 
+
+\begin{itemize}
+\item    DAC (Discretionary Access Control)
+\item    MAC (Mandatory Access Control)
+\item    ABAC (Attribute Based Access Control)
+\item   RBAC (Role Based Access Control). 
+\end{itemize}
+
+Nous donnons ci-desssous une rapide description de leur fonctionnement : 
+
+Dans le modèle DAC (ou Contrôle d'Accès Discrétionnaire), chaque personne est administrateur de ses ressources. Le fait de posséder un objet permet de modifier les droits d'accès sur celui-ci. 
+
+Comme points positifs, on peut considérer : Facile à implémenter ;Offre une grande flexibilité ; Intégré à la plupart des systèmes d'exploitation.
+
+Les points négatifs sont plus nombreux : Modèle inadapté à un système comportant un nombre important d'utilisateurs ; Ne reflète pas le flux réel de l'information dans un système, les informations autorisées pouvant être copiées d'un objet à un autre ; Aucune restriction ne s'applique à l'utilisation des informations lorsque l'utilisateur les a reçues ; Sujet à de nombreuses erreurs lors de l'attribution des autorisations par le propriétaire de l'objet.
+
+
+Dans le modèle MAC, l'accès aux objets est restreint en fonction de la sensibilité des informations (classification) contenues dans les objets et du niveau d'autorisation de l'utilisateur de disposer d'informations d'une telle sensibilité. 
+On aura par exemple : un technicien habilité niveau 3 ne pourra pas accéder à un dossier de niveau 5, mais il aura accès aux dossiers de niveau 1, 2 et 3.
+
+Les niveaux proposés pour l'exemple sont les suivants : 
+\begin{itemize}
+\item Niveau 1 : néant
+\item Niveau 2 : Non classifié
+\item Niveau 3 : Confidentiel, non-classifié
+\item Niveau 4 : Secret, confidentiel, non-classifié
+\item Niveau 5 : Top secret, secret, confidentiel, non-classifié
+\end{itemize}
+Le principal point positif est que cette méthode offre un niveau hautement sécurisé d'administration aux sources d'information. En effet, une autorité centrale applique les décisions de contrôle d'accès, et non par le propriétaire individuel d'un objet (ressource). Et le propriétaire ne peut pas modifier les droits d'accès. 
+
+Les points négatifs sont : Modèle très rigide. Il impose des restrictions sur l'accès des utilisateurs qui, conformément aux politiques de sécurité, ne permettent pas les modifications dynamiques. ; Inadapté aux systèmes repartis. ; Assez coûteux en étude, car il nécessite une planification prédéterminée pour être mis en ?uvre efficacement. ; Assez coûteux en exploitation. Après la mise en \oe{}uvre, un mode de gestion complexe est nécessaire à cause de la mise à jour constante des étiquettes d'objet et de compte, pour collecter de nouvelles données.
+
+Nous ne détaillerons pas les autres modèles d'habilitations.
+
+Par rapport aux problématiques de sécurité définies plus haut, nous pensons que le modèle MAC est le plus adapté pour notre \textit{Box LoRa}. Nous choisissons donc ce modèle comme angle d'attaque.
+
+Ainsi, nous pouvons proposer l'utilisation de deux modules intéressants qui semblent être adaptés : SELinux et AppArmor.
+Ces deux logiciels sont un moyen de mettre en \oe{}uvre un système MAC. Nous allons faire un rapide comparatif afin de prendre une décision sur l'emploi d'un tel ou d'un autre.
+
 
 \chapter{Conclusion}
+Nous avons maintenant compris le fonctionnement général d'un système de communications complet en LoRaWAN. Avec l'expérience que nous avons acquise, nous sommes à même de voir les failles potentielles tout au long système et de déployer des moyens pour sécuriser au maximum la communication. En prenant encore plus de recul, et avec le mois supplémentaire de projet, nous allons pouvoir aller plus loin en attaquant nous même notre système pour tenter d'y déceler d'autres vulnérabilités. Les éventualités qui peuvent nous arriver sont très nombreuses et nous ne pouvons pas toutes les anticiper, néanmoins, nous faisons le maximum avec nos connaissances actuelles pour aller le plus loin possible dans la sécurisation.
 
+En terme de bénéfices, ce projet nous a beaucoup appris sur notre façon de travailler et de nous organiser. Nous avons appris à faire des recherches documentaires très poussées, à faire de nombreux tests unitaires et d'intégration pour contrôler nos avancées, à travailler dans des domaines inconnus et nous avons pris beaucoup de plaisir à découvrir cet environnement.
+
+Travailler en binôme nous a permis d'avoir une efficacité autre qu'en solitaire. Il faut savoir écouter l'autre pour pouvoir résoudre nos problèmes communs. Nous avons beaucoup appris en organisation et en méthodologie lors de ce projet.
+
+Nos mois de projets ayant été entrecoupés de cours et autres séminaires, nous avons perdu un peu de temps pour les parties finales, qui demandent notamment de coder des morceaux. En ayant eu une plus large continuité, nous aurions pu commencer à coder beaucoup plus tot et avoir bien plus d'avance. Néanmoins, nous avons appris à travailler dans l'urgence, avec des contraintes à respecter (réunion hebdomadaires, comptes rendus, rapports, présentations, etc). 
+
+Ce projet fut une belle découverte de l'expérience du travail de projet en équipe dirigée.
 
 %============================ Fin doc =======================================
 

@@ -62,17 +62,13 @@
 \contentsline {paragraph}{}{19}{section*.44}% 
 \contentsline {section}{\numberline {3.3}Passerelle}{19}{section.3.3}% 
 \contentsline {paragraph}{}{19}{section*.45}% 
-\contentsline {subsection}{\numberline {3.3.1}Tests Unitaire}{19}{subsection.3.3.1}% 
+\contentsline {subsection}{\numberline {3.3.1}Surface d'attaque de la \textit {Box LoRa}}{19}{subsection.3.3.1}% 
 \contentsline {paragraph}{}{19}{section*.46}% 
-\contentsline {subsection}{\numberline {3.3.2}Tests Int\'egration}{19}{subsection.3.3.2}% 
+\contentsline {subsection}{\numberline {3.3.2}Solutions envisag\'ees et solution retenue}{19}{subsection.3.3.2}% 
 \contentsline {paragraph}{}{19}{section*.47}% 
-\contentsline {subsection}{\numberline {3.3.3}Probl\`emes rencontr\'e}{19}{subsection.3.3.3}% 
-\contentsline {paragraph}{}{19}{section*.48}% 
-\contentsline {subsection}{\numberline {3.3.4}Conclusion}{19}{subsection.3.3.4}% 
-\contentsline {paragraph}{}{19}{section*.49}% 
-\contentsline {chapter}{\numberline {4}Conclusion}{20}{chapter.4}% 
-\contentsline {chapter}{\numberline {A}Notes sur les diff\'erents dump de la m\'emoire}{22}{appendix.A}% 
-\contentsline {section}{\numberline {A.1}Test Dump m\'emoire STM32}{22}{section.A.1}% 
-\contentsline {paragraph}{}{22}{section*.51}% 
-\contentsline {subsection}{\numberline {A.1.1}Conclusions sur les validations}{22}{subsection.A.1.1}% 
-\contentsline {paragraph}{}{22}{section*.52}% 
+\contentsline {chapter}{\numberline {4}Conclusion}{22}{chapter.4}% 
+\contentsline {chapter}{\numberline {A}Notes sur les diff\'erents dump de la m\'emoire}{24}{appendix.A}% 
+\contentsline {section}{\numberline {A.1}Test Dump m\'emoire STM32}{24}{section.A.1}% 
+\contentsline {paragraph}{}{24}{section*.49}% 
+\contentsline {subsection}{\numberline {A.1.1}Conclusions sur les validations}{24}{subsection.A.1.1}% 
+\contentsline {paragraph}{}{24}{section*.50}% 
