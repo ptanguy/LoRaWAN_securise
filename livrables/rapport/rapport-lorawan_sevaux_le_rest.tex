@@ -72,31 +72,31 @@ Le n\oe{}ud LoRaWAN � besoin de clefs pour se connecter au r�seau, qu'il doi
 \chapter{R�alisation et Tests}
 \paragraph{}  
 
-Au cours de ce projet nous devions effectu� 3 r�alisations, un d�monstrateur, un n\oe{}ud s�curis� et une \textit{Box LoRa} s�curis�.
+Au cours de ce projet, nous devions effectuer 3 r�alisations : un d�monstrateur, un n\oe{}ud s�curis� et une \textit{Box LoRa} s�curis�s.
 
 
 
 \section{D�monstrateur}
 \paragraph{}
-Comme nous l'avons dis dans le chapitre pr�c�dant nous avons dans un premier temps r�alis� un d�monstrateur non s�curis� d'un r�seau LoRaWAN. Le but �tait d'utiliser nos connaissances du LoRaWAN et de les d�montrer lors d'une pr�sentation. Pour cr�er ce d�monstrateur nous avons utiliser l'OS \textit{ChirpStack}\cite{chirpstarksite} sur la \textit{Raspberry Pi} �quip� de son \textit{shield} antenne \textit{iC880A} pour le n\oe{}ud nous avons utilis� la carte \textit{Fipy}\cite{fipysite} avec sont \textit{shield} \textit{PySence}.
+Comme nous l'avons dit dans le chapitre pr�c�dent nous avons dans un premier temps r�alis� un d�monstrateur non s�curis� d'un r�seau LoRaWAN. Le but �tait d'utiliser nos connaissances du LoRaWAN et de les d�montrer lors d'une pr�sentation. Pour cr�er ce d�monstrateur nous avons utilisé l'OS \textit{ChirpStack}\cite{chirpstarksite} sur la \textit{Raspberry Pi} �quip�e de son \textit{shield} antenne \textit{iC880A} pour le n\oe{}ud nous avons utilis� la carte \textit{Fipy}\cite{fipysite} avec son \textit{shield} \textit{PySence}.
 
-L'OS ChirpStack permet de mettre tr�s facilement un r�seau LoRaWAN en fonctionnement car il int�gre d�j� les diff�rents services de passerelle, serveur r�seau et serveur d'application. Ces diff�rents service sont aussi facilement configurable gr�ce � une interface web.
+L'OS ChirpStack permet de mettre tr�s facilement un r�seau LoRaWAN en fonctionnement, car il int�gre d�j� les diff�rents services de passerelle, serveur r�seau et serveur d'application. Ces diff�rents services sont aussi facilement configurables gr�ce � une interface web.
 
-La carte \textit{Fipy}, est une carte de d�veloppement orient� pour l'utilisation de r�seau sans fils comme WiFi, Bluetooth ou LoRaWAN. Cette carte ce programme en \textit{Python} avec l'extension \textit{Pymakr} pour les �diteur de text \textit{Atom} et \textit{Visual Studio Code}.
+La carte \textit{Fipy}, est une carte de d�veloppement orient�e pour l'utilisation de r�seaux sans fils comme WiFi, Bluetooth ou LoRaWAN. Cette carte se programme en \textit{Python} avec l'extension \textit{Pymakr} pour les �diteurs de texte \textit{Atom} et \textit{Visual Studio Code}.
 Elle nous a permis de cr�er le noeud LoRaWAN facilement car la documentation donne des exemples pour ce type de programme.
 
-Lors du d�veloppement de ce d�monstrateur, nous n'avons pas eu de probl�mes particulier autre que des probl�mes de configuration de l'extension \textit{Pymakr}.
+Lors du d�veloppement de ce d�monstrateur, nous n'avons pas eu de probl�mes particuliers, autres que des probl�mes de configuration de l'extension \textit{Pymakr}.
 
-En fonctionnement le n\oe{}ud envoyait une chaine de caract�re � la passerelle puis on lisait cette chaine caract�re gr�ce au serveur d'application. 
+En fonctionnement le n\oe{}ud envoyait une chaine de caract�res � la passerelle puis on lisait cette chaine caract�res gr�ce au serveur d'application. 
 
 \section{N\oe{}ud}
 \paragraph{}
-Pour le rendu final du projet le n\oe{}ud doit fonctionner sur une carte B-L072Z-LRWAN1\cite{cartelora} qui est une carte de d�couverte produite par STmicroelectronics orient� pour le d�veloppement de solutions bas�es sur des r�seaux \textit{LoRaWAN} ou \textit{SigFox}. Cette carte est �quip� d'une MCU \textit{STM32L072CZ} qui est bas� sur une architecture Arm Cortex M0+.
+Pour le rendu final du projet le n\oe{}ud doit fonctionner sur une carte B-L072Z-LRWAN1\cite{cartelora} qui est une carte de d�couverte produite par STmicroelectronics orient�e pour le d�veloppement de solutions bas�es sur des r�seaux \textit{LoRaWAN} ou \textit{SigFox}. Cette carte est �quip�e d'une MCU \textit{STM32L072CZ} qui est bas�e sur une architecture Arm Cortex M0+.
 
-Pour rappelle, dans l'architecture LoRaWAN, le r�le du n\oe{}ud est de transmettre une information qui serra trait� par l'application server.
-Dans le cadre de notre sc�nario le campus connect�, nous transmettons une donn�e publique qui est la temp�rature. Nous nous sommes donc concentr�, sur l'authentification du n\oe{}ud LoRaWAN et l'int�grit� de la donn�e.
+Pour rappel, dans l'architecture LoRaWAN, le r�le du n\oe{}ud est de transmettre une information qui serra trait�e par l'application server.
+Dans le cadre de notre sc�nario le campus connect�, nous transmettons une donn�e publique qui est la temp�rature. Nous nous sommes donc concentr�s, sur l'authentification du n\oe{}ud LoRaWAN et l'int�grit� de la donn�e.
 
-Pour cela nous devions �viter que notre n\oe{}ud soit remplac� par un autre n\oe{}ud lequel pourrait envoyer des informations erron�es.
+Pour cela nous devions �viter que notre n\oe{}ud soit remplac� par un autre n\oe{}ud, lequel pourrait envoyer des informations erron�es.
 
 \subsection{Surface d'attaque du n\oe{}ud}
 \paragraph{}
@@ -108,16 +108,16 @@ Sur la figure \ref{Sch�ma vecteur attaque B-L072Z-LRWAN1} vous pouvez voir les
 \label{Sch�ma vecteur attaque B-L072Z-LRWAN1}
 \end{figure}
 
-Il y a plusieurs vecteur d'attaque possible dans n�tre cas, chaque points de la figure \ref{Sch�ma vecteur attaque B-L072Z-LRWAN1} est un cible potentielle :
+Il y a plusieurs vecteusr d'attaque possible dans n�tre cas, chaque points de la figure \ref{Sch�ma vecteur attaque B-L072Z-LRWAN1} est un cible potentielle :
 
 \begin{enumerate}
-\item Changer le mode de d�marrage pour utiliser un autre programme que celui contenu dans la m�moire Flash et avoir acc�s � tout les contenu du micro contr�leur.
+\item Changer le mode de d�marrage pour utiliser un autre programme que celui contenu dans la m�moire Flash et avoir acc�s � tous les contenus du micro contr�leur.
 \item Acc�s � des parties du programme sensibles pour les copier ou les voler
-\item Utilisation de faille dans la SRAM comme un buffer overflow pour voler des information de dans ou provoquer un d�nie de service sur la carte.
+\item Utilisation de failles dans la SRAM comme un buffer overflow pour voler des informations dedans ou provoquer un d�ni de service sur la carte.
 \item L'observation des communications et/ou usurpation des appareils du r�seau
 \item Un attaquant pourrait remplacer le \textit{shield} contenant les capteurs pour envoyer des fausses valeurs et mettre dans un �tat non d�termin�.
 \item Utilisation des ports de debugages pour avoir un acc�s complet au micro contr�leur.
-\item Utilisation des Interfaces de communication pour avoirs acc�s au micro contr�leur
+\item Utilisation des Interfaces de communication pour avoir acc�s au micro contr�leur
 \end{enumerate}
 
 Pour chacune des attaques ci-dessus on peut trouver une ou plusieurs contremesures:
@@ -141,7 +141,7 @@ Le protocole LoRaWAN permet � un n\oe{}ud de ce connecter de deux fa�ons dif
 \paragraph{}
 L'activation par \textbf{OTAA} met en jeux \textit{DevEUI}, \textit{AppEUI}, \textit{AppKey}  pour ce connecter � la \textit{gateway} puis utilise \textit{AppSKey} et \textit{NetSKey} pour chiffr�s la communication jusqu'� l'\textit{application server}.
 Le protocole LoRaWAN ne pr�cise pas si les cl�s doivent �tre stock� en clair dans la m�moire ou doivent �tre chiffr�s. Il faut \textit{AppSKey} et \textit{NetSKey} sont renouvel� � chaque 
-Si un attaquant arrive � obtenir les trois premi�res cl�s alors, il pourra usurp� l'identit� de notre n\oe{}ud. S'il parvint � obtenir les deux autres cl�s, il pourra uniquement d�chiffrer l'information.
+Si un attaquant arrive � obtenir les trois premi�res cl�s alors, il pourra usurper l'identit� de notre n\oe{}ud. S'il parvient � obtenir les deux autres cl�s, il pourra uniquement d�chiffrer l'information.
 
 \subsubsection{Fonctionnement activation ABP}
 \paragraph{}
