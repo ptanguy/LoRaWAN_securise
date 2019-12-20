@@ -112,3 +112,12 @@ On passe sur la branche warrior
 
     branch = warrior
 
+Rappatrier l'image sur la machine hôte
+
+    scp -r numeroetudiant@m1-isc-os:/<source>/ ./<cible>/
+
+Flasher l'image sur carte SD
+
+    dd if=<source> of=<cible> bs=<taille des blocs> skip= seek= conv=<conversion>
+
+Prêt à être utilisé sur la box LoRa. Les commandes d'administration peuvent s'effectuer via un terminal directement sur la box LoRa.
