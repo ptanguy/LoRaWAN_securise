@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.12.11)  20 DEC 2019 07:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.12.11)  20 DEC 2019 15:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -867,36 +867,152 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 
 ]
 Chapitre 1.
-(./documentationlorawanscuris.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 117.
- [1
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 105.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 11
+0.
+(/usr/share/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+) [1
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 117.
- (./documentationlorawanscuris.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 117.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 117.
+Overfull \hbox (27.4421pt too wide) in paragraph at lines 139--144
+[]\T1/ptm/m/n/10 mkdir build cd buid BOARD=B-L072Z-LRWAN1 cmake -DCMAKE_TOOLCHA
+IN_FILE= ^^Tcmake/toolchain-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--144
+\T1/ptm/m/n/10 arm-none-eabi.cmake ^^T -DBOARD= ^^T$BOARD ^^T -DAPPLICATION= ^^
+TLo-Ra-Mac ^^T -
+ []
+
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 153.
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 1
+53.
+(/usr/share/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+)
+LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <9> not available
+(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 153.
+ [2] [3] [4
+
+]
+Chapitre 2.
+<CreaPRojet.png, id=137, 836.12375pt x 134.5025pt>
+File: CreaPRojet.png Graphic file (type png)
+<use CreaPRojet.png>
+Package pdftex.def Info: CreaPRojet.png  used on input line 244.
+(pdftex.def)             Requested size: 469.76985pt x 75.56715pt.
+<selectioncarte.png, id=139, 1336.995pt x 935.495pt>
+File: selectioncarte.png Graphic file (type png)
+<use selectioncarte.png>
+Package pdftex.def Info: selectioncarte.png  used on input line 248.
+(pdftex.def)             Requested size: 469.75053pt x 328.68431pt.
+[5 <./CreaPRojet.png>]
+<nomproj.png, id=145, 608.2725pt x 633.36626pt>
+File: nomproj.png Graphic file (type png)
+<use nomproj.png>
+Package pdftex.def Info: nomproj.png  used on input line 252.
+(pdftex.def)             Requested size: 469.7635pt x 489.14319pt.
+ [6 <./selectioncarte.png>] [7 <./nomproj.png>]
+<config.png, id=156, 1621.05624pt x 610.28pt>
+File: config.png Graphic file (type png)
+<use config.png>
+Package pdftex.def Info: config.png  used on input line 282.
+(pdftex.def)             Requested size: 469.74799pt x 176.8463pt.
+<uart1.png, id=157, 719.68875pt x 489.83pt>
+File: uart1.png Graphic file (type png)
+<use uart1.png>
+Package pdftex.def Info: uart1.png  used on input line 286.
+(pdftex.def)             Requested size: 469.76883pt x 319.73108pt.
+<genererconfig.png, id=158, 32.12pt x 42.1575pt>
+File: genererconfig.png Graphic file (type png)
+<use genererconfig.png>
+Package pdftex.def Info: genererconfig.png  used on input line 290.
+(pdftex.def)             Requested size: 32.1199pt x 42.15738pt.
+ [8 <./config.png> <./uart1.png>]
+<main.png, id=165, 331.2375pt x 548.0475pt>
+File: main.png Graphic file (type png)
+<use main.png>
+Package pdftex.def Info: main.png  used on input line 294.
+(pdftex.def)             Requested size: 331.23668pt x 548.04616pt.
+ [9 <./genererconfig.png> <./main.png>]
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <9> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 299.
+<BPDebug.png, id=174, 91.34125pt x 76.285pt>
+File: BPDebug.png Graphic file (type png)
+<use BPDebug.png>
+Package pdftex.def Info: BPDebug.png  used on input line 350.
+(pdftex.def)             Requested size: 91.34102pt x 76.2848pt.
+ [10 <./BPDebug.png>]
+<Rresume.png, id=181, 92.345pt x 70.2625pt>
+File: Rresume.png Graphic file (type png)
+<use Rresume.png>
+Package pdftex.def Info: Rresume.png  used on input line 354.
+(pdftex.def)             Requested size: 92.34476pt x 70.26231pt.
+ [11 <./Rresume.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 436--437
+[]\T1/ptm/m/n/10 La liste des constantes dé-fi-nis-sant les sec-teurs de la mé-
+moire se trouve dans le fi-chier : \T1/ptm/m/it/10 Dri-
+ []
+
+[12]
+Chapitre 3.
+[13
+
+] [14]
+Underfull \hbox (badness 10000) in paragraph at lines 574--578
+[]\T1/ptm/m/n/10 path = layers/bsp/meta-raspberrypi url =
+ []
+
+[15] [16
+
+]
+Chapitre 4.
+[17] [18
+
+] (./documentationlorawanscuris.ind)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 625.
+ [19
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 625.
+
+(./documentationlorawanscuris.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 625.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 625.
 Package rerunfilecheck Info: File `documentationlorawanscuris.out' has not chan
 ged.
-(rerunfilecheck)             Checksum: E81C69F63AD497B126C77C1297BE8A5D;139.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 117.
+(rerunfilecheck)             Checksum: EBE7264FAF5CD1E9F8AADD1BBE6FCEB8;3341.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 625.
  ) 
 Here is how much of TeX's memory you used:
- 14363 strings out of 492167
- 199456 string characters out of 6131557
- 298927 words of memory out of 5000000
- 18459 multiletter control sequences out of 15000+600000
- 36899 words of font info for 49 fonts, out of 8000000 for 9000
+ 14627 strings out of 492167
+ 203638 string characters out of 6131557
+ 370286 words of memory out of 5000000
+ 18632 multiletter control sequences out of 15000+600000
+ 52020 words of font info for 72 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 42i,11n,49p,298b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
-ts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helveti
-c/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
-e/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on documentationlorawanscuris.pdf (5 pages, 38975 bytes).
+ 42i,12n,49p,641b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{cite.UtilisationLoRa-Node\\penalty\040\\@M\040\04
+0:loramac-node} has been referenced but does not exist, replaced by a fixed one
+
+
+{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy5.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb>
+</usr/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-dis
+t/fonts/type1/urw/courier/ucrro8a.pfb></usr/share/texmf-dist/fonts/type1/urw/he
+lvetic/uhvb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></
+usr/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-dist/fo
+nts/type1/urw/times/utmr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utm
+ri8a.pfb>
+Output written on documentationlorawanscuris.pdf (23 pages, 621578 bytes).
 PDF statistics:
- 59 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
- 7 named destinations out of 1000 (max. 500000)
- 29 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 275 PDF objects out of 1000 (max. 8388607)
+ 214 compressed objects within 3 object streams
+ 45 named destinations out of 1000 (max. 500000)
+ 194 words of extra memory for PDF output out of 10000 (max. 10000000)
 

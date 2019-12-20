@@ -97,6 +97,509 @@
 
 
 
+\chapter{Utilisation de LoRaMac\sphinxhyphen{}node}
+\label{\detokenize{UtilisationLoRa-Node:utilisation-de-loramac-node}}\label{\detokenize{UtilisationLoRa-Node::doc}}
+Dans un premier temps, nous allons utiliser le projet LoRaMAc\sphinxhyphen{}node créé par Semtech pour utiliser notre carte B\sphinxhyphen{}L072Z\sphinxhyphen{}LRWAN1 comme nœud LoRaWAN.
+
+
+\section{Installation}
+\label{\detokenize{UtilisationLoRa-Node:installation}}
+Pour gagner du temps dans le développement du nœud, nous utilisons comme base un projet github \sphinxcite{UtilisationLoRa-Node:loramac-node} mettant en œuvre le LoRaWAN sur notre carte.
+Nous développons le nœud à partir d’une distribution \sphinxstyleemphasis{Linux} basée sur \sphinxstyleemphasis{Arch Linux}, les dépendances requises sont :
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+cmake
+arm\PYGZhy{}none\PYGZhy{}eabi\PYGZhy{}gcc
+arm\PYGZhy{}none\PYGZhy{}eabi\PYGZhy{}newlibS221 : https://www.st.com/en/mems\PYGZhy{}and\PYGZhy{}sS221 : https://www.st.com/en/mems\PYGZhy{}and\PYGZhy{}sensors/hts221.html\PYGZsh{}overviewensors/hts221.html\PYGZsh{}overview
+openocd
+\end{sphinxVerbatim}
+
+Pour utiliser le projet LoRaMAC\sphinxhyphen{}node dans notre projet, nous avons téléchargé le .zip du projet de la branche master en \sphinxstylestrong{version 4.4.2}.
+Installation de Stlink
+———————\sphinxhyphen{}
+
+Le St\sphinxhyphen{}link est un programme permettant d’avoir accès au débuger des cartes conçues par STMicroelectronics, il permet, entre autres, de charger des programmes dans les cartes.
+.. code\sphinxhyphen{}block:: bash
+\begin{quote}
+
+git clone \sphinxurl{https://github.com/texane/stlink.git}
+make release
+cd build/Release
+sudo make install
+sudo ldconfig
+\end{quote}
+
+
+\subsection{Installation de LoRaMAC\sphinxhyphen{}node}
+\label{\detokenize{UtilisationLoRa-Node:installation-de-loramac-node}}
+Après avoir extrait le zip téléchargé précédemment, placez\sphinxhyphen{}vous dans le dossier LoRaMac\sphinxhyphen{}node\sphinxhyphen{}master.
+.. code\sphinxhyphen{}block:: bash
+\begin{quote}
+
+mkdir build
+cd buid
+BOARD=B\sphinxhyphen{}L072Z\sphinxhyphen{}LRWAN1
+cmake \sphinxhyphen{}DCMAKE\_TOOLCHAIN\_FILE= »cmake/toolchain\sphinxhyphen{}arm\sphinxhyphen{}none\sphinxhyphen{}eabi.cmake » \sphinxhyphen{}DBOARD= »\$BOARD » \sphinxhyphen{}DAPPLICATION= »LoRaMac » \sphinxhyphen{}DCLASS= »classA » \sphinxhyphen{}DACTIVEREGION= »LORAMAC\_REGION\_EU868 » ..
+make
+\end{quote}
+
+
+\section{Charger un programme dans la carte}
+\label{\detokenize{UtilisationLoRa-Node:charger-un-programme-dans-la-carte}}
+Pour charger le programme dans la carte nous utilisons St\sphinxhyphen{}Link, dans un premier temps brancher la carte à l’aide d’un câble USB à l’ordinateur.
+Sur la carte, vous devez utiliser le port USB le plus éloigné de l’antenne.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+st\PYGZhy{}info \PYGZhy{}\PYGZhy{}probe \PYG{c+c1}{\PYGZsh{}Permet de verifier que la carte est recunnu par l\PYGZsq{}ordinateur}
+\PYG{c+c1}{\PYGZsh{}Placez\PYGZhy{}vous dans le dossier build créé précédement.}
+st\PYGZhy{}flash write build/src/apps/LoRaMac/LoRaMac\PYGZhy{}classA.bin 0x8000000
+\end{sphinxVerbatim}
+
+Pour lancer le programme, vous n’avez plus qu’a appuyer sur le bouton noir (RESET) de la carte.
+
+
+\section{Faciliter la compilation et éviter les erreurs}
+\label{\detokenize{UtilisationLoRa-Node:faciliter-la-compilation-et-eviter-les-erreurs}}
+Pour faciliter la compilation et le chargement du projet nous vous recommandons de faire un script dans le dossier build.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+nano my\PYGZhy{}LoRa.sh
+\PYG{c+c1}{\PYGZsh{}A l\PYGZsq{}intérieur écrivez les lignes suivantes}
+\PYG{n+nv}{BOARD}\PYG{o}{=}B\PYGZhy{}L072Z\PYGZhy{}LRWAN1
+cmake \PYGZhy{}DCMAKE\PYGZus{}TOOLCHAIN\PYGZus{}FILE\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}cmake/toolchain\PYGZhy{}arm\PYGZhy{}none\PYGZhy{}eabi.cmake\PYGZdq{}} \PYGZhy{}DBOARD\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{n+nv}{\PYGZdl{}BOARD}\PYG{l+s+s2}{\PYGZdq{}} \PYGZhy{}DAPPLICATION\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}LoRaMac\PYGZdq{}} \PYGZhy{}DCLASS\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}classA\PYGZdq{}} \PYGZhy{}DACTIVEREGION\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}LORAMAC\PYGZus{}REGION\PYGZus{}EU868\PYGZdq{}} ..
+make
+\end{sphinxVerbatim}
+
+Maintenant pour mettre le programme sur la carte vous n’aurez plus qu’à la brancher et lancer la commande suivante.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+./my\PYGZhy{}LoRa.sh
+\end{sphinxVerbatim}
+
+
+\section{Configurer LoRaMAC\sphinxhyphen{}node}
+\label{\detokenize{UtilisationLoRa-Node:configurer-loramac-node}}
+Nous vous recommandons d’utiliser dans un premier temps le programme \sphinxstyleemphasis{exemple} de LoRaMAC\sphinxhyphen{}node.
+Pour cela, vous devrez utiliser les programmes se trouvant dans le dossier « LoRaWAN\_securise/noeud/LoRaMac\sphinxhyphen{}node\sphinxhyphen{}master/src/apps/LoRaMac/classA/B\sphinxhyphen{}L072Z\sphinxhyphen{}LRWAN1/ »
+
+Le programme \sphinxstyleemphasis{main.c} est le programme principal, c’est dans celui\sphinxhyphen{}ci que vous aller créer votre programme personnel. Le fichier \sphinxstyleemphasis{Commissioning.h} contient les différentes variables nécessaire à une liaison LoRaWAN (DevEUI, AppKey …).
+
+Lorsque l’on commence un projet, vous devez configurer dans un premier temps le fichier \sphinxstyleemphasis{Commissioning.h}.
+
+Dans nôtres cas nous utilisons une méthode de connexion APB donc nous devons configurer dans ce fichier, le mode de connexion, devAddr, AppSKey et NwkSKey.
+
+Voici les valeurs que nous utilisons pour ces différentes clés :
+\begin{itemize}
+\item {} 
+devAddr  =  0x00000000
+
+\item {} 
+AppSkey  =  0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C
+
+\item {} 
+NwkSkey  =   0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C
+
+\end{itemize}
+
+Pour configurer notre programme, cherchez les lignes suivantes et mettez les valeurs indiquées à la place des valeurs par défaut.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{define OVER\PYGZus{}THE\PYGZus{}AIR\PYGZus{}ACTIVATION                            0}
+\PYG{c+c1}{// Définit le mode de connexion APB}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{define LORAWAN\PYGZus{}DEVICE\PYGZus{}ADDRESS                             ( uint32\PYGZus{}t )0x00000000}
+\PYG{c+c1}{// DevAddr}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{define LORAWAN\PYGZus{}NWK\PYGZus{}S\PYGZus{}ENC\PYGZus{}KEY                              \PYGZob{} 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C \PYGZcb{}}
+\PYG{c+c1}{//NwkSKey}
+\PYG{c+cp}{\PYGZsh{}}\PYG{c+cp}{define LORAWAN\PYGZus{}APP\PYGZus{}S\PYGZus{}KEY                                  \PYGZob{} 0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C \PYGZcb{}}
+\PYG{c+c1}{//AppSKey}
+\end{sphinxVerbatim}
+
+Enregistrez les modifications et lancer le programme à l’aide du script créé précédemment.
+
+
+\chapter{Creation d’un programme de test pour y mettre des fonctions de sécurités}
+\label{\detokenize{creationPrgpourFctdeSEc:creation-d-un-programme-de-test-pour-y-mettre-des-fonctions-de-securites}}\label{\detokenize{creationPrgpourFctdeSEc::doc}}
+Pour faciliter l’implémentation des fonctions de sécurités, nous avons créé un programme simple utilisant uniquement des fonctions faites par STM.
+Le programme que nous avons créé inverse l’état de 3 LEDs à des intervalle différents, et tant que l’utilisateur appui sur le bouton bleu (USER) de la carte les LEDs restes éteintes. Le programme écrit aussi une clé secrète sur le port série.
+Si nous envoyons la clé secrète sur la liaison série, c’est pour éviter que le compilateur optimise le code en la supprimant, ce qui serrait possible si cette variable n’est pas utilisée.
+Installation du logiciel
+\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
+
+Pour ce programme, nous utilisons \sphinxstyleemphasis{CubeIDEv1.0.2} qui est l’IDE de \sphinxstyleemphasis{STMicroelectronic} permettant une configuration facile des horloges, des entrées sortie du micro contrôleur.
+Vous pouvez le télécharger pour vôtres plateforme à cette adresse : \sphinxurl{https://www.st.com/en/development-tools/stm32cubeide.html}.
+
+Une fois le fichier téléchargé, vous devez l’extraire. Et lancer le script d’installation avec les droits d’administrateur et suivez les consignes.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+unzip en.en.st\PYGZhy{}stm32cubeide\PYGZus{}1.1.0\PYGZus{}4551\PYGZus{}20191014\PYGZus{}1140\PYGZus{}amd64.sh.zip
+sudo sh ./en.en.st\PYGZhy{}stm32cubeide\PYGZus{}1.1.0\PYGZus{}4551\PYGZus{}20191014\PYGZus{}1140\PYGZus{}amd64.sh/st\PYGZhy{}stm32cubeide\PYGZus{}1.1.0\PYGZus{}4551\PYGZus{}20191014\PYGZus{}1140\PYGZus{}amd64.sh
+\end{sphinxVerbatim}
+
+
+\section{Configuration du projet}
+\label{\detokenize{creationPrgpourFctdeSEc:configuration-du-projet}}
+Dans le logiciel, vous devez commencer par créer un nouveau projet.
+File \sphinxhyphen{}\textgreater{} New \sphinxhyphen{}\textgreater{} STM32 PRoject
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{CreaPRojet}.png}\hspace*{\fill}}
+
+Dans la fenêtre qui c’est ouverte, aller sur l’onglet « board selector » et dans le champ de recherche « B\sphinxhyphen{}L072Z\sphinxhyphen{}LRWAN1 ».
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{selectioncarte}.png}\hspace*{\fill}}
+
+Sélectionner la carte puis cliquez sur « Next », entrer le nom de votre projet puis cliquez sur « Finish ».
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{nomproj}.png}\hspace*{\fill}}
+
+
+\section{Programmation}
+\label{\detokenize{creationPrgpourFctdeSEc:programmation}}
+Pour commencer, nous allons paramétrer les I/O, à savoir 3 LEDS et un Bouton Poussoir.
+
+Dans l’arborescencedu projet (fenêtre à gauche) sélectionner le fichier avec l’extension \sphinxstyleemphasis{.ioc} c’est un fichier qui va vous permettre de facilement configurer les I/O.
+
+Pour configurer les I/O cliquez sur leurs identifiants, sur la figure de droite. Sélectionner \sphinxstyleemphasis{GPIO\_Output} pour les LEDs et \sphinxstyleemphasis{GPIO\_Input} pour le bouton.
+En se référant à la documentation les I/O à configurer sont les suivantes :
+\begin{itemize}
+\item {} 
+PB5 = Led\_Vert
+
+\item {} 
+PB6 = Led\_Bleu
+
+\item {} 
+PB7 = Led\_Rouge
+
+\item {} 
+PB2 = Bouton Pression
+
+\end{itemize}
+
+Pour faciliter la programmation avec des noms personnalisés pour ces I/O, vous pouvez définir des \sphinxstyleemphasis{label} dans la colonne « User label » du tableau « GPIO ».
+
+Vous devriez avoir une configuration comparable à celle de la figure suivante.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{config}.png}\hspace*{\fill}}
+
+Maintenant nous allons configurer L’UART1, dans la catégorie « Connectivity » cliquer sur « USART1 » mettez le, en mode « Synchronous » et réglez le \sphinxstyleemphasis{Baud Rate} à 115200.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{uart1}.png}\hspace*{\fill}}
+
+Pour générer le code vous devez cliquer sur l’icône « Device Configuration Tool Code Generation » dans la barre d’outil en haut de l’écran.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{genererconfig}.png}\hspace*{\fill}}
+
+Dans l’arborescence du projet, déplacez\sphinxhyphen{}vous jusqu’au fichier \sphinxstyleemphasis{main.c}
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{main}.png}\hspace*{\fill}}
+
+Dans les variable privé \textasciitilde{}ligne 52 vous allez ajouter un buffer et nôtres clés secrète.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{uint8\PYGZus{}t} \PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]}\PYG{p}{;}
+\PYG{k+kt}{char} \PYG{n}{SECRET\PYGZus{}KEY}\PYG{p}{[}\PYG{l+m+mi}{16}\PYG{p}{]} \PYG{o}{=} \PYG{p}{\PYGZob{}}\PYG{l+m+mh}{0x2B}\PYG{p}{,} \PYG{l+m+mh}{0x7E}\PYG{p}{,} \PYG{l+m+mh}{0x15}\PYG{p}{,} \PYG{l+m+mh}{0x16}\PYG{p}{,} \PYG{l+m+mh}{0x28}\PYG{p}{,} \PYG{l+m+mh}{0xAE}\PYG{p}{,} \PYG{l+m+mh}{0xD2}\PYG{p}{,} \PYG{l+m+mh}{0xA6}\PYG{p}{,} \PYG{l+m+mh}{0xAB}\PYG{p}{,} \PYG{l+m+mh}{0xF7}\PYG{p}{,} \PYG{l+m+mh}{0x15}\PYG{p}{,} \PYG{l+m+mh}{0x88}\PYG{p}{,} \PYG{l+m+mh}{0x09}\PYG{p}{,} \PYG{l+m+mh}{0xCF}\PYG{p}{,} \PYG{l+m+mh}{0x3F}\PYG{p}{,} \PYG{l+m+mh}{0x3C}\PYG{p}{\PYGZcb{}}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+Dans la partie « USER CODE BEGIN 2 » \textasciitilde{} ligne 156 nous allons initialiser nos LEDs dans l’état éteint, puis envoyer notre clé sur la liaison série.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}WritePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Blue\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Blue\PYGZus{}Pin}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}WritePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Green\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Green\PYGZus{}Pin}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}WritePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Red\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Red\PYGZus{}Pin}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{16}\PYG{p}{;} \PYG{n}{i}\PYG{o}{+}\PYG{o}{+} \PYG{p}{)}\PYG{p}{\PYGZob{}}
+
+        \PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{SECRET\PYGZus{}KEY}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{;}
+
+        \PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}}\PYG{l+s+sc}{\PYGZbs{}n}\PYG{l+s+sc}{\PYGZsq{}}\PYG{p}{;}
+        \PYG{n}{HAL\PYGZus{}USART\PYGZus{}Transmit}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{husart1}\PYG{p}{,} \PYG{n}{buffer}\PYG{p}{,} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+Dans la boucle « while(1) » \textasciitilde{}ligne 187, de la fonction « main » du programme vous allez écrire le programme faisant clignoter les LEDs gère le bouton, tout en envoyant la clé sur la liaison série.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{16}\PYG{p}{;} \PYG{n}{i}\PYG{o}{+}\PYG{o}{+} \PYG{p}{)}\PYG{p}{\PYGZob{}}
+    \PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{n}{SECRET\PYGZus{}KEY}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]}\PYG{p}{;}
+    \PYG{n}{HAL\PYGZus{}USART\PYGZus{}Transmit}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{husart1}\PYG{p}{,} \PYG{n}{buffer}\PYG{p}{,} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{=} \PYG{l+s+sc}{\PYGZsq{}}\PYG{l+s+sc}{\PYGZbs{}n}\PYG{l+s+sc}{\PYGZsq{}}\PYG{p}{;}
+\PYG{n}{HAL\PYGZus{}USART\PYGZus{}Transmit}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{husart1}\PYG{p}{,} \PYG{n}{buffer}\PYG{p}{,} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{;}
+\PYG{n}{HAL\PYGZus{}Delay}\PYG{p}{(}\PYG{l+m+mi}{1000}\PYG{p}{)}\PYG{p}{;}
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}ReadPin}\PYG{p}{(}\PYG{n}{BP\PYGZus{}USER\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{BP\PYGZus{}USER\PYGZus{}Pin}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{\PYGZob{}}
+    \PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}WritePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Blue\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Blue\PYGZus{}Pin}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}WritePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Green\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Green\PYGZus{}Pin}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}WritePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Red\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Red\PYGZus{}Pin}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\PYG{k}{else}\PYG{p}{\PYGZob{}}
+    \PYG{c+c1}{//HAL\PYGZus{}Delay(1000);}
+    \PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}TogglePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Red\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Red\PYGZus{}Pin}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{HAL\PYGZus{}Delay}\PYG{p}{(}\PYG{l+m+mi}{500}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}TogglePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Blue\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Blue\PYGZus{}Pin}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{HAL\PYGZus{}Delay}\PYG{p}{(}\PYG{l+m+mi}{250}\PYG{p}{)}\PYG{p}{;}
+    \PYG{n}{HAL\PYGZus{}GPIO\PYGZus{}TogglePin}\PYG{p}{(}\PYG{n}{LED\PYGZus{}Green\PYGZus{}GPIO\PYGZus{}Port}\PYG{p}{,} \PYG{n}{LED\PYGZus{}Green\PYGZus{}Pin}\PYG{p}{)}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\section{Lancer le projet}
+\label{\detokenize{creationPrgpourFctdeSEc:lancer-le-projet}}
+Pour écrire le code sur la carte, vous devez d’abord la brancher à votre ordinateur.
+Puis lancer le débuggage, pour ça cliquez sur l’icône en forme de virus vert dans la barre d’outils au\sphinxhyphen{}dessus du code.
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{BPDebug}.png}\hspace*{\fill}}
+
+CubeIDE va passer en mode « Débuggage » une fois que le programme est chargé, vous pouvez soit, débrancher et rebrancher la carte pour le lancer ou vous pouvez aussi le démarrer depuis l’interface de l’IDE en cliquant sur l’icône « Resume »
+
+\noindent{\hspace*{\fill}\sphinxincludegraphics{{Rresume}.png}\hspace*{\fill}}
+
+
+\section{Fonctions de sécurités}
+\label{\detokenize{creationPrgpourFctdeSEc:fonctions-de-securites}}
+
+\subsection{RDP}
+\label{\detokenize{creationPrgpourFctdeSEc:rdp}}
+Pour implémenter la contre mesure RDP, vous devez tout d’abord créer une variable en dessous de celles créées précédemment.
+Cette variable contiendra nôtres configuration personnalisée des octets d’Options.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{FLASH\PYGZus{}OBProgramInitTypeDef} \PYG{n}{myconf}\PYG{p}{;}      \PYG{c+c1}{//Option bytes config perso for RDP}
+\end{sphinxVerbatim}
+
+En suite, il faut ajouter le code suivant à l’initialisation du système \textasciitilde{}ligne 113.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{// Implémentation de RDP}
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}Unlock}\PYG{p}{(}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n}{HAL\PYGZus{}OK}\PYG{p}{)}\PYG{p}{\PYGZob{}}      \PYG{c+c1}{//deverouille la memoire flash}
+
+
+          \PYG{k}{if}\PYG{p}{(}\PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}OB\PYGZus{}Unlock}\PYG{p}{(}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n}{HAL\PYGZus{}OK}\PYG{p}{)}\PYG{p}{\PYGZob{}}  \PYG{c+c1}{// deverouille les options byte dans la memoire flash}
+
+                  \PYG{n}{HAL\PYGZus{}FLASHEx\PYGZus{}OBGetConfig}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{myconf}\PYG{p}{)}\PYG{p}{;}     \PYG{c+c1}{// Recupere la configuration actuelle des options bytes}
+
+
+                  \PYG{k}{if}\PYG{p}{(}\PYG{n}{myconf}\PYG{p}{.}\PYG{n}{RDPLevel} \PYG{o}{=}\PYG{o}{=} \PYG{n}{OB\PYGZus{}RDP\PYGZus{}LEVEL0}\PYG{p}{)}\PYG{p}{\PYGZob{}} \PYG{c+c1}{// Test si RDP est désactiver}
+
+                          \PYG{n}{myconf}\PYG{p}{.}\PYG{n}{RDPLevel} \PYG{o}{=} \PYG{n}{OB\PYGZus{}RDP\PYGZus{}LEVEL1}\PYG{p}{;}      \PYG{c+c1}{//Mettre à 1 pour avoir le niveau 1}
+
+                          \PYG{n}{HAL\PYGZus{}FLASHEx\PYGZus{}OBProgram}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{myconf}\PYG{p}{)}\PYG{p}{;}       \PYG{c+c1}{// Ecrit la configuration}
+
+
+                          \PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}OB\PYGZus{}Launch}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}        \PYG{c+c1}{// applique la configuration des options bytes}
+
+                          \PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}OB\PYGZus{}Lock}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}  \PYG{c+c1}{//verouille les options byte dans la memoire flash}
+                \PYG{p}{\PYGZcb{}}
+
+        \PYG{p}{\PYGZcb{}}
+          \PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}Lock}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}     \PYG{c+c1}{//verouille la memoire flash}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+
+\subsection{PCROP et RDP}
+\label{\detokenize{creationPrgpourFctdeSEc:pcrop-et-rdp}}
+Pour implémenter PCROP en plus de RDP, il faut rajouter une variable pour la configuration des octets d’option avancé à coté de la variable créé précédemment.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{FLASH\PYGZus{}AdvOBProgramInitTypeDef} \PYG{n}{myconfAdv}\PYG{p}{;}
+\end{sphinxVerbatim}
+
+Il faut ensuite modifier le morceau de code écrit précédemment pour y ajouter la configuration de PCROP.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}Unlock}\PYG{p}{(}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n}{HAL\PYGZus{}OK}\PYG{p}{)}\PYG{p}{\PYGZob{}}      \PYG{c+c1}{//deverouille la memoire flash}
+
+
+\PYG{k}{if}\PYG{p}{(}\PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}OB\PYGZus{}Unlock}\PYG{p}{(}\PYG{p}{)} \PYG{o}{=}\PYG{o}{=} \PYG{n}{HAL\PYGZus{}OK}\PYG{p}{)}\PYG{p}{\PYGZob{}}    \PYG{c+c1}{// deverouille les options byte dans la memoire flash}
+
+        \PYG{n}{HAL\PYGZus{}FLASHEx\PYGZus{}OBGetConfig}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{myconf}\PYG{p}{)}\PYG{p}{;}       \PYG{c+c1}{// Recupere la configuration actuelle des options bytes}
+        \PYG{n}{HAL\PYGZus{}FLASHEx\PYGZus{}AdvOBGetConfig}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{myconfAdv}\PYG{p}{)}\PYG{p}{;} \PYG{c+c1}{//Récupère la configuration du registre où sont stocké les configurations de pcrop}
+
+
+        \PYG{k}{if}\PYG{p}{(}\PYG{n}{myconf}\PYG{p}{.}\PYG{n}{RDPLevel} \PYG{o}{=}\PYG{o}{=} \PYG{n}{OB\PYGZus{}RDP\PYGZus{}LEVEL0}\PYG{p}{)}\PYG{p}{\PYGZob{}}
+
+                \PYG{n}{myconfAdv}\PYG{p}{.}\PYG{n}{PCROPSector} \PYG{o}{=} \PYG{n}{OB\PYGZus{}PCROP\PYGZus{}AllPages} \PYG{o}{\PYGZhy{}} \PYG{n}{OB\PYGZus{}PCROP\PYGZus{}Pages32to63}\PYG{p}{;}       \PYG{c+c1}{//Choix des secteur à sécuriser}
+                 \PYG{n}{myconfAdv}\PYG{p}{.}\PYG{n}{PCROPSector2} \PYG{o}{=} \PYG{n}{OB\PYGZus{}PCROP\PYGZus{}AllPages}\PYG{p}{;}
+                 \PYG{n}{myconfAdv}\PYG{p}{.}\PYG{n}{PCROPState} \PYG{o}{=} \PYG{n}{OB\PYGZus{}PCROP\PYGZus{}STATE\PYGZus{}ENABLE}\PYG{p}{;}
+                 \PYG{n}{myconf}\PYG{p}{.}\PYG{n}{RDPLevel} \PYG{o}{=} \PYG{n}{OB\PYGZus{}RDP\PYGZus{}LEVEL1}\PYG{p}{;}       \PYG{c+c1}{//Mettre à 1 pour avoir le niveau 1}
+                 \PYG{n}{HAL\PYGZus{}FLASHEx\PYGZus{}OB\PYGZus{}SelectPCROP}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}  \PYG{c+c1}{//Active PcROP}
+                 \PYG{n}{HAL\PYGZus{}FLASHEx\PYGZus{}AdvOBProgram}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{myconfAdv}\PYG{p}{)}\PYG{p}{;}
+                 \PYG{n}{HAL\PYGZus{}FLASHEx\PYGZus{}OBProgram}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{myconf}\PYG{p}{)}\PYG{p}{;}        \PYG{c+c1}{// Ecrit la configuration}
+                 \PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}OB\PYGZus{}Launch}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;} \PYG{c+c1}{// applique la configuration des options bytes}
+                 \PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}OB\PYGZus{}Lock}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}   \PYG{c+c1}{//verouille les options byte dans la memoire flash}
+        \PYG{p}{\PYGZcb{}}
+  \PYG{p}{\PYGZcb{}}
+  \PYG{n}{HAL\PYGZus{}FLASH\PYGZus{}Lock}\PYG{p}{(}\PYG{p}{)}\PYG{p}{;}     \PYG{c+c1}{//verouille la memoire flash}
+\PYG{p}{\PYGZcb{}}
+\end{sphinxVerbatim}
+
+La liste des constantes définissant les secteurs de la mémoire se trouve dans le fichier : \sphinxstyleemphasis{Drivers/STM32L0xx\_HAL\_Driver/Inc/stm32l0xx\_hal\_flash\_ex.h}, les définitions commence à partir de la ligne 489.
+
+
+\chapter{Tutoriel pour ajouter une layer SELinux à notre OS chirpstack\sphinxhyphen{}gateway\sphinxhyphen{}os via Yocto :}
+\label{\detokenize{securisationGW:tutoriel-pour-ajouter-une-layer-selinux-a-notre-os-chirpstack-gateway-os-via-yocto}}\label{\detokenize{securisationGW::doc}}
+
+\section{Connexion au serveur de compilation}
+\label{\detokenize{securisationGW:connexion-au-serveur-de-compilation}}
+Pour se connecter au serveur de compilation :
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+numeroetudiant@m1\PYGZhy{}isc\PYGZhy{}os
+motdepasse
+\end{sphinxVerbatim}
+
+choisir un shell bash
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+bash
+\end{sphinxVerbatim}
+
+
+\section{Problèmes rentrés}
+\label{\detokenize{securisationGW:problemes-rentres}}
+Problème de téléchargement qui ne marche pas:
+\begin{quote}
+
+Ajoutez le proxy: export http\_proxy=http://ocytohe.univ\sphinxhyphen{}ubs.fr:3128
+\end{quote}
+
+Problème Git et proxy
+\begin{quote}
+
+git config \textendash{}global http.proxy \sphinxurl{http://ocytohe.univ-ubs.fr:3128}
+\end{quote}
+
+
+\section{Générer l’OS}
+\label{\detokenize{securisationGW:generer-l-os}}
+Cloner le répertoire :
+\begin{quote}
+
+git clone \sphinxurl{https://github.com/brocaar/chirpstack-gateway-os}
+\end{quote}
+
+On se met dans notre répertoire \textgreater{} \textasciitilde{}/projet/os/chirpstack\sphinxhyphen{}gateway\sphinxhyphen{}os/
+
+On active l’environnement de build en faisant
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{source} oe\PYGZhy{}init\PYGZhy{}build\PYGZhy{}env
+\end{sphinxVerbatim}
+
+renvoit :
+\begin{quote}
+
+« You had no conf/local.conf file. This configuration file has therefore been created for you with some default values.
+You may wish to edit it, for example, select a different machine (target hardware). See conf/local.conf for more information as common configuration options are commented.
+
+You had no conf/bblayers.conf file. This configuration file has therefore been created for you with some default values.
+To add additional metadata layers into your configuration please add entries to conf/bblayers.conf. »
+\end{quote}
+
+On se retrouve dans le dossier build
+
+Ajouter la layer meta\sphinxhyphen{}selinux, dans le dossier source
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+git clone https://git.yoctoproject.org/git/meta\PYGZhy{}selinux
+\end{sphinxVerbatim}
+
+Aller éditer manuellement le fichier bblayers.conf dans le dossier build, pour l’ajouter
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+vim bblayers.conf
+i \PYG{o}{(}entrer en mode insertion\PYG{o}{)}
+\end{sphinxVerbatim}
+
+Ajouter à la fin du fichier, dans les guillemets :
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+/home/numeroetudiant/projet/os/chirpstack\PYGZhy{}gateway\PYGZhy{}os/meta\PYGZhy{}selinux \PYG{l+s+se}{\PYGZbs{}}
+echap
+:wq
+\end{sphinxVerbatim}
+
+Maintenant, on cherche à compiler nôtre image, avec la commande
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+bitbake core\PYGZhy{}image\PYGZhy{}minimal
+\end{sphinxVerbatim}
+
+Cependant, nous ne pouvons pas effectuer cette comande, car les modules dont dépend le projet chirpstack\sphinxhyphen{}gateway\sphinxhyphen{}os ne peuvent pas téléchargés, et bitbake en fait partie.
+
+Le protocole ssh est bloqué par le seveur de compilation. Certains utilisent le protocole git qui lui aussi utilise le protocole ssh.
+on a donc remplacé les url git par des url https qui n’utilisent pas le protocole ssh pour les télécharger.
+
+On suit le cheminement du makefile :
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+make submodules
+\end{sphinxVerbatim}
+
+Cependant, nous avons oublié de modifier également le fichier
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+git submodule init
+git \PYG{n+nv}{submodule} \PYG{o}{=}\PYGZgt{} nous montre toutes les layers .git/modules/layers
+\end{sphinxVerbatim}
+
+On finit par tout télécharger à la main
+On peut relancer la compilation
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+bitbake core\PYGZhy{}image\PYGZhy{}minimal
+\end{sphinxVerbatim}
+
+On obtient une erreur :
+\begin{quote}
+
+« Layer selinux is not compatible with the core layer which only supports these series: thud (layer is compatible with zeus) »
+\end{quote}
+
+On va donc copier notre répertoire ailleurs pour faire des essais et essayer de changer de version de yocto : nous étions sur rocko et nous passons à zeus :
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+git checkout \PYGZhy{}b zeus origin/zeus
+\end{sphinxVerbatim}
+
+Cependant erreur, nous travaillons sur le git du projet chirpstack\sphinxhyphen{}gateway\sphinxhyphen{}os donc incompatible pour les commandes avec la version zeus.
+
+on passe tout le monde sur warrior (avant dernière version disponible et fonctionnelle)
+
+On doit changer thud dans le fichier .gitmodules
+
+exemple :
+\begin{quote}
+\begin{description}
+\item[{{[}submodule « layers/bsp/meta\sphinxhyphen{}raspberrypi »{]}}] \leavevmode
+path = layers/bsp/meta\sphinxhyphen{}raspberrypi
+url = git://git.yoctoproject.org/meta\sphinxhyphen{}raspberrypi
+branch = thud
+
+\end{description}
+\end{quote}
+
+On passe sur la branche warrior
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nv}{branch} \PYG{o}{=} warrior
+\end{sphinxVerbatim}
+
+Rappatrier l’image sur la machine hôte
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+scp \PYGZhy{}r numeroetudiant@m1\PYGZhy{}isc\PYGZhy{}os:/\PYGZlt{}source\PYGZgt{}/ ./\PYGZlt{}cible\PYGZgt{}/
+\end{sphinxVerbatim}
+
+Flasher l’image sur carte SD
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+dd \PYG{k}{if}\PYG{o}{=}\PYGZlt{}source\PYGZgt{} \PYG{n+nv}{of}\PYG{o}{=}\PYGZlt{}cible\PYGZgt{} \PYG{n+nv}{bs}\PYG{o}{=}\PYGZlt{}taille des blocs\PYGZgt{} \PYG{n+nv}{skip}\PYG{o}{=} \PYG{n+nv}{seek}\PYG{o}{=} \PYG{n+nv}{conv}\PYG{o}{=}\PYGZlt{}conversion\PYGZgt{}
+\end{sphinxVerbatim}
+
+Prêt à être utilisé sur la box LoRa. Les commandes d’administration peuvent s’effectuer via un terminal directement sur la box LoRa.
+
+
 \chapter{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}
 \item {} 
@@ -109,6 +612,11 @@
 \DUrole{xref,std,std-ref}{search}
 
 \end{itemize}
+
+\begin{sphinxthebibliography}{LoRaMAC\sphinxhyphen{}}
+\bibitem[LoRaMAC\sphinxhyphen{}node]{UtilisationLoRa-Node:loramac-node}
+Projet permettant la mise en œuvre d’un Nœud LoRaWAN sur une carte \sphinxstyleemphasis{B\sphinxhyphen{}L072Z\sphinxhyphen{}LRWAN1} (\sphinxurl{https://github.com/Lora-net/LoRaMac-node/tree/master/Doc})
+\end{sphinxthebibliography}
 
 
 

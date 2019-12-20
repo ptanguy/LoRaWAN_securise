@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto : &#8212; Documentation Documentation LoRa WAN Sécurisé </title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tutoriel-pour-ajouter-une-layer-selinux-a-notre-os-chirpstack-gateway-os-via-yocto">
+<h1>Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto :<a class="headerlink" href="#tutoriel-pour-ajouter-une-layer-selinux-a-notre-os-chirpstack-gateway-os-via-yocto" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="connexion-au-serveur-de-compilation">
+<h2>Connexion au serveur de compilation<a class="headerlink" href="#connexion-au-serveur-de-compilation" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour se connecter au serveur de compilation :</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>numeroetudiant@m1-isc-os
+motdepasse
+</pre></div>
+</div>
+<p>choisir un shell bash</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>bash
+</pre></div>
+</div>
+</div>
+<div class="section" id="problemes-rentres">
+<h2>Problèmes rentrés<a class="headerlink" href="#problemes-rentres" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Problème de téléchargement qui ne marche pas:</p>
+<blockquote>
+<div><p>Ajoutez le proxy: export http_proxy=http://ocytohe.univ-ubs.fr:3128</p>
+</div></blockquote>
+<p>Problème Git et proxy</p>
+<blockquote>
+<div><p>git config –global http.proxy <a class="reference external" href="http://ocytohe.univ-ubs.fr:3128">http://ocytohe.univ-ubs.fr:3128</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="generer-l-os">
+<h2>Générer l’OS<a class="headerlink" href="#generer-l-os" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Cloner le répertoire :</p>
+<blockquote>
+<div><p>git clone <a class="reference external" href="https://github.com/brocaar/chirpstack-gateway-os">https://github.com/brocaar/chirpstack-gateway-os</a></p>
+</div></blockquote>
+<p>On se met dans notre répertoire &gt; ~/projet/os/chirpstack-gateway-os/</p>
+<p>On active l’environnement de build en faisant</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> oe-init-build-env
+</pre></div>
+</div>
+<p>renvoit :</p>
+<blockquote>
+<div><p>« You had no conf/local.conf file. This configuration file has therefore been created for you with some default values.
+You may wish to edit it, for example, select a different machine (target hardware). See conf/local.conf for more information as common configuration options are commented.</p>
+<p>You had no conf/bblayers.conf file. This configuration file has therefore been created for you with some default values.
+To add additional metadata layers into your configuration please add entries to conf/bblayers.conf. »</p>
+</div></blockquote>
+<p>On se retrouve dans le dossier build</p>
+<p>Ajouter la layer meta-selinux, dans le dossier source</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>git clone https://git.yoctoproject.org/git/meta-selinux
+</pre></div>
+</div>
+<p>Aller éditer manuellement le fichier bblayers.conf dans le dossier build, pour l’ajouter</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>vim bblayers.conf
+i <span class="o">(</span>entrer en mode insertion<span class="o">)</span>
+</pre></div>
+</div>
+<p>Ajouter à la fin du fichier, dans les guillemets :</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>/home/numeroetudiant/projet/os/chirpstack-gateway-os/meta-selinux <span class="se">\</span>
+echap
+:wq
+</pre></div>
+</div>
+<p>Maintenant, on cherche à compiler nôtre image, avec la commande</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>bitbake core-image-minimal
+</pre></div>
+</div>
+<p>Cependant, nous ne pouvons pas effectuer cette comande, car les modules dont dépend le projet chirpstack-gateway-os ne peuvent pas téléchargés, et bitbake en fait partie.</p>
+<p>Le protocole ssh est bloqué par le seveur de compilation. Certains utilisent le protocole git qui lui aussi utilise le protocole ssh.
+on a donc remplacé les url git par des url https qui n’utilisent pas le protocole ssh pour les télécharger.</p>
+<p>On suit le cheminement du makefile :</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>make submodules
+</pre></div>
+</div>
+<p>Cependant, nous avons oublié de modifier également le fichier</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>git submodule init
+git <span class="nv">submodule</span> <span class="o">=</span>&gt; nous montre toutes les layers .git/modules/layers
+</pre></div>
+</div>
+<p>On finit par tout télécharger à la main
+On peut relancer la compilation</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>bitbake core-image-minimal
+</pre></div>
+</div>
+<p>On obtient une erreur :</p>
+<blockquote>
+<div><p>« Layer selinux is not compatible with the core layer which only supports these series: thud (layer is compatible with zeus) »</p>
+</div></blockquote>
+<p>On va donc copier notre répertoire ailleurs pour faire des essais et essayer de changer de version de yocto : nous étions sur rocko et nous passons à zeus :</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>git checkout -b zeus origin/zeus
+</pre></div>
+</div>
+<p>Cependant erreur, nous travaillons sur le git du projet chirpstack-gateway-os donc incompatible pour les commandes avec la version zeus.</p>
+<p>on passe tout le monde sur warrior (avant dernière version disponible et fonctionnelle)</p>
+<p>On doit changer thud dans le fichier .gitmodules</p>
+<p>exemple :</p>
+<blockquote>
+<div><dl class="simple">
+<dt>[submodule « layers/bsp/meta-raspberrypi »]</dt><dd><p>path = layers/bsp/meta-raspberrypi
+url = git://git.yoctoproject.org/meta-raspberrypi
+branch = thud</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>On passe sur la branche warrior</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="nv">branch</span> <span class="o">=</span> warrior
+</pre></div>
+</div>
+<p>Rappatrier l’image sur la machine hôte</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>scp -r numeroetudiant@m1-isc-os:/&lt;source&gt;/ ./&lt;cible&gt;/
+</pre></div>
+</div>
+<p>Flasher l’image sur carte SD</p>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>&lt;source&gt; <span class="nv">of</span><span class="o">=</span>&lt;cible&gt; <span class="nv">bs</span><span class="o">=</span>&lt;taille des blocs&gt; <span class="nv">skip</span><span class="o">=</span> <span class="nv">seek</span><span class="o">=</span> <span class="nv">conv</span><span class="o">=</span>&lt;conversion&gt;
+</pre></div>
+</div>
+<p>Prêt à être utilisé sur la box LoRa. Les commandes d’administration peuvent s’effectuer via un terminal directement sur la box LoRa.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Documentation LoRa WAN Sécurisé</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, François Sevaux, Arthur Le Rest | M1 CSSE UBS Lorient.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/securisationGW.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

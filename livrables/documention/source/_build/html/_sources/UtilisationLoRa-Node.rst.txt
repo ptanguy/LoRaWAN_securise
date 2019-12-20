@@ -2,41 +2,56 @@
 Utilisation de LoRaMac-node
 ****************************
 
-Dans un premier temps nous allons utiliser le projet LoRaMAc-node créer par semtech pour utiliser notre carte B-L072Z-LRWAN1 comme noeud LoRaWAN.
+Dans un premier temps, nous allons utiliser le projet LoRaMAc-node créé par Semtech pour utiliser notre carte B-L072Z-LRWAN1 comme nœud LoRaWAN.
 
 Installation
 ############
 
-Pour commencer, vous devez installer les dépendances nécessaires. Le nom des pacquet est sucéptible de varié en onctions de votre OS, dans nôtres cas nous utilisons ArchLinux
 
-.. code-block:: Bash
+Pour gagner du temps dans le développement du nœud, nous utilisons comme base un projet github [LoRaMAC-node]_ mettant en œuvre le LoRaWAN sur notre carte.
+Nous développons le nœud à partir d'une distribution *Linux* basée sur *Arch Linux*, les dépendances requises sont : 
 
-	sudo pacman -Sy arm-none-eabi-gcc gdb-common cmake
-	# Installation de St-Link version Open Sources
-	git clone https://github.com/texane/stlink.git
-	make release
-	cd build/Release
-	sudo make install
-	sudo ldconfig
+.. code-block:: bash
+
+    cmake
+    arm-none-eabi-gcc
+    arm-none-eabi-newlibS221 : https://www.st.com/en/mems-and-sS221 : https://www.st.com/en/mems-and-sensors/hts221.html#overviewensors/hts221.html#overview
+    openocd
+
+Pour utiliser le projet LoRaMAC-node dans notre projet, nous avons téléchargé le .zip du projet de la branche master en **version 4.4.2**.
+Installation de Stlink
+----------------------
+
+Le St-link est un programme permettant d'avoir accès au débuger des cartes conçues par STMicroelectronics, il permet, entre autres, de charger des programmes dans les cartes.
+.. code-block:: bash
+
+    git clone https://github.com/texane/stlink.git
+    make release
+    cd build/Release
+    sudo make install
+    sudo ldconfig
+
+Installation de LoRaMAC-node
+----------------------------
+
+Après avoir extrait le zip téléchargé précédemment, placez-vous dans le dossier LoRaMac-node-master.
+.. code-block:: bash
+
+    mkdir build
+    cd buid
+    BOARD=B-L072Z-LRWAN1
+    cmake -DCMAKE_TOOLCHAIN_FILE="cmake/toolchain-arm-none-eabi.cmake" -DBOARD="$BOARD" -DAPPLICATION="LoRaMac" -DCLASS="classA" -DACTIVEREGION="LORAMAC_REGION_EU868" ..
+    make
 
 
-Ensuite il faut récupérer la branche master du projet sur github.
+.. [LoRaMAC-node] Projet permettant la mise en œuvre d'un Nœud LoRaWAN sur une carte *B-L072Z-LRWAN1* (https://github.com/Lora-net/LoRaMac-node/tree/master/Doc)
 
-.. code-block:: Bash
 
-	git clone https://github.com/Lora-net/LoRaMac-node.git
-	cd LoRaMac-node-master
-	mkdir build
-	cd build 
-	BOARD=B-L072Z-LRWAN1
-	cmake -DCMAKE_TOOLCHAIN_FILE="cmake/toolchain-arm-none-eabi.cmake" -DBOARD="$BOARD" -DAPPLICATION="LoRaMac" -DCLASS="classA" -DACTIVEREGION="LORAMAC_REGION_EU868" ..
-	make
-	
 Charger un programme dans la carte
 ##################################
 
-Pour charger le programme dans la carte nous utilisons St-Link, dans un premier temps brancher la carte à l'aide d'un cable USB à l'ordinateur.
-Sur la carte vous devez utiliser le port USB le plus éloigné de l'antenne.
+Pour charger le programme dans la carte nous utilisons St-Link, dans un premier temps brancher la carte à l'aide d'un câble USB à l'ordinateur.
+Sur la carte, vous devez utiliser le port USB le plus éloigné de l'antenne.
 
 .. code-block:: Bash
 
@@ -71,13 +86,13 @@ Configurer LoRaMAC-node
 #######################
 
 Nous vous recommandons d'utiliser dans un premier temps le programme *exemple* de LoRaMAC-node.
-Pour cela, vous devrez utiliser les programmes ce trouvant dans le dossier "LoRaWAN_securise/noeud/LoRaMac-node-master/src/apps/LoRaMac/classA/B-L072Z-LRWAN1/"
+Pour cela, vous devrez utiliser les programmes se trouvant dans le dossier "LoRaWAN_securise/noeud/LoRaMac-node-master/src/apps/LoRaMac/classA/B-L072Z-LRWAN1/"
 
-Le programme *main.c* est le programme principale c'est dans celui-ci que vous aller créer votre programme personnel. Le fichier *Commissioning.h* contient les différentes variables nécéssaire à une liaison LoRaWAN (DevEUI, AppKey ...).
+Le programme *main.c* est le programme principal, c'est dans celui-ci que vous aller créer votre programme personnel. Le fichier *Commissioning.h* contient les différentes variables nécessaire à une liaison LoRaWAN (DevEUI, AppKey ...).
 
-Lorsque l'on commence un projet vous devez configurer dans un premier temps le fichier *Commissioning.h*.
+Lorsque l'on commence un projet, vous devez configurer dans un premier temps le fichier *Commissioning.h*.
 
-Dans notres cas nous utilisons une méthode de connexion APB donc nous devons configurer dans ce fichier, le mode de connexion, devAddr, AppSKey et NwkSKey.
+Dans nôtres cas nous utilisons une méthode de connexion APB donc nous devons configurer dans ce fichier, le mode de connexion, devAddr, AppSKey et NwkSKey.
 
 Voici les valeurs que nous utilisons pour ces différentes clés :
 
@@ -85,7 +100,7 @@ Voici les valeurs que nous utilisons pour ces différentes clés :
 * AppSkey  =  0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C 
 * NwkSkey  =   0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C 
 
-Pour conigurer nôtre programme, cherchez les lignes suivante et métez les valeurs indiqué à la place des valeurs par défaut
+Pour configurer notre programme, cherchez les lignes suivantes et mettez les valeurs indiquées à la place des valeurs par défaut.
 
 .. code-block:: C
 
@@ -99,4 +114,4 @@ Pour conigurer nôtre programme, cherchez les lignes suivante et métez les vale
 	//AppSKey
 
 
-Enregistrez les modifications et lancer le programme à l'aide du script créé précédement.
+Enregistrez les modifications et lancer le programme à l'aide du script créé précédemment.

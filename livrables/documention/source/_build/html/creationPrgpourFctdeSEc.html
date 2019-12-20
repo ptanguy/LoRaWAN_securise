@@ -15,6 +15,8 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto :" href="securisationGW.html" />
+    <link rel="prev" title="Utilisation de LoRaMac-node" href="UtilisationLoRa-Node.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,56 +35,55 @@
             
   <div class="section" id="creation-d-un-programme-de-test-pour-y-mettre-des-fonctions-de-securites">
 <h1>Creation d’un programme de test pour y mettre des fonctions de sécurités<a class="headerlink" href="#creation-d-un-programme-de-test-pour-y-mettre-des-fonctions-de-securites" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Pour faciliter l’implémentation des fonctions de sécurités, nous avons créer un programme simple utilisant uniquement des fonctions faite par STM.
-Le programme que nous avons créer inverse l’état de 3 LEDs à des intervalent différents, et tant que l’utiliseur appuit sur le bouton bleu (USER) de la carte les LEDs restes éteintes. Le programme Ecrit aussi une clés secrette sur le port serie.
-Si nous envoyons la clés secret sur la liaison série c’est pour eviter que le compilateur optimise le code en la supprimant, ce qui serrait possible si cette variable n’est pas utlisé.</p>
-<div class="section" id="installation-du-logiciel">
-<h2>Installation du logiciel<a class="headerlink" href="#installation-du-logiciel" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Pour ce programme, nous utilisons <em>CubeIDEv1.0.2</em> qui est l’IDE de <em>STMicroelectronic</em> permetant une configuration facile des horloges, des entrées sortie … du micro contrôleur.
-Vous pouvez le télécharger pour votres platforme à cette addresse : <a class="reference external" href="https://www.st.com/en/development-tools/stm32cubeide.html">https://www.st.com/en/development-tools/stm32cubeide.html</a>.</p>
-<p>Une fois le fichier téléchargé vous devez l’extraire. Et lancer le script d’installation avec les droit d’administrateur et suivez les consignes.</p>
+<p>Pour faciliter l’implémentation des fonctions de sécurités, nous avons créé un programme simple utilisant uniquement des fonctions faites par STM.
+Le programme que nous avons créé inverse l’état de 3 LEDs à des intervalle différents, et tant que l’utilisateur appui sur le bouton bleu (USER) de la carte les LEDs restes éteintes. Le programme écrit aussi une clé secrète sur le port série.
+Si nous envoyons la clé secrète sur la liaison série, c’est pour éviter que le compilateur optimise le code en la supprimant, ce qui serrait possible si cette variable n’est pas utilisée.
+Installation du logiciel
+########################</p>
+<p>Pour ce programme, nous utilisons <em>CubeIDEv1.0.2</em> qui est l’IDE de <em>STMicroelectronic</em> permettant une configuration facile des horloges, des entrées sortie du micro contrôleur.
+Vous pouvez le télécharger pour vôtres plateforme à cette adresse : <a class="reference external" href="https://www.st.com/en/development-tools/stm32cubeide.html">https://www.st.com/en/development-tools/stm32cubeide.html</a>.</p>
+<p>Une fois le fichier téléchargé, vous devez l’extraire. Et lancer le script d’installation avec les droits d’administrateur et suivez les consignes.</p>
 <div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span>unzip en.en.st-stm32cubeide_1.1.0_4551_20191014_1140_amd64.sh.zip
 sudo sh ./en.en.st-stm32cubeide_1.1.0_4551_20191014_1140_amd64.sh/st-stm32cubeide_1.1.0_4551_20191014_1140_amd64.sh
 </pre></div>
 </div>
-</div>
 <div class="section" id="configuration-du-projet">
 <h2>Configuration du projet<a class="headerlink" href="#configuration-du-projet" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Dans le logiciel vous devez commencer par créer un nouveau projet.
+<p>Dans le logiciel, vous devez commencer par créer un nouveau projet.
 File -&gt; New -&gt; STM32 PRoject</p>
 <img alt="_images/CreaPRojet.png" class="align-center" src="_images/CreaPRojet.png" />
 <p>Dans la fenêtre qui c’est ouverte, aller sur l’onglet « board selector » et dans le champ de recherche « B-L072Z-LRWAN1 ».</p>
 <img alt="_images/selectioncarte.png" class="align-center" src="_images/selectioncarte.png" />
-<p>Sélectionez la carte puis cliquez sur « Next », entrer le nom de votre projet puis cliquez sur « Finish ».</p>
+<p>Sélectionner la carte puis cliquez sur « Next », entrer le nom de votre projet puis cliquez sur « Finish ».</p>
 <img alt="_images/nomproj.png" class="align-center" src="_images/nomproj.png" />
 </div>
 <div class="section" id="programmation">
 <h2>Programmation<a class="headerlink" href="#programmation" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Pour commencer nous allons paramétrer les I/O, à savoir 3 LEDS et un Bouton Poussoir.</p>
-<p>Dans l’orborecence du projet  (Fenêtre à gauche) séléctionner le fichier avec l’extension <em>.ioc</em> c’est un fichier qui va vous permettre de facilement configurer le les I/O.</p>
-<p>Pour configurer les I/O cliquer sur leurs identifiants, sur la figure de droite. Sélectionner <em>GPIO_Output</em> pour les LEDs et <em>GPIO_Input</em> pour le bouton.
-En se réferant à la documentations les I/O à configurer sont les suivantes :</p>
+<p>Pour commencer, nous allons paramétrer les I/O, à savoir 3 LEDS et un Bouton Poussoir.</p>
+<p>Dans l’arborescencedu projet (fenêtre à gauche) sélectionner le fichier avec l’extension <em>.ioc</em> c’est un fichier qui va vous permettre de facilement configurer les I/O.</p>
+<p>Pour configurer les I/O cliquez sur leurs identifiants, sur la figure de droite. Sélectionner <em>GPIO_Output</em> pour les LEDs et <em>GPIO_Input</em> pour le bouton.
+En se référant à la documentation les I/O à configurer sont les suivantes :</p>
 <ul class="simple">
 <li><p>PB5 = Led_Vert</p></li>
 <li><p>PB6 = Led_Bleu</p></li>
 <li><p>PB7 = Led_Rouge</p></li>
 <li><p>PB2 = Bouton Pression</p></li>
 </ul>
-<p>Pour faciliter la programmation avec des nom personnalisé pour ces I/O, vous pouvez définir des <em>label</em> dans la colonne « User label » du tableau « GPIO ».</p>
-<p>Vous devrier avoir une configuration comparable à celle de la figure suivante.</p>
+<p>Pour faciliter la programmation avec des noms personnalisés pour ces I/O, vous pouvez définir des <em>label</em> dans la colonne « User label » du tableau « GPIO ».</p>
+<p>Vous devriez avoir une configuration comparable à celle de la figure suivante.</p>
 <img alt="_images/config.png" class="align-center" src="_images/config.png" />
-<p>Maintenant nous allons configurer L’uart1, dans la catégorie « Connectivity » cliquer sur « USART1 » metter le en mode « Synchronous » et réglez le <em>Baud Rate</em> à 115200.</p>
+<p>Maintenant nous allons configurer L’UART1, dans la catégorie « Connectivity » cliquer sur « USART1 » mettez le, en mode « Synchronous » et réglez le <em>Baud Rate</em> à 115200.</p>
 <img alt="_images/uart1.png" class="align-center" src="_images/uart1.png" />
-<p>Pour génerer le code vous devez cliquer sur l’icon « Device Configuration Tool Code Generation » dans la barre d’outil en haut de l’écran.</p>
+<p>Pour générer le code vous devez cliquer sur l’icône « Device Configuration Tool Code Generation » dans la barre d’outil en haut de l’écran.</p>
 <img alt="_images/genererconfig.png" class="align-center" src="_images/genererconfig.png" />
-<p>Dans l’arborescence du projet déplacez-vous jusqu’au fichier <em>main.c</em></p>
+<p>Dans l’arborescence du projet, déplacez-vous jusqu’au fichier <em>main.c</em></p>
 <img alt="_images/main.png" class="align-center" src="_images/main.png" />
-<p>Dans les variable privé ~ligne 52 vous allez ajouter un buffer et notres clés secrette.</p>
+<p>Dans les variable privé ~ligne 52 vous allez ajouter un buffer et nôtres clés secrète.</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
 <span class="kt">char</span> <span class="n">SECRET_KEY</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x2B</span><span class="p">,</span> <span class="mh">0x7E</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span> <span class="mh">0xAE</span><span class="p">,</span> <span class="mh">0xD2</span><span class="p">,</span> <span class="mh">0xA6</span><span class="p">,</span> <span class="mh">0xAB</span><span class="p">,</span> <span class="mh">0xF7</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span> <span class="mh">0x88</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span> <span class="mh">0xCF</span><span class="p">,</span> <span class="mh">0x3F</span><span class="p">,</span> <span class="mh">0x3C</span><span class="p">};</span>
 </pre></div>
 </div>
-<p>Dans la partie « USER CODE BEGIN 2 » ~ ligne 156 nous allons initialiser nos LEDs dans l’état éteint, puis envoyer notre clés sur la liaison série.</p>
+<p>Dans la partie « USER CODE BEGIN 2 » ~ ligne 156 nous allons initialiser nos LEDs dans l’état éteint, puis envoyer notre clé sur la liaison série.</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_Blue_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Blue_Pin</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_Green_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Green_Pin</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="n">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_Red_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Red_Pin</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
@@ -96,7 +97,7 @@ En se réferant à la documentations les I/O à configurer sont les suivantes :<
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Dans la boucle « while(1) » ~ligne 187, de la fonction « main » du programme vous allez ecrire le programme faisant clignoter les LEDs gère le bouton, tout en envoyant la clés sur la liaison série.</p>
+<p>Dans la boucle « while(1) » ~ligne 187, de la fonction « main » du programme vous allez écrire le programme faisant clignoter les LEDs gère le bouton, tout en envoyant la clé sur la liaison série.</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">){</span>
     <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">SECRET_KEY</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
     <span class="n">HAL_USART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">husart1</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="mi">1000</span><span class="p">);</span>
@@ -122,8 +123,84 @@ En se réferant à la documentations les I/O à configurer sont les suivantes :<
 </div>
 <div class="section" id="lancer-le-projet">
 <h2>Lancer le projet<a class="headerlink" href="#lancer-le-projet" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Pour écrire le code sur la carte, vous devez d’abords la brancher à votre ordinateur.
-Puis lancer le débuggage, pour ça cliquez sur l’icon en forme de virus vert dans la barre d’outils au dessus du code.</p>
+<p>Pour écrire le code sur la carte, vous devez d’abord la brancher à votre ordinateur.
+Puis lancer le débuggage, pour ça cliquez sur l’icône en forme de virus vert dans la barre d’outils au-dessus du code.</p>
+<img alt="_images/BPDebug.png" class="align-center" src="_images/BPDebug.png" />
+<p>CubeIDE va passer en mode « Débuggage » une fois que le programme est chargé, vous pouvez soit, débrancher et rebrancher la carte pour le lancer ou vous pouvez aussi le démarrer depuis l’interface de l’IDE en cliquant sur l’icône « Resume »</p>
+<img alt="_images/Rresume.png" class="align-center" src="_images/Rresume.png" />
+</div>
+<div class="section" id="fonctions-de-securites">
+<h2>Fonctions de sécurités<a class="headerlink" href="#fonctions-de-securites" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="rdp">
+<h3>RDP<a class="headerlink" href="#rdp" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour implémenter la contre mesure RDP, vous devez tout d’abord créer une variable en dessous de celles créées précédemment.
+Cette variable contiendra nôtres configuration personnalisée des octets d’Options.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">FLASH_OBProgramInitTypeDef</span> <span class="n">myconf</span><span class="p">;</span>      <span class="c1">//Option bytes config perso for RDP</span>
+</pre></div>
+</div>
+<p>En suite, il faut ajouter le code suivant à l’initialisation du système ~ligne 113.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="c1">// Implémentation de RDP</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">HAL_FLASH_Unlock</span><span class="p">()</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">){</span>      <span class="c1">//deverouille la memoire flash</span>
+
+
+          <span class="k">if</span><span class="p">(</span><span class="n">HAL_FLASH_OB_Unlock</span><span class="p">()</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">){</span>  <span class="c1">// deverouille les options byte dans la memoire flash</span>
+
+                  <span class="n">HAL_FLASHEx_OBGetConfig</span><span class="p">(</span><span class="o">&amp;</span><span class="n">myconf</span><span class="p">);</span>     <span class="c1">// Recupere la configuration actuelle des options bytes</span>
+
+
+                  <span class="k">if</span><span class="p">(</span><span class="n">myconf</span><span class="p">.</span><span class="n">RDPLevel</span> <span class="o">==</span> <span class="n">OB_RDP_LEVEL0</span><span class="p">){</span> <span class="c1">// Test si RDP est désactiver</span>
+
+                          <span class="n">myconf</span><span class="p">.</span><span class="n">RDPLevel</span> <span class="o">=</span> <span class="n">OB_RDP_LEVEL1</span><span class="p">;</span>      <span class="c1">//Mettre à 1 pour avoir le niveau 1</span>
+
+                          <span class="n">HAL_FLASHEx_OBProgram</span><span class="p">(</span><span class="o">&amp;</span><span class="n">myconf</span><span class="p">);</span>       <span class="c1">// Ecrit la configuration</span>
+
+
+                          <span class="n">HAL_FLASH_OB_Launch</span><span class="p">();</span>        <span class="c1">// applique la configuration des options bytes</span>
+
+                          <span class="n">HAL_FLASH_OB_Lock</span><span class="p">();</span>  <span class="c1">//verouille les options byte dans la memoire flash</span>
+                <span class="p">}</span>
+
+        <span class="p">}</span>
+          <span class="n">HAL_FLASH_Lock</span><span class="p">();</span>     <span class="c1">//verouille la memoire flash</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pcrop-et-rdp">
+<h3>PCROP et RDP<a class="headerlink" href="#pcrop-et-rdp" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Pour implémenter PCROP en plus de RDP, il faut rajouter une variable pour la configuration des octets d’option avancé à coté de la variable créé précédemment.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">FLASH_AdvOBProgramInitTypeDef</span> <span class="n">myconfAdv</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Il faut ensuite modifier le morceau de code écrit précédemment pour y ajouter la configuration de PCROP.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">HAL_FLASH_Unlock</span><span class="p">()</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">){</span>      <span class="c1">//deverouille la memoire flash</span>
+
+
+<span class="k">if</span><span class="p">(</span><span class="n">HAL_FLASH_OB_Unlock</span><span class="p">()</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">){</span>    <span class="c1">// deverouille les options byte dans la memoire flash</span>
+
+        <span class="n">HAL_FLASHEx_OBGetConfig</span><span class="p">(</span><span class="o">&amp;</span><span class="n">myconf</span><span class="p">);</span>       <span class="c1">// Recupere la configuration actuelle des options bytes</span>
+        <span class="n">HAL_FLASHEx_AdvOBGetConfig</span><span class="p">(</span><span class="o">&amp;</span><span class="n">myconfAdv</span><span class="p">);</span> <span class="c1">//Récupère la configuration du registre où sont stocké les configurations de pcrop</span>
+
+
+        <span class="k">if</span><span class="p">(</span><span class="n">myconf</span><span class="p">.</span><span class="n">RDPLevel</span> <span class="o">==</span> <span class="n">OB_RDP_LEVEL0</span><span class="p">){</span>
+
+                <span class="n">myconfAdv</span><span class="p">.</span><span class="n">PCROPSector</span> <span class="o">=</span> <span class="n">OB_PCROP_AllPages</span> <span class="o">-</span> <span class="n">OB_PCROP_Pages32to63</span><span class="p">;</span>       <span class="c1">//Choix des secteur à sécuriser</span>
+                 <span class="n">myconfAdv</span><span class="p">.</span><span class="n">PCROPSector2</span> <span class="o">=</span> <span class="n">OB_PCROP_AllPages</span><span class="p">;</span>
+                 <span class="n">myconfAdv</span><span class="p">.</span><span class="n">PCROPState</span> <span class="o">=</span> <span class="n">OB_PCROP_STATE_ENABLE</span><span class="p">;</span>
+                 <span class="n">myconf</span><span class="p">.</span><span class="n">RDPLevel</span> <span class="o">=</span> <span class="n">OB_RDP_LEVEL1</span><span class="p">;</span>       <span class="c1">//Mettre à 1 pour avoir le niveau 1</span>
+                 <span class="n">HAL_FLASHEx_OB_SelectPCROP</span><span class="p">();</span>  <span class="c1">//Active PcROP</span>
+                 <span class="n">HAL_FLASHEx_AdvOBProgram</span><span class="p">(</span><span class="o">&amp;</span><span class="n">myconfAdv</span><span class="p">);</span>
+                 <span class="n">HAL_FLASHEx_OBProgram</span><span class="p">(</span><span class="o">&amp;</span><span class="n">myconf</span><span class="p">);</span>        <span class="c1">// Ecrit la configuration</span>
+                 <span class="n">HAL_FLASH_OB_Launch</span><span class="p">();</span> <span class="c1">// applique la configuration des options bytes</span>
+                 <span class="n">HAL_FLASH_OB_Lock</span><span class="p">();</span>   <span class="c1">//verouille les options byte dans la memoire flash</span>
+        <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">HAL_FLASH_Lock</span><span class="p">();</span>     <span class="c1">//verouille la memoire flash</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>La liste des constantes définissant les secteurs de la mémoire se trouve dans le fichier : <em>Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_flash_ex.h</em>, les définitions commence à partir de la ligne 489.</p>
+</div>
 </div>
 </div>
 
@@ -144,11 +221,25 @@ Puis lancer le débuggage, pour ça cliquez sur l’icon en forme de virus vert 
 
 
 <h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="UtilisationLoRa-Node.html">Utilisation de LoRaMac-node</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creation d’un programme de test pour y mettre des fonctions de sécurités</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-du-projet">Configuration du projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#programmation">Programmation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lancer-le-projet">Lancer le projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fonctions-de-securites">Fonctions de sécurités</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="securisationGW.html">Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto :</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="UtilisationLoRa-Node.html" title="Chapitre précédent">Utilisation de LoRaMac-node</a></li>
+      <li>Next: <a href="securisationGW.html" title="Chapitre suivant">Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto :</a></li>
   </ul></li>
 </ul>
 </div>
