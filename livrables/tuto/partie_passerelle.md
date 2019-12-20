@@ -2,7 +2,7 @@
        
 3.3. Passerelle
 
-3.3.1 Surface d'attaque de la \textit{Box LoRa}
+3.3.1. Surface d'attaque de la \textit{Box LoRa}
 
 Concernant la \textit{Box LoRa}, nous avons affaire aux problématiques suivantes : comment faire pour garantir une compartimentation parfaite et complète de tous les services proposés ? 
 
@@ -14,3 +14,6 @@ On peut donc voir que si chaque service n'est pas bien isolé des autres, ces co
 
 Ainsi, nous devons apporter des solutions pour protéger notre \textit{Box LoRa}
 
+3.3.2. Solutions envisagées
+
+Pour répondre à ces problématiques, nous avons étudié plusieurs solutions.
