@@ -56,5 +56,10 @@ Nous ne détaillerons pas les autres modèles d'habilitations.
 Par rapport aux problématiques de sécurité définies plus haut, nous pensons que le modèle MAC est le plus adapté pour notre \textit{Box LoRa}. Nous choisissons donc ce modèle comme angle d'attaque.
 
 Ainsi, nous pouvons proposer l'utilisation de deux modules intéressants qui semblent être adaptés : SELinux et AppArmor.
-Ces deux Linux Security Module (LSM) sont un moyen de mettre en oeuvre un système MAC. Nous allons faire un rapide comparatif afin de prendre une décision sur l'emploi d'un tel ou d'un autre.
+Ces deux Linux Security Module (LSM) sont un moyen de mettre en oeuvre un système MAC. 
+
+Concernant l'emploi de l'un ou l'autre, nous avons retenu les critères suivants : 
+
+AppArmor n'est pas nativement installable sur Raspberry Pi, il faut faire de nombreuses modifications. SELinux est moins facile à configurer, mais à l'aide de nos cours de bases des OS, nous avons les connaissances pour ajouter un LSM au noyau de notre OS (cf. tutoriel en annexe). Suivant de nombreux conseils de collègues et de lectures sur Internet, nous choisissons de partir sur la solution SELinux.
+
 
