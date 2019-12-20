@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>La sécurité dans le micro controleur STM32L072CZ &#8212; Documentation Documentation LoRa WAN Sécurisé </title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="la-securite-dans-le-micro-controleur-stm32l072cz">
+<h1>La sécurité dans le micro controleur STM32L072CZ<a class="headerlink" href="#la-securite-dans-le-micro-controleur-stm32l072cz" title="Lien permanent vers ce titre">¶</a></h1>
+<p>La plus part des micros controleurs STM incorporent des technologies de sécurité <a class="footnote-reference brackets" href="#id2" id="id1">1</a> , nous allons nous concentrer sur le composant <em>STM32L072CZ</em> car c’est le microcontroleur utiliser pour notre noeud.</p>
+<div class="section" id="fonctions-de-securite-dans-le-stm32l072cz">
+<h2>Fonctions de sécurité dans le STM32L072CZ<a class="headerlink" href="#fonctions-de-securite-dans-le-stm32l072cz" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Tout les micros controleur n’ont pas les mêmes fonctions de sécurité intégrer. Ici nous allons lister celles présantes dans le <em>STM32L072CZ</em></p>
+<ul class="simple">
+<li><p>RDP (Read Out Protection) : Protection de la mémoire Flash qui empêche la copie du code. Cette fonction prévient donc du reverse ingineering fait à l’aide des outils de debugage.</p></li>
+<li><p>WRP (Write Protection) : Sert à prottéger une partie de la mémoire Flash d’un effacement ou d’une mise à jour.</p></li>
+<li><p>PCROP (Execute Only Firmware) : Permet de configurer certaines partie de la memoire flash pour qu’elles soient uniquement accéssible accéssible par le bus d’instruction du CPU.</p></li>
+<li><p>Firewall : Le parfeu est un composant physique qui controle les accés à trois parties de la mémoire, la zone du code (mémoire flash), les donées volatile (SRAM) et les donnés non volatile (Flash).</p></li>
+<li><p>MPU (Memory Protection Unit) : Mecanisme de protection qui permet de définir des droits d’accès à certaines zone de la mémoire.</p></li>
+<li><p>Anti temper : Détection d’une intrusion au niveau physique, permet de prendre les mesure adéquates comme éfaccer la mémoire par example.</p></li>
+<li><p>IWDG ( Independant watchdog) : Watchdog Independant permettant de lever des flags si une tache prend plus de temps que celui qui lui est attribué.</p></li>
+</ul>
+</div>
+<div class="section" id="premier-cas-d-etude-attaque-par-les-ports-de-debugage">
+<h2>Premier cas d’étude, attaque par les ports de debugage<a class="headerlink" href="#premier-cas-d-etude-attaque-par-les-ports-de-debugage" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Dans un premier temps nous allons nous concentrer sur la sécurisation vis à vis d’un dump memoire via l’outil ST Link.
+Pour celà nous allons utiliser la fonction de sécurité <em>RDP</em>.</p>
+<p>La <em>RDP</em> offre différents niveaux de protection 0, 1, 2.</p>
+<ul class="simple">
+<li><p>Le niveau 0, équivaut à aucune protection la memoire flash et complètement lisible, peut importe le mode de démarrage du controleur (par la RAM, par la flash, par le debuger …). Ce mode doit être utilisé uniquement pour la phase de développement.</p></li>
+<li><p>Le niveau 1, empèche l’accès à la mémoire flash et à la mémoire SRAM2 par le debuger. Cepandant lorsque le programme démarra à partir de la mémoire flash celui-ci à accées à la mémoire flash et la SRAM2.</p></li>
+<li><p>Le niveau 2, ce niveau empêche tout les accès aux mémoire depuis l’extérieur. <strong>Attention après l’avoir activer on ne peut plus revenir en arrière</strong>.</p></li>
+</ul>
+</div>
+<div class="section" id="second-cas-d-etude-attaque-par-une-faille-dans-le-code">
+<h2>Second cas d’étude, attaque par une faille dans le code<a class="headerlink" href="#second-cas-d-etude-attaque-par-une-faille-dans-le-code" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Il faut faire très attention lors de l’utilisation de la <em>RDP</em> car dés que l’on utilise une protection de niveau &lt;= 1, on ne peut plus mettre de programme dans la carte via le bootloader.
+Pour mettre à jour le programme il faut utiliser une <em>SFU</em> (Secure Firmware Update).</p>
+<p>Dans un second temps nous pouvons nous attarder sur protéger nos clès vias à vis d’une faille exploité dans notre code. Pour celà nous devrons utiliser en plus les sécurité suivante <em>PCROP</em>, <em>Firewall</em> et <em>TrustZone</em></p>
+</div>
+<div class="section" id="ordre-d-implementation-des-fonctions-de-securite">
+<h2>Ordre d’implémentation des fonctions de sécurité<a class="headerlink" href="#ordre-d-implementation-des-fonctions-de-securite" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Nous venons de voir les fonctions à mettre en oeuvre pour notre scénario, comme ce sont des fonctions de sécurité une fois implémentée elles vont restreindrent les capacité de débogage du code.</p>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Vous pouvez trouver plus d’information à cette adresse : <a class="reference external" href="https://www.st.com/content/ccc/resource/technical/document/application_note/group1/9f/0b/e4/b6/75/15/4f/e2/DM00493651/files/DM00493651.pdf/jcr:content/translations/en.DM00493651.pdf">https://www.st.com/content/ccc/resource/technical/document/application_note/group1/9f/0b/e4/b6/75/15/4f/e2/DM00493651/files/DM00493651.pdf/jcr:content/translations/en.DM00493651.pdf</a></p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Documentation LoRa WAN Sécurisé</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Recherche rapide</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, François Sevaux, Arthur Le Rest | M1 CSSE UBS Lorient.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/securityInSTM.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

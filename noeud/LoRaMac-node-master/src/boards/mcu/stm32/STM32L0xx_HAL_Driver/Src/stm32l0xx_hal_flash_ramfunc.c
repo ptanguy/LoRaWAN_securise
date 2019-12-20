@@ -80,12 +80,11 @@ extern FLASH_ProcessTypeDef pFlash;
 /**
   * @}
   */
-  
+
 /** @defgroup FLASH_RAMFUNC FLASH_RAMFUNC
   * @brief FLASH functions executed from RAM
   * @{
-  */ 
-
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -104,7 +103,7 @@ static __RAM_FUNC FLASHRAM_SetErrorCode(void);
   */
 
 /* Private functions ---------------------------------------------------------*/
- 
+
 /** @defgroup FLASH_RAMFUNC_Exported_Functions FLASH RAM Exported Functions
  *
 @verbatim  
@@ -117,17 +116,121 @@ static __RAM_FUNC FLASHRAM_SetErrorCode(void);
 
 @endverbatim
   * @{
-  */ 
+  */
 
 /** @defgroup FLASH_RAMFUNC_Exported_Functions_Group1 Peripheral features functions 
   * @{
-  */  
+  */
 
 /**
   * @brief  Enable  the power down mode during RUN mode.
   * @note  This function can be used only when the user code is running from Internal SRAM.
   * @retval HAL status
   */
+
+//============================ PERSO =============================================
+/**
+* This function performs a mass erase of the flash.
+* This function is loaded in RAM.
+* Param None
+* Retval while successful, the function never returns except if executed
+from RAM
+*/
+__RAM_FUNC FlashMassErase(void)
+{
+  /* (1) Check if the read protection is not level 2 */
+  /* (2) Check if the read protection is not level 1 */
+  /* (3) Erase the Option byte containing the read protection */
+  /* (4) Reload the Option bytes */
+  /* (5) Program read protection to level 1 by writing 0xAA
+to start the mass erase */
+  /* (6) Lock the NVM by setting the PELOCK bit */
+  if ((FLASH->OPTR & 0x000000FF) == 0xCC) /* (1) */
+  {
+    /* Report the error and abort*/
+    return;
+  }
+  else if ((FLASH->OPTR & 0x000000FF) == 0xAA) /* (2) */
+  {
+    OptionByteErase(FLASH_OPTR0);         /* (3) */
+    FLASH->PECR |= FLASH_PECR_OBL_LAUNCH; /* (4) */
+    /* The MCU will reset while executing the option bytes reloading */
+  }
+  OptionByteProg(FLASH_OPTR0, 0x00AA);               /* (5) */
+  if (*(uint32_t *)(FLASH_MAIN_ADDR) != (uint32_t)0) /* Check the erasing
+of the page by reading all the page value */
+  {
+    /* Report the error */
+  }
+  LockNVM(); /* (6) */
+  while (1)  /* Infinite loop */
+  {
+  }
+}
+
+/**
+* This function programs a 16-bit option byte and its complement word.
+* Param None
+* Retval None
+*/
+__INLINE __RAM_FUNC OptionByteProg(uint8_t index, uint16_t data)
+{
+/* (1) Write a 32-bit word value at the option byte address,
+the 16-bit data is extended with its compemented value */
+/* (3) Wait until the BSY bit is reset in the FLASH_SR register */
+/* (4) Check the EOP flag in the FLASH_SR register */
+/* (5) Clear EOP flag by software by writing EOP at 1 */
+*(__IO uint32_t *)(OB_BASE + index) = (uint32_t)((~data << 16) | data);
+/* (1) */
+while ((FLASH->SR & FLASH_SR_BSY) != 0) /* (2) */
+{
+/* For robust implementation, add here time-out management */
+}
+if ((FLASH->SR & FLASH_SR_EOP) != 0) /* (3) */
+{
+FLASH->SR = FLASH_SR_EOP; /* (4) */
+}
+else
+{
+/* Manage the error cases */
+
+/**
+* This function erases a 16-bit option byte and its complement
+word.
+* Param None
+* Retval None
+*/
+__INLINE __RAM_FUNC OptionByteErase(uint8_t index)
+{
+  /* (1) Set the ERASE bit in the FLASH_PECR register
+to enable option byte erasing */
+  /* (2) Write a 32-bit word value at the option byte address to be erased
+to start the erase sequence */
+  /* (3) Wait until the BSY bit is reset in the FLASH_SR register */
+  /* (4) Check the EOP flag in the FLASH_SR register */
+  /* (5) Clear EOP flag by software by writing EOP at 1 */
+  /* (6) Reset the ERASE and PROG bits in the FLASH_PECR register
+to disable the page erase */
+  FLASH->PECR |= FLASH_PECR_ERASE;         /* (1) */
+  *(__IO uint32_t *)(OB_BASE + index) = 0; /* (2) */
+  while ((FLASH->SR & FLASH_SR_BSY) != 0)  /* (3) */
+  {
+    /* For robust implementation, add here time-out management */
+  }
+  if ((FLASH->SR & FLASH_SR_EOP) != 0) /* (4) */
+  {
+    FLASH->SR |= FLASH_SR_EOP; /* (5) */
+  }
+  else
+  {
+    /* Manage the error cases */
+  }
+  FLASH->PECR &= ~(FLASH_PECR_ERASE); /* (6) */
+}
+
+
+//============================ PERSO =============================================
+
 __RAM_FUNC HAL_FLASHEx_EnableRunPowerDown(void)
 {
   /* Enable the Power Down in Run mode*/
@@ -146,7 +249,7 @@ __RAM_FUNC HAL_FLASHEx_DisableRunPowerDown(void)
   /* Disable the Power Down in Run mode*/
   __HAL_FLASH_POWER_DOWN_DISABLE();
 
-  return HAL_OK;  
+  return HAL_OK;
 }
 
 /**
@@ -184,19 +287,19 @@ __RAM_FUNC HAL_FLASHEx_EraseParallelPage(uint32_t Page_Address1, uint32_t Page_A
 
   /* Wait for last operation to be completed */
   status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
-  
-  if(status == HAL_OK)
+
+  if (status == HAL_OK)
   {
     /* Proceed to erase the page */
     SET_BIT(FLASH->PECR, FLASH_PECR_PARALLBANK);
     SET_BIT(FLASH->PECR, FLASH_PECR_ERASE);
     SET_BIT(FLASH->PECR, FLASH_PECR_PROG);
-  
+
     /* Write 00000000h to the first word of the first program page to erase */
     *(__IO uint32_t *)Page_Address1 = 0x00000000U;
-    /* Write 00000000h to the first word of the second program page to erase */    
+    /* Write 00000000h to the first word of the second program page to erase */
     *(__IO uint32_t *)Page_Address2 = 0x00000000U;
- 
+
     /* Wait for last operation to be completed */
     status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
 
@@ -204,7 +307,7 @@ __RAM_FUNC HAL_FLASHEx_EraseParallelPage(uint32_t Page_Address1, uint32_t Page_A
     CLEAR_BIT(FLASH->PECR, FLASH_PECR_PROG);
     CLEAR_BIT(FLASH->PECR, FLASH_PECR_ERASE);
     CLEAR_BIT(FLASH->PECR, FLASH_PECR_PARALLBANK);
-  }     
+  }
   /* Return the Erase Status */
   return status;
 }
@@ -237,15 +340,15 @@ __RAM_FUNC HAL_FLASHEx_EraseParallelPage(uint32_t Page_Address1, uint32_t Page_A
   *         beginning.
   * @retval HAL status
   */
-__RAM_FUNC HAL_FLASHEx_ProgramParallelHalfPage(uint32_t Address1, uint32_t* pBuffer1, uint32_t Address2, uint32_t* pBuffer2)
+__RAM_FUNC HAL_FLASHEx_ProgramParallelHalfPage(uint32_t Address1, uint32_t *pBuffer1, uint32_t Address2, uint32_t *pBuffer2)
 {
-  uint32_t count = 0U; 
+  uint32_t count = 0U;
   HAL_StatusTypeDef status = HAL_OK;
 
   /* Wait for last operation to be completed */
   status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
-  
-  if(status == HAL_OK)
+
+  if (status == HAL_OK)
   {
     /* Proceed to program the new half page */
     SET_BIT(FLASH->PECR, FLASH_PECR_PARALLBANK);
@@ -254,28 +357,28 @@ __RAM_FUNC HAL_FLASHEx_ProgramParallelHalfPage(uint32_t Address1, uint32_t* pBuf
 
     /* Wait for last operation to be completed */
     status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
-    if(status == HAL_OK)
+    if (status == HAL_OK)
     {
       /* Disable all IRQs */
       __disable_irq();
 
       /* Write the first half page directly with 16 different words */
-      while(count < 16U)
+      while (count < 16U)
       {
-        /* Address1 doesn't need to be increased */ 
-        *(__IO uint32_t*) Address1 = *pBuffer1;
+        /* Address1 doesn't need to be increased */
+        *(__IO uint32_t *)Address1 = *pBuffer1;
         pBuffer1++;
-        count ++;  
+        count++;
       }
 
       /* Write the second half page directly with 16 different words */
       count = 0U;
-      while(count < 16U)
+      while (count < 16U)
       {
-        /* Address2 doesn't need to be increased */ 
-        *(__IO uint32_t*) Address2 = *pBuffer2;
+        /* Address2 doesn't need to be increased */
+        *(__IO uint32_t *)Address2 = *pBuffer2;
         pBuffer2++;
-        count ++;  
+        count++;
       }
 
       /* Enable IRQs */
@@ -318,30 +421,30 @@ __RAM_FUNC HAL_FLASHEx_ProgramParallelHalfPage(uint32_t Address1, uint32_t* pBuf
   *         beginning.
   * @retval HAL status
   */
-__RAM_FUNC HAL_FLASHEx_HalfPageProgram(uint32_t Address, uint32_t* pBuffer)
+__RAM_FUNC HAL_FLASHEx_HalfPageProgram(uint32_t Address, uint32_t *pBuffer)
 {
-  uint32_t count = 0U; 
+  uint32_t count = 0U;
   HAL_StatusTypeDef status = HAL_OK;
 
   /* Wait for last operation to be completed */
   status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
-  
-  if(status == HAL_OK)
+
+  if (status == HAL_OK)
   {
     /* Proceed to program the new half page */
     SET_BIT(FLASH->PECR, FLASH_PECR_FPRG);
     SET_BIT(FLASH->PECR, FLASH_PECR_PROG);
-    
+
     /* Disable all IRQs */
     __disable_irq();
 
     /* Write one half page directly with 16 different words */
-    while(count < 16U)
+    while (count < 16U)
     {
-      /* Address doesn't need to be increased */ 
-      *(__IO uint32_t*) Address = *pBuffer;
+      /* Address doesn't need to be increased */
+      *(__IO uint32_t *)Address = *pBuffer;
       pBuffer++;
-      count ++;  
+      count++;
     }
 
     /* Enable IRQs */
@@ -349,7 +452,7 @@ __RAM_FUNC HAL_FLASHEx_HalfPageProgram(uint32_t Address, uint32_t* pBuffer)
 
     /* Wait for last operation to be completed */
     status = FLASHRAM_WaitForLastOperation(FLASH_TIMEOUT_VALUE);
- 
+
     /* If the write operation is completed, disable the PROG and FPRG bits */
     CLEAR_BIT(FLASH->PECR, FLASH_PECR_PROG);
     CLEAR_BIT(FLASH->PECR, FLASH_PECR_FPRG);
@@ -389,10 +492,10 @@ __RAM_FUNC HAL_FLASHEx_HalfPageProgram(uint32_t Address, uint32_t* pBuffer)
   *            @arg @ref HAL_FLASH_ERROR_NOTZERO FLASH Write operation is done in a not-erased region
   * @retval HAL Status
   */
-__RAM_FUNC HAL_FLASHEx_GetError(uint32_t * Error)
-{ 
+__RAM_FUNC HAL_FLASHEx_GetError(uint32_t *Error)
+{
   *Error = pFlash.ErrorCode;
-  return HAL_OK;  
+  return HAL_OK;
 }
 
 /**
@@ -405,7 +508,7 @@ __RAM_FUNC HAL_FLASHEx_GetError(uint32_t * Error)
 
 /** @addtogroup FLASH_RAMFUNC_Private_Functions
   * @{
-  */ 
+  */
 
 /**
   * @brief  Set the specific FLASH error flag.
@@ -414,23 +517,23 @@ __RAM_FUNC HAL_FLASHEx_GetError(uint32_t * Error)
 static __RAM_FUNC FLASHRAM_SetErrorCode(void)
 {
   uint32_t flags = 0;
-  
-  if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_WRPERR))
+
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_WRPERR))
   {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_WRP;
     flags |= FLASH_FLAG_WRPERR;
   }
-  if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_PGAERR))
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_PGAERR))
   {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_PGA;
     flags |= FLASH_FLAG_PGAERR;
   }
-  if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_SIZERR))
-  { 
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_SIZERR))
+  {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_SIZE;
     flags |= FLASH_FLAG_SIZERR;
   }
-  if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_OPTVERR))
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_OPTVERR))
   {
     /* WARNING : On the first cut of STM32L031xx and STM32L041xx devices,
      *           (RefID = 0x1000) the FLASH_FLAG_OPTVERR bit was not behaving
@@ -444,18 +547,18 @@ static __RAM_FUNC FLASHRAM_SetErrorCode(void)
     flags |= FLASH_FLAG_OPTVERR;
   }
 
-  if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_RDERR))
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_RDERR))
   {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_RD;
     flags |= FLASH_FLAG_RDERR;
   }
-  if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_FWWERR))
-  { 
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_FWWERR))
+  {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_FWWERR;
     flags |= HAL_FLASH_ERROR_FWWERR;
   }
-  if(__HAL_FLASH_GET_FLAG(FLASH_FLAG_NOTZEROERR))
-  { 
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_NOTZEROERR))
+  {
     pFlash.ErrorCode |= HAL_FLASH_ERROR_NOTZERO;
     flags |= FLASH_FLAG_NOTZEROERR;
   }
@@ -464,43 +567,43 @@ static __RAM_FUNC FLASHRAM_SetErrorCode(void)
   __HAL_FLASH_CLEAR_FLAG(flags);
 
   return HAL_OK;
-}  
+}
 
 /**
   * @brief  Wait for a FLASH operation to complete.
   * @param  Timeout: maximum flash operationtimeout
   * @retval HAL status
   */
-static __RAM_FUNC  FLASHRAM_WaitForLastOperation(uint32_t Timeout)
-{ 
-    /* Wait for the FLASH operation to complete by polling on BUSY flag to be reset.
+static __RAM_FUNC FLASHRAM_WaitForLastOperation(uint32_t Timeout)
+{
+  /* Wait for the FLASH operation to complete by polling on BUSY flag to be reset.
        Even if the FLASH operation fails, the BUSY flag will be reset and an error
        flag will be set */
-       
-    while(__HAL_FLASH_GET_FLAG(FLASH_FLAG_BSY) && (Timeout != 0x00U)) 
-    { 
-      Timeout--;
-    }
-    
-    if(Timeout == 0x00U)
-    {
-      return HAL_TIMEOUT;
-    }
-    
+
+  while (__HAL_FLASH_GET_FLAG(FLASH_FLAG_BSY) && (Timeout != 0x00U))
+  {
+    Timeout--;
+  }
+
+  if (Timeout == 0x00U)
+  {
+    return HAL_TIMEOUT;
+  }
+
   /* Check FLASH End of Operation flag  */
   if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_EOP))
   {
     /* Clear FLASH End of Operation pending bit */
     __HAL_FLASH_CLEAR_FLAG(FLASH_FLAG_EOP);
   }
-  
-  if( __HAL_FLASH_GET_FLAG(FLASH_FLAG_WRPERR)     || 
-      __HAL_FLASH_GET_FLAG(FLASH_FLAG_PGAERR)     || 
-      __HAL_FLASH_GET_FLAG(FLASH_FLAG_SIZERR)     || 
-      __HAL_FLASH_GET_FLAG(FLASH_FLAG_OPTVERR)    || 
-      __HAL_FLASH_GET_FLAG(FLASH_FLAG_RDERR)      || 
-      __HAL_FLASH_GET_FLAG(FLASH_FLAG_FWWERR)     || 
-      __HAL_FLASH_GET_FLAG(FLASH_FLAG_NOTZEROERR) )
+
+  if (__HAL_FLASH_GET_FLAG(FLASH_FLAG_WRPERR) ||
+      __HAL_FLASH_GET_FLAG(FLASH_FLAG_PGAERR) ||
+      __HAL_FLASH_GET_FLAG(FLASH_FLAG_SIZERR) ||
+      __HAL_FLASH_GET_FLAG(FLASH_FLAG_OPTVERR) ||
+      __HAL_FLASH_GET_FLAG(FLASH_FLAG_RDERR) ||
+      __HAL_FLASH_GET_FLAG(FLASH_FLAG_FWWERR) ||
+      __HAL_FLASH_GET_FLAG(FLASH_FLAG_NOTZEROERR))
   {
     /*Save the error code*/
 
@@ -533,5 +636,4 @@ static __RAM_FUNC  FLASHRAM_WaitForLastOperation(uint32_t Timeout)
   * @}
   */
 
-     
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

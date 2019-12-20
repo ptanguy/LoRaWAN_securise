@@ -66,7 +66,13 @@
   *         These functions are defined inside the "stm32l0xx_hal_flash_ramfunc.c"
   *         file.
   */
+//============================ PERSO =============================================
+
+ __RAM_FUNC FlashMassErase(void);
   
+//============================ PERSO =============================================
+
+
 /** @addtogroup FLASH_RAMFUNC_Exported_Functions_Group1
   * @{
   */

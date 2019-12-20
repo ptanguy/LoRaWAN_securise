@@ -28,3 +28,7 @@ Analyse des risques
 Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Celà veut dire que si un attaquant fait un dump de la mémoire, il va pouvoir trouver facilement les clès.
 On remarque ensuite, que l'utilisation de l'activation par OTAA est plus sécurisé car elle utilise plus de clès et en renouvelle 2 à chaques connexions. La connexions par ABP est moins sécurisé car elle utilise uniquement 3 clès, dont 2 qui peuvent aussi permettre l'écoutes de la communication.
 
+Dans le scénario que nous utilisons nous n'avons pas besoins de dissmimuler l'information transmise, donc obtenir *NetSKey* et *AppSKey* lors d'une activation OTAA nous importe peut.
+
+D'un point de vue technique le nombre de clès à recupérer par attanquant pour usurper l'identité de notre noeud est le même d'un mode d'activation à l'autre.
+Nous avons choisit d'utiliser et de protéger le mode d'activation ABP, car si un attanquant arrive à obtenir les clès il pourra lire les informations transmisent, nous trouvons intéressant de pouvoir observer les trames LoRaWAN ce propager dans l'air à l'aide d'un analiseur de spectre et de pouvoir les décodé avec un logiciel comme GNURadio.

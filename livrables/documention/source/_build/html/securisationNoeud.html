@@ -51,6 +51,9 @@ Si un attaquant arrive à obtenir les 3 premières clés alors, il pourra usurp�
 <h2>Analyse des risques<a class="headerlink" href="#analyse-des-risques" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Dans un premier temps on remarque que le protocole LoRaWAN ne stipule pas si les clés doivent être stocké en clair dans la mémoire ou bien chiffré. Celà veut dire que si un attaquant fait un dump de la mémoire, il va pouvoir trouver facilement les clès.
 On remarque ensuite, que l’utilisation de l’activation par OTAA est plus sécurisé car elle utilise plus de clès et en renouvelle 2 à chaques connexions. La connexions par ABP est moins sécurisé car elle utilise uniquement 3 clès, dont 2 qui peuvent aussi permettre l’écoutes de la communication.</p>
+<p>Dans le scénario que nous utilisons nous n’avons pas besoins de dissmimuler l’information transmise, donc obtenir <em>NetSKey</em> et <em>AppSKey</em> lors d’une activation OTAA nous importe peut.</p>
+<p>D’un point de vue technique le nombre de clès à recupérer par attanquant pour usurper l’identité de notre noeud est le même d’un mode d’activation à l’autre.
+Nous avons choisit d’utiliser et de protéger le mode d’activation ABP, car si un attanquant arrive à obtenir les clès il pourra lire les informations transmisent, nous trouvons intéressant de pouvoir observer les trames LoRaWAN ce propager dans l’air à l’aide d’un analiseur de spectre et de pouvoir les décodé avec un logiciel comme GNURadio.</p>
 </div>
 </div>
 
@@ -105,7 +108,7 @@ On remarque ensuite, que l’utilisation de l’activation par OTAA est plus sé
       &copy;2019, François Sevaux, Arthur Le Rest | M1 CSSE UBS Lorient.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

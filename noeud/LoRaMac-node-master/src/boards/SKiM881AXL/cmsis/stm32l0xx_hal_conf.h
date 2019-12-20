@@ -214,6 +214,7 @@
 
 #ifdef HAL_FLASH_MODULE_ENABLED
   #include "stm32l0xx_hal_flash.h"
+  //#include "stm32l0xx_hal_flash_ex.h"
 #endif /* HAL_FLASH_MODULE_ENABLED */
  
 #ifdef HAL_I2C_MODULE_ENABLED

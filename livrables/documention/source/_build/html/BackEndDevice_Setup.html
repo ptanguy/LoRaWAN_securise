@@ -35,15 +35,15 @@
 <h1>Mise en place du noeud LoRaWAN avec la carte <em>B-L072Z-LRWAN1</em><a class="headerlink" href="#mise-en-place-du-noeud-lorawan-avec-la-carte-b-l072z-lrwan1" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien permanent vers ce titre">¶</a></h2>
-<p>La finalité de la partie Noeud de notre projet est d’utiliser la carte <em>B-L072Z-LRWAN1</em> ainsi que le shield <em>Motion-MEMS</em>.
-Nous devrons récupérer la valeure d’un des capteurs du shield <em>Motion-MEMS</em> et la transmettre à notre <em>BoxLoRa</em> (Passerelle + NetworkServer + Application Server).
-Nous avons choisit de récupérer les valeur de la température.</p>
-<p>D’un point de vue sécurité, comme nous avons préalablement chosit d’utiliser le mode d’appairage OTAA (Over The Air Activation) du protocal LoRaWAN pour notre noeud.
-Nous devons cacher une clés maitre (AES 128bit) appelé <strong>AppKey</strong> fin déviter l’usurpation de notre Noeud. Nous devons aussi cacher la valeur d’un compteur de trame (Frame Counter) pour eviter les attaques par rejeu.</p>
+<p>La finalité de la partie <em>noeud</em> de notre projet est d’utiliser la carte <em>B-L072Z-LRWAN1</em> ainsi que le shield <em>Motion-MEMS</em>.
+Nous devrons récupérer la valeur d’un des capteurs du shield <em>Motion-MEMS</em> et la transmettre à notre <em>BoxLoRa</em> (Passerelle + NetworkServer + Application Server).
+Nous avons choisi de récupérer les valeurs de la température.</p>
+<p>D’un point de vue sécurité, comme nous avons préalablement chosi d’utiliser le mode d’appairage OTAA (Over-The-Air Activation) du protocole LoRaWAN pour notre noeud.
+Nous devons cacher une clef maître (AES 128bit) appelée <strong>AppKey</strong> fin d’éviter l’usurpation de notre noeud. Nous devons aussi cacher la valeur d’un compteur de trame (Frame Counter) pour éviter les attaques par rejeu.</p>
 <div class="section" id="installation-des-outils">
 <h3>Installation des outils<a class="headerlink" href="#installation-des-outils" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Pour gagner du temps dans le dévelopement de noeud nous utilisons comme base un projet github <a class="reference internal" href="#loramac-node" id="id1"><span>[LoRaMAC-node]</span></a> mettant en oeuvre le LoRaWAN sur notre carte.
-Nous développons le Noeud à partir d’une distribution <em>Linux</em> basé sur <em>Arch Linux</em>, les dépendance requisent sont :</p>
+<p>Pour gagner du temps dans le dévelopement du noeud, nous utilisons comme base un projet github <a class="reference internal" href="#loramac-node" id="id1"><span>[LoRaMAC-node]</span></a> mettant en oeuvre le LoRaWAN sur notre carte.
+Nous développons le noeud à partir d’une distribution <em>Linux</em> basée sur <em>Arch Linux</em>, les dépendances requises sont :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake
 arm-none-eabi-gcc
 arm-none-eabi-newlibS221 : https://www.st.com/en/mems-and-sS221 : https://www.st.com/en/mems-and-sensors/hts221.html#overviewensors/hts221.html#overview
@@ -53,7 +53,7 @@ openocd
 <p>Pour utiliser le projet LoRaMAC-node dans notre projet nous avons téléchargé le .zip du projet de la branche master en <strong>version 4.4.2</strong>.</p>
 <div class="section" id="installation-de-stlink">
 <h4>Installation de Stlink<a class="headerlink" href="#installation-de-stlink" title="Lien permanent vers ce titre">¶</a></h4>
-<p>Le St-link est un programme permettant d’avoir accés au debuger des cartes conçuent par St-microelectronics, il permet entre autre de charger des programmes dans les cartes.</p>
+<p>Le St-link est un programme permettant d’avoir accès au debuger des cartes conçues par St-microelectronics, il permet, entre autres, de charger des programmes dans les cartes.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/texane/stlink.git
 make release
 <span class="nb">cd</span> build/Release
@@ -64,7 +64,7 @@ sudo ldconfig
 </div>
 <div class="section" id="installation-de-loramac-node">
 <h4>Installation de LoRaMAC-node<a class="headerlink" href="#installation-de-loramac-node" title="Lien permanent vers ce titre">¶</a></h4>
-<p>Après avoir extrait le zip téléchargé précédement placez-vous dans le dossier LoRaMac-node-master.</p>
+<p>Après avoir extrait le zip téléchargé précédement, placez-vous dans le dossier LoRaMac-node-master.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir build
 <span class="nb">cd</span> buid
 <span class="nv">BOARD</span><span class="o">=</span>B-L072Z-LRWAN1
@@ -81,10 +81,10 @@ make
 </div>
 <div class="section" id="envoyer-un-programme-sur-la-carte">
 <h3>Envoyer un programme sur la carte<a class="headerlink" href="#envoyer-un-programme-sur-la-carte" title="Lien permanent vers ce titre">¶</a></h3>
-<p>Pour développer un programme pour la carte il faut écrire le programme dans le fichier <em>src/apps/LoRaMac/classA/B-L072Z-LRWAN1/main.c</em>.</p>
+<p>Pour développer un programme pour la carte, il faut écrire le programme dans le fichier <em>src/apps/LoRaMac/classA/B-L072Z-LRWAN1/main.c</em>.</p>
 <p>Dans un premier temps, branchez la carte en USB par le port <strong>CN7</strong>.
-Ensuite placer vous dans le dossier <em>build</em>
-compiler le programme en utilisant la commande :</p>
+Ensuite, placez vous dans le dossier <em>build</em>
+Compilez le programme en utilisant la commande :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make
 </pre></div>
 </div>
@@ -97,7 +97,7 @@ st-flash write src/apps/LoRaMac/LoRaMac-classA.bin  0x8000000
 <div class="section" id="recuperer-la-valeur-d-un-capteur">
 <h3>Recupérer la valeur d’un capteur<a class="headerlink" href="#recuperer-la-valeur-d-un-capteur" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Le shield de cateur que nous utilisons contient différents capteurs, nous utiliserons que le capteur de température (HTS221). En se rapportant à la documentation du shield <a class="footnote-reference brackets" href="#id4" id="id2">1</a> nous voyons que le capteur est relié au bus I2C.
-Pour communiquer sur un bus I2C nous avons besoins d’un mettre et d’un esclave, le maitre sera notre carte <em>B-L072Z-LRWAN1</em> et l’esclave le capteur. Pour trouver l’addresse de notre capteur nous avons consulté la documentation de celui-ci <a class="footnote-reference brackets" href="#id5" id="id3">2</a> il ait apparu que le capteur avait 2 addresses, une pour la lecture <strong>BF</strong> et une pour l’ecriture <strong>BE</strong>.</p>
+Pour communiquer sur un bus I2C nous avons besoin d’un maître et d’un esclave, le maître sera notre carte <em>B-L072Z-LRWAN1</em> et l’esclave le capteur. Pour trouver l’addresse de notre capteur, nous avons consulté la documentation de celui-ci <a class="footnote-reference brackets" href="#id5" id="id3">2</a> il est apparu que le capteur avait 2 addresses, une pour la lecture <strong>BF</strong> et une pour l’ecriture <strong>BE</strong>.</p>
 <p>================================= A FINIR =================================</p>
 <dl class="footnote brackets">
 <dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
@@ -162,7 +162,7 @@ Pour communiquer sur un bus I2C nous avons besoins d’un mettre et d’un escla
       &copy;2019, François Sevaux, Arthur Le Rest | M1 CSSE UBS Lorient.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

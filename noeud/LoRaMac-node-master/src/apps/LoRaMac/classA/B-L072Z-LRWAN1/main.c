@@ -23,6 +23,8 @@
 
 /*! \file classA/B-L072Z-LRWAN1/main.c */
 
+
+
 #include <stdio.h>
 #include "utilities.h"
 #include "board.h"
@@ -30,6 +32,13 @@
 #include "LoRaMac.h"
 #include "Commissioning.h"
 #include "NvmCtxMgmt.h"
+#include "delay-board.h"
+
+
+/* TESTS */
+
+
+
 
 #ifndef ACTIVE_REGION
 
@@ -392,7 +401,8 @@ static void PrepareTxFrame( uint8_t port )
  * \retval  [0: frame could be send, 1: error]
  */
 static bool SendFrame( void )
-{
+{   
+    
     McpsReq_t mcpsReq;
     LoRaMacTxInfo_t txInfo;
 
@@ -433,8 +443,25 @@ static bool SendFrame( void )
 
     LoRaMacStatus_t status;
     status = LoRaMacMcpsRequest( &mcpsReq );
+
+
     printf( "\r\n###### ===== MCPS-Request ==== ######\r\n" );
-    printf( "STATUS      : %s\r\n", MacStatusStrings[status] );
+    //printf( "STATUS      : %s\r\n", MacStatusStrings[status] );
+    //printf(" @ :  %x \n", &NwkKey);
+    
+    printf("Coucou \n");
+    /*
+    if (HAL_FLASH_OB_Unlock()){
+        printf("Verouillage \n");
+        HAL_FLASH_OB_Lock();
+    }
+    else {
+        printf("Pas marche \n");
+    }
+    HAL_FLASHEx_OBGetConfig(&OB->RDP);
+    */
+    printf("Coucou \n");
+    //printf("Contenu : %ld", OB->RDP);
 
     if( status == LORAMAC_STATUS_OK )
     {
@@ -791,6 +818,7 @@ static void McpsIndication( McpsIndication_t *mcpsIndication )
                             LoRaMacStatus_t status = LoRaMacMlmeRequest( &mlmeReq );
                             printf( "\r\n###### ===== MLME-Request - MLME_TXCW1 ==== ######\r\n" );
                             printf( "STATUS      : %s\r\n", MacStatusStrings[status] );
+                            
                         }
                         ComplianceTest.State = 1;
                     }
@@ -941,6 +969,9 @@ void OnMacProcessNotify( void )
  */
 int main( void )
 {
+    bool led = true;
+
+
     LoRaMacPrimitives_t macPrimitives;
     LoRaMacCallback_t macCallbacks;
     MibRequestConfirm_t mibReq;
@@ -966,8 +997,58 @@ int main( void )
 
     printf( "###### ===== ClassA demo application v1.0.RC1 ==== ######\r\n\r\n" );
 
+    
+    printf("DEBUT MAIN !!!\r\n");
+
+    
+
+    
+    //char choix = 'o';
+    /*
+    printf("Y = set RDP LVL1\r\n\r\n");
+    scanf("%c",&choix);
+    if (choix == 'y'){
+        printf("\t y ! \r\n\r\n");
+        
+    //    FLASH_OBProgramInitTypeDef obConfig;
+
+        //FLASH_OBProgramInitTypeDef myconf;
+ 
+        /*
+        HAL_FLASH_Unlock();
+        HAL_FLASH_OB_Unlock();
+
+        
+        uint8_t my_RDP = 0xBBU; 
+
+        myconf->RDP = my_RDP;
+       /* myconf.USER
+        myconf.WRP01
+        myconf.WRP22
+        myconf.WRP45*/
+
+        /*
+        HAL_FLASHEx_OBProgram(myconf);
+        printf("Writing \r\n\r\n"); 
+        HAL_FLASHEx_OBGetConfig(&myconf);
+        printf("%x \r\n\r\n", myconf->RDP);
+        HAL_RCC_DeInit();
+        HAL_FLASH_OB_Launch();
+        printf("Launched \r\n\r\n");
+        HAL_FLASH_OB_Lock();
+        HAL_FLASH_Lock();
+        printf("Locked \r\n\r\n");
+        */
+    //}
+    //else{
+    //    printf("pas Y \r\n\r\n");
+    //}
+    
+    
     while( 1 )
-    {
+    {   
+
+
         // Process Radio IRQ
         if( Radio.IrqProcess != NULL )
         {
