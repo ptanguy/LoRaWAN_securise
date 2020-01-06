@@ -24,7 +24,7 @@
 \begin{document}
 \includepdf{PageGarde/PageGarde.pdf}
 
-\paragraph{Remerciements}
+%\paragraph{Remerciements}
 \tableofcontents
 \pagebreak
 
