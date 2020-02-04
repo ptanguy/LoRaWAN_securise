@@ -15,6 +15,7 @@
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Creation d’un programme de test pour y mettre des fonctions de sécurités" href="creationPrgpourFctdeSEc.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -45,8 +46,8 @@ motdepasse
 </pre></div>
 </div>
 </div>
-<div class="section" id="problemes-rentres">
-<h2>Problèmes rentrés<a class="headerlink" href="#problemes-rentres" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="problemes-rencontres">
+<h2>Problèmes rencontrés<a class="headerlink" href="#problemes-rencontres" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Problème de téléchargement qui ne marche pas:</p>
 <blockquote>
 <div><p>Ajoutez le proxy: export http_proxy=http://ocytohe.univ-ubs.fr:3128</p>
@@ -123,14 +124,12 @@ On peut relancer la compilation</p>
 <p>on passe tout le monde sur warrior (avant dernière version disponible et fonctionnelle)</p>
 <p>On doit changer thud dans le fichier .gitmodules</p>
 <p>exemple :</p>
-<blockquote>
-<div><dl class="simple">
-<dt>[submodule « layers/bsp/meta-raspberrypi »]</dt><dd><p>path = layers/bsp/meta-raspberrypi
-url = git://git.yoctoproject.org/meta-raspberrypi
-branch = thud</p>
-</dd>
-</dl>
-</div></blockquote>
+<div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>submodule <span class="s2">&quot;layers/bsp/meta-raspberrypi&quot;</span><span class="o">]</span>
+    <span class="nv">path</span> <span class="o">=</span> layers/bsp/meta-raspberrypi
+    <span class="nv">url</span> <span class="o">=</span> git://git.yoctoproject.org/meta-raspberrypi
+    <span class="nv">branch</span> <span class="o">=</span> thud
+</pre></div>
+</div>
 <p>On passe sur la branche warrior</p>
 <div class="highlight-Bash notranslate"><div class="highlight"><pre><span></span><span class="nv">branch</span> <span class="o">=</span> warrior
 </pre></div>
@@ -164,11 +163,23 @@ branch = thud</p>
 
 
 <h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="UtilisationLoRa-Node.html">Utilisation de LoRaMac-node</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creationPrgpourFctdeSEc.html">Creation d’un programme de test pour y mettre des fonctions de sécurités</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutoriel pour ajouter une layer SELinux à notre OS chirpstack-gateway-os via Yocto :</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connexion-au-serveur-de-compilation">Connexion au serveur de compilation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problemes-rencontres">Problèmes rencontrés</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generer-l-os">Générer l’OS</a></li>
+</ul>
+</li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="creationPrgpourFctdeSEc.html" title="Chapitre précédent">Creation d’un programme de test pour y mettre des fonctions de sécurités</a></li>
   </ul></li>
 </ul>
 </div>
