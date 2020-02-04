@@ -37,8 +37,8 @@ SecApp.list \
 all: SecApp.elf secondary-outputs
 
 # Tool invocations
-SecApp.elf: $(OBJS) $(USER_OBJS) /home/arthur/STM32CubeIDE/workspace_1.0.2/SecApp/STM32L072CZYX_FLASH.ld
-	arm-none-eabi-gcc -o "SecApp.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/home/arthur/STM32CubeIDE/workspace_1.0.2/SecApp/STM32L072CZYX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SecApp.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+SecApp.elf: $(OBJS) $(USER_OBJS) /home/arthur/Nextcloud/M1_CSSE/Projet/LoRaWAN_securise/noeud/SecApp/STM32L072CZYX_FLASH.ld
+	arm-none-eabi-gcc -o "SecApp.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"/home/arthur/Nextcloud/M1_CSSE/Projet/LoRaWAN_securise/noeud/SecApp/STM32L072CZYX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SecApp.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
