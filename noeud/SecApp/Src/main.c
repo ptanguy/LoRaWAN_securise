@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "MySecret/MySecret.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-//#define SECRET_KEY	{0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C}
+//#define NOT_SECRET_KEY	{0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C}
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,8 +55,8 @@ FLASH_AdvOBProgramInitTypeDef myconfAdv;
 
 
 uint8_t buffer[2];
-int SECRET_KEY[16]	= {0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C};
-
+int NOT_SECRET_KEY[16]	= {0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6, 0xAB, 0xF7, 0x15, 0x88, 0x09, 0xCF, 0x4F, 0x3C};
+unsigned char useless = 0;
 unsigned int* data;
 unsigned int* pI;
 
@@ -73,7 +73,7 @@ static void MX_USART1_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
-void MySecretFunction(unsigned int* pnumber1, unsigned int* pout, unsigned int multi);
+void MySecretFunction( );
 
 /* USER CODE END PFP */
 
@@ -110,6 +110,7 @@ int main(void)
   /* USER CODE BEGIN SysInit */
 
   // Implémentation de RDP
+  /*
   if (HAL_FLASH_Unlock() == HAL_OK){
 
 
@@ -135,7 +136,7 @@ int main(void)
 
 	  }
 	  HAL_FLASH_Lock();
-  }
+  }*/
 
 
   //HAL_GPIO_WritePin(LED_Green_GPIO_Port, LED_Green_Pin, 1);
@@ -157,7 +158,7 @@ int main(void)
 
   for (int i = 0; i < 16; i++ ){
 
-	  buffer[0] = SECRET_KEY[i];
+	  buffer[0] = NOT_SECRET_KEY[i];
 
 	  buffer[1] = '\n';
 	  HAL_USART_Transmit(&husart1, buffer, sizeof(buffer), 1000);
@@ -182,7 +183,7 @@ int main(void)
   {
 
 	  for (int i = 0; i < 16; i++ ){
-		  buffer[0] = SECRET_KEY[i];
+		  buffer[0] = NOT_SECRET_KEY[i];
 		  HAL_USART_Transmit(&husart1, buffer, sizeof(buffer), 1000);
 	  }
 	  buffer[0] = '\n';
@@ -193,15 +194,19 @@ int main(void)
 		  HAL_GPIO_WritePin(LED_Blue_GPIO_Port, LED_Blue_Pin, 0);
 		  HAL_GPIO_WritePin(LED_Green_GPIO_Port, LED_Green_Pin, 0);
 		  HAL_GPIO_WritePin(LED_Red_GPIO_Port, LED_Red_Pin, 0);
+		  useless = MySecret_fct(useless+1);
 	  }
 	  else{
-		  //HAL_Delay(1000);
-		  HAL_GPIO_TogglePin(LED_Red_GPIO_Port, LED_Red_Pin);
+		  HAL_Delay(1000);
+		  HAL_GPIO_TogglePin(LED_Green_GPIO_Port, LED_Green_Pin);
 		  HAL_Delay(500);
 		  HAL_GPIO_TogglePin(LED_Blue_GPIO_Port, LED_Blue_Pin);
-		  HAL_Delay(250);
-		  HAL_GPIO_TogglePin(LED_Green_GPIO_Port, LED_Green_Pin);
+		  HAL_Delay(300);
+		  HAL_GPIO_TogglePin(LED_Red_GPIO_Port, LED_Red_Pin);
+		  HAL_Delay(200);
+
 	  }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -522,10 +527,8 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void MySecretFunction(unsigned int *pnumber1, unsigned int* pout, unsigned int multi){
+void MySecretFunction(void){
 
-	*pout = *pnumber1 + *pnumber1;
-	*pout = *pout * multi;
 }
 
 /* USER CODE END 4 */
