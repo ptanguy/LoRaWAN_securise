@@ -63,7 +63,6 @@ MEMORY
 {
     RAM	(xrw)	: ORIGIN = 0x20000000,	LENGTH = 20K
     FLASH	(rx)	: ORIGIN = 0x8000000,	LENGTH = 192K
-    PCROP (x)	: ORIGIN  = 0x8008000, LENGTH = 32K
 }
 
 /* Sections */
@@ -77,14 +76,6 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  /* My PCROP place */
-  .PCROPedCode :
-  {
-    . = ALIGN(4);
-        *MySecret.o  (.text .text*)
-    . = ALIGN(4);
-  } >PCROP
-  
   /* The program code and other data into "FLASH" Rom type memory */
   .text :
   {
@@ -101,9 +92,7 @@ SECTIONS
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
   } >FLASH
-  
 
-  
   /* Constant data into "FLASH" Rom type memory */
   .rodata :
   {
