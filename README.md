@@ -1,4 +1,4 @@
-![logo ubs](https://www.univ-ubs.fr/_contents-images/ametys-internal%253Asites/wwwdev/ametys-internal%253Acontents/normes-graphiques-article/_metadata/content/_data/UBS-FACULTE-SSI-LOGO-CMJN-2.png_150x212)
+![logo ubs](https://www.google.com/url?sa=i&url=https%3A%2F%2Fdiplomeo.com%2Fetablissement-faculte_des_sciences_et_sciences_de_l_ingenieur_universite_bretagne_sud-1352&psig=AOvVaw0tbBEKBeQuC1M-_6SgY7_v&ust=1582282465327000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOD5x9T73-cCFQAAAAAdAAAAABAJ)
 
 
 Ce projet à été mené par 2 étudiants François Sevaux et Arthur Le Rest, en première année de Master Cybersécurité des systèmes embarqué (CSSE) à l'université de Bretagne Sud (UBS) Lorient.
