@@ -73,8 +73,6 @@ static void MX_USART1_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
-void MySecretFunction( );
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -110,33 +108,36 @@ int main(void)
   /* USER CODE BEGIN SysInit */
 
   // Implémentation de RDP
-  /*
+
   if (HAL_FLASH_Unlock() == HAL_OK){
 
 
 	  if(HAL_FLASH_OB_Unlock() == HAL_OK){
-
+		  //Recuperation des anciens valeurs des registres
 		  HAL_FLASHEx_OBGetConfig(&myconf);
-
+		  HAL_FLASHEx_AdvOBGetConfig(&myconfAdv);
 
 		  if(myconf.RDPLevel == OB_RDP_LEVEL0){
+		  //if(myconfAdv.PCROPSector != OB_PCROP_Pages160to191){
 
-			  //myconfAdv.PCROPSector = OB_PCROP_Pages0to31;
-			  //myconfAdv.PCROPSector2 = OB_PCROP2_AllPages;
-			  //myconfAdv.PCROPState = OB_PCROP_STATE_ENABLE;
+			  HAL_FLASHEx_OB_SelectPCROP();
+			  myconfAdv.PCROPSector = OB_WRP_AllPages ^ OB_PCROP_Pages160to191;
+			  myconfAdv.PCROPSector2 = OB_WRP2_AllPages;
+			  myconfAdv.PCROPState = OB_PCROP_STATE_ENABLE;
+		  	  myconf.RDPLevel = OB_RDP_LEVEL1;	//Mettre à 1 pour avoir le niveau 1
 
-		  	  myconf.RDPLevel = OB_RDP_LEVEL0;	//Mettre à 1 pour avoir le niveau 1
 
 		  	  HAL_FLASHEx_AdvOBProgram(&myconfAdv);
-		  	  HAL_FLASHEx_OB_SelectPCROP();
 		  	  HAL_FLASHEx_OBProgram(&myconf);
+
 		  	  HAL_FLASH_OB_Launch();
 		  	  HAL_FLASH_OB_Lock();
+
 		  }
 
 	  }
 	  HAL_FLASH_Lock();
-  }*/
+  }
 
 
   //HAL_GPIO_WritePin(LED_Green_GPIO_Port, LED_Green_Pin, 1);
@@ -164,14 +165,6 @@ int main(void)
 	  HAL_USART_Transmit(&husart1, buffer, sizeof(buffer), 1000);
   }
 
-  for (int i = 0; i < 16; i++ ){
-	  *pI = (unsigned int)i;
-	  MySecretFunction(pI, data, i);
-	  buffer[0] = *data;
-
-	  buffer[1] = '\n';
-	  HAL_USART_Transmit(&husart1, buffer, sizeof(buffer), 1000);
-  }
 
 
 
@@ -181,13 +174,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  for (int i = 0; i < 16; i++ ){
-		  buffer[0] = NOT_SECRET_KEY[i];
-		  HAL_USART_Transmit(&husart1, buffer, sizeof(buffer), 1000);
-	  }
-	  buffer[0] = '\n';
-	  HAL_USART_Transmit(&husart1, buffer, sizeof(buffer), 1000);
 
 	  HAL_Delay(1000);
 	  if (HAL_GPIO_ReadPin(BP_USER_GPIO_Port, BP_USER_Pin) == 0){
@@ -527,9 +513,6 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void MySecretFunction(void){
-
-}
 
 /* USER CODE END 4 */
 

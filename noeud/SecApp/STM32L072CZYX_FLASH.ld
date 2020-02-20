@@ -63,7 +63,7 @@ MEMORY
 {
     RAM	(xrw)	: ORIGIN = 0x20000000,	LENGTH = 20K
     FLASH	(rx)	: ORIGIN = 0x8000000,	LENGTH = 192K
-    PCROP (x)	: ORIGIN  = 0x8008000, LENGTH = 32K
+    PCROP (x)	: ORIGIN  = 0x8005000, LENGTH = 4K
 }
 
 /* Sections */
