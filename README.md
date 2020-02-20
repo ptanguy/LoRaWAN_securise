@@ -7,7 +7,7 @@ Organisation des dossiers
  
  - Documentation : Dossier contenant les différents rapports et présentations effectués
  - noeud : Dossier contenant les programmes relatif au neoud LoRaWAN : 
-  - Avec LoRaMacNode
-  - Application sécuriser pour tester l'implémentation des fonctions de sécurité dans une carte STM
+   - Avec LoRaMacNode
+   - Application sécuriser pour tester l'implémentation des fonctions de sécurité dans une carte STM
  - réseau_simple : Dossier contenant le programme pour faire un noeud avec une carte Fipy
  - Useful_Datasheets : Dossier contenant les datasheets utiliser pendant le projet
